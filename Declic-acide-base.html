@@ -1,0 +1,337 @@
+<!-- Version autonome générée par build-standalone.mjs. Modifier les fichiers source, puis régénérer. -->
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#163b3b">
+  <meta name="description" content="Comprends les couples acide-base, entraîne-toi avec des indices et teste tes acquis. Un parcours guidé de physique-chimie en terminale.">
+  <title>Déclic — Les couples acide-base</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23163b3b'/%3E%3Ctext x='13' y='47' fill='%23ebd79c' font-family='Georgia' font-size='49'%3Ed.%3C/text%3E%3C/svg%3E">
+  <style>
+:root{--ink:#203837;--green:#235d52;--deep:#163b3b;--muted:#6c7975;--paper:#f8f7f2;--line:#e2e5da;--lime:#dfedb5;--gold:#ebd79c;--white:#fff;--serif:Georgia,'Times New Roman',serif;font-family:Inter,'Segoe UI',Arial,sans-serif;color:var(--ink);background:var(--paper);font-synthesis:none}
+*{box-sizing:border-box}body{margin:0;font-size:15px;line-height:1.6}button,input{font:inherit}button,a,input{-webkit-tap-highlight-color:transparent}button{cursor:pointer}a{color:inherit}button:disabled{cursor:default}button:focus-visible,a:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid #538875;outline-offset:4px}button{color:inherit}h1,h2,h3,p{margin-top:0}h1,h2,h3{line-height:1.2}h1{font-family:var(--serif);font-weight:400;font-size:clamp(34px,3.7vw,55px);letter-spacing:-1.7px;margin-bottom:15px}h2{font-size:23px;letter-spacing:-.5px}h3{font-size:18px}p{margin-bottom:16px}small{font-size:12px}strong{font-weight:650}.muted{color:var(--muted)}.eyebrow{font-size:11px;letter-spacing:1.7px;font-weight:750;color:var(--green)}.formula{font-family:var(--serif);font-variant-numeric:lining-nums;letter-spacing:.3px}.skip{position:fixed;top:-100px;left:20px;background:white;padding:12px;z-index:100}.skip:focus{top:10px}.sidebar{position:fixed;inset:0 auto 0 0;width:246px;padding:36px 24px 24px;background:#fff;border-right:1px solid var(--line);display:flex;flex-direction:column;z-index:5}.brand{display:flex;align-items:center;gap:12px;text-decoration:none;font-size:29px;line-height:1.1;font-weight:650;letter-spacing:-1px}.brand-icon{display:grid;place-items:center;background:var(--deep);color:var(--gold);width:47px;height:47px;border-radius:15px;font-family:var(--serif);font-size:36px;font-weight:400;padding-bottom:5px}.brand small{display:block;font-family:inherit;font-size:9px;letter-spacing:1.5px;color:var(--muted);font-weight:600;margin-top:7px}.course-label{font-size:9px;letter-spacing:1.4px;color:var(--muted);font-weight:700;margin:50px 0 15px 10px}nav{display:grid;gap:6px}nav a{display:flex;gap:14px;align-items:center;text-decoration:none;font-size:14px;padding:13px 15px;border-radius:9px;color:#61706a;font-weight:550}nav a>span:first-child{font-size:21px;line-height:1;width:20px}nav a:hover{background:#f4f6ee}nav a.active{background:#eaf0df;color:var(--deep)}.nav-dot{display:none;margin-left:auto;width:6px;height:6px;border-radius:50%;background:var(--green)}nav a.active .nav-dot{display:block}.side-module{background:#f7f8f1;border:1px solid #e9ecdf;padding:20px 17px;border-radius:12px;margin-top:44px}.side-module .eyebrow{font-size:9px;letter-spacing:1.5px}.side-module h2{font-size:16px;line-height:1.5;margin:12px 0 17px;letter-spacing:0}.fine-rule{height:1px;background:var(--line)}.side-module p{font-size:11px;color:var(--muted);margin:12px 0}.module-pill{display:inline-block;font-size:10px;background:#e8edda;padding:4px 8px;border-radius:4px}.side-bottom{margin-top:auto;display:flex;gap:12px;align-items:center;padding:28px 10px 0}.side-bottom p{font-size:11px;line-height:1.5;color:var(--muted);margin:0}.little-orbit{display:grid;place-items:center;width:35px;height:35px;border:1px solid #c8d5c8;border-radius:50%;font-family:var(--serif);font-size:17px;transform:rotate(-12deg)}.workspace{margin-left:246px}.topbar{min-height:78px;padding:22px 42px;border-bottom:1px solid var(--line);display:flex;gap:18px;justify-content:space-between;align-items:center;font-size:11px;color:var(--muted);background:#fafaf6}.topbar strong{font-weight:500;color:var(--ink);margin-left:10px}.desktop-only{margin-left:12px}.save-indicator{display:flex;align-items:center;gap:8px;font-size:10px;white-space:nowrap}.save-indicator:before{content:'';width:6px;height:6px;background:#6d9571;border-radius:50%}.save-indicator.warning:before{background:#b7772b}main{max-width:1350px;margin:auto;padding:39px 42px 30px;min-height:calc(100vh - 145px);outline:none}.page-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:25px;gap:14px}.breadcrumb{font-size:10px;font-weight:650;color:var(--muted);letter-spacing:1.5px}.badge{font-size:10px;color:var(--green);border:1px solid #d9dfd1;background:#f0f3e9;padding:5px 10px;border-radius:30px;white-space:nowrap}.intro-line{color:var(--muted);font-size:14px;max-width:660px;line-height:1.7}.hero{display:grid;grid-template-columns:1.1fr 1fr;gap:30px;align-items:center;margin:10px 0 32px}.hero-copy{padding:15px 0}.hero-copy .eyebrow{display:block;margin-bottom:14px}.hero-copy h1 em{color:var(--green);font-weight:400}.hero-meta{display:flex;gap:15px;color:var(--muted);font-size:11px;margin-top:20px}.hero-meta span+span{border-left:1px solid #d4dbd0;padding-left:15px}.hero-figure{position:relative;background:#ecf0e3;border-radius:18px;border:1px solid #e2e7d9;min-height:235px;padding:25px 24px;overflow:hidden;display:flex;flex-direction:column;justify-content:center}.hero-figure:after{content:'';position:absolute;right:-50px;top:-75px;width:220px;height:220px;border:1px solid #d4decb;border-radius:50%;pointer-events:none}.figure-label{font-size:9px;letter-spacing:1.9px;color:#6b7d63;margin-bottom:25px}.pair{display:flex;align-items:center;justify-content:space-between;gap:8px;position:relative;z-index:1}.species{text-align:center;min-width:85px}.species .formula{font-size:clamp(24px,2.7vw,39px);display:block;white-space:nowrap}.species small{display:block;font-size:10px;color:#68775d;margin-top:7px}.species-role{display:inline-block;margin-top:13px;font-size:9px;letter-spacing:1.1px;font-weight:750;color:var(--green);background:#dde7cd;padding:3px 9px;border-radius:5px}.species-role.base{background:#f4e7c2;color:#756330}.transfer{text-align:center;flex:1;min-width:55px;max-width:110px;color:var(--green)}.transfer .proton{font-size:17px;font-family:var(--serif);display:block;margin-bottom:-6px}.transfer .arrow{font-size:35px;line-height:1.2;display:block}.transfer small{font-size:9px}.figure-note{font-size:10px;color:#6d7b65;margin:20px 0 0;position:relative}.learning-grid{display:grid;grid-template-columns:235px minmax(0,1fr);gap:25px;align-items:start}.journey{background:white;border:1px solid var(--line);border-radius:13px;padding:22px 16px}.journey-heading{font-size:13px;font-weight:650;margin:0 0 4px 5px}.journey-subtitle{font-size:10px;color:var(--muted);margin:0 0 18px 5px}.journey-list{display:grid;gap:7px}.lesson-link{display:flex;align-items:center;gap:10px;width:100%;border:1px solid transparent;background:transparent;text-align:left;padding:12px 9px;border-radius:8px}.lesson-link:hover{background:#f5f7ef}.lesson-link.current{background:#eef3e4;border-color:#dde6d0}.step-number{flex-shrink:0;display:grid;place-items:center;width:25px;height:25px;border:1px solid #d7ded1;border-radius:50%;font-size:11px;color:#778271}.current .step-number,.complete .step-number{background:var(--green);color:white;border-color:var(--green)}.lesson-link strong{display:block;font-size:11px;line-height:1.4}.lesson-link small{display:block;font-size:9px;color:var(--muted);margin-top:3px}.journey-progress{margin-top:23px;border-top:1px solid var(--line);padding-top:18px}.journey-progress>div:first-child{display:flex;justify-content:space-between;font-size:10px;color:var(--muted)}.progress-track{height:5px;background:#e9eddf;border-radius:6px;margin-top:10px;overflow:hidden}.progress-track span{display:block;height:100%;background:var(--green);border-radius:6px;transition:width .3s}.lesson-card,.question-card,.panel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:29px}.lesson-card h2{font-family:var(--serif);font-size:29px;font-weight:400;letter-spacing:-.6px;margin:9px 0 14px}.lesson-description{color:#64736d;font-size:13px}.rule{border-left:3px solid #668367;padding:12px 16px;background:#f3f6ec;font-size:13px;margin:19px 0}.lesson-detail{font-size:13px}.note{display:flex;gap:10px;font-size:11px;color:#7d6c3d;background:#faf5e7;border-radius:7px;padding:12px 14px;margin-top:18px}.note span{font-weight:700}.exercise-divider{height:1px;background:var(--line);margin:26px 0}.exercise-label{font-size:10px;font-weight:750;letter-spacing:1.5px;color:var(--green);display:flex;justify-content:space-between;gap:10px}.exercise-label .muted{font-weight:400;letter-spacing:0}.question-title{font-size:16px;line-height:1.5;font-weight:600;margin:12px 0 17px;letter-spacing:0}.options{display:grid;gap:9px}.option{display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:13px 15px;border:1px solid #dde3d8;border-radius:8px;background:#fff;font-size:13px;line-height:1.5;transition:background .15s,border .15s}.option:hover:not(:disabled){background:#f6f8ef;border-color:#a0b498}.option.selected{background:#eef4e5;border-color:#668c63}.option-letter{width:23px;height:23px;display:grid;place-items:center;border-radius:5px;background:#f2f3ed;color:#74806e;font-size:10px;flex-shrink:0}.selected .option-letter{background:var(--green);color:white}.option.correct{border-color:#558563;background:#edf5e9}.option.wrong{border-color:#bd8b4a;background:#fff5e7}.option:disabled{opacity:1;color:inherit}.actions{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-top:22px;flex-wrap:wrap}.button{display:inline-flex;justify-content:center;align-items:center;gap:16px;background:var(--green);border:1px solid var(--green);border-radius:8px;color:#fff;padding:11px 20px;text-decoration:none;font-size:12px;font-weight:600;line-height:1.6}.button:hover:not(:disabled){background:#16483e}.button:disabled{background:#e7ebdf;border-color:#e7ebdf;color:#88917f}.button.secondary{background:white;color:var(--green);border-color:#d7dfd0}.button.secondary:hover{background:#f1f5e9}.button.dark{background:var(--deep)}.text-button{background:transparent;border:0;padding:3px 0;color:var(--green);font-size:11px;text-decoration:none}.text-button:hover{text-decoration:underline}.hint{background:#faf6e9;border:1px solid #e9dfbe;border-radius:8px;padding:13px 15px;font-size:12px;margin:13px 0 0;color:#77632f}.feedback{padding:15px 17px;border-radius:8px;background:#edf5e9;margin-top:17px;font-size:12px;border-left:3px solid #54865d}.feedback strong{display:block;margin-bottom:5px}.feedback p{margin:0}.feedback.needs-work{background:#fff5e7;border-color:#bb904f;color:#72582b}.question-card{max-width:790px;margin:25px auto}.question-card .question-title{font-size:23px;line-height:1.5;margin:22px 0}.question-card .option{padding:17px 18px;font-size:15px}.question-card .exercise-label{font-size:11px}.question-card .actions{margin-top:26px}.formula-label{display:block;color:var(--muted);font-size:12px;margin-bottom:8px}.formula-input{background:#fcfcf8;border:1px solid #bdccba;border-radius:8px;padding:13px 16px;font-family:var(--serif);font-size:24px;width:100%;color:var(--ink)}.input-help{font-size:10px;color:var(--muted);margin:8px 0 0}.answer-error{font-size:12px;color:#965a20;margin-top:8px}.session-top{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:12px;margin-bottom:16px;gap:10px}.session-top strong{color:var(--green)}.session-progress{max-width:790px;margin:30px auto 0}.session-progress .progress-track{height:6px}.section-intro{max-width:780px;margin-top:10px}.section-intro .eyebrow{display:block;margin-bottom:15px}.start-grid{display:grid;grid-template-columns:1.25fr 1fr;gap:24px;margin-top:30px}.start-panel{border:1px solid var(--line);border-radius:14px;background:white;padding:35px}.start-panel h2{font-family:var(--serif);font-size:31px;font-weight:400}.start-panel p{color:var(--muted);font-size:14px}.start-panel .button{margin-top:12px}.checklist{list-style:none;padding:0;display:grid;gap:15px;font-size:13px;margin:26px 0}.checklist li{display:flex;gap:12px}.checklist li:before{content:'✓';color:var(--green)}.quiet-card{background:#ecf0e3;border:1px solid #dfe5d6;border-radius:14px;padding:35px;display:flex;flex-direction:column;justify-content:center}.quiet-card .big-symbol{font-family:var(--serif);font-size:70px;color:var(--green);line-height:1.2;margin:0 0 22px}.quiet-card h3{font-family:var(--serif);font-size:28px;font-weight:400}.quiet-card p{font-size:13px;color:#69765e;margin-bottom:0}.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:30px 0 24px}.stat{padding:24px;background:#fff;border:1px solid var(--line);border-radius:12px}.stat .number{font-family:var(--serif);font-size:37px;line-height:1.2}.stat .label{font-size:11px;color:var(--muted);margin-top:8px}.dashboard-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:24px}.skill-row{margin:23px 0}.skill-row:last-child{margin-bottom:0}.skill-row>div:first-child{display:flex;justify-content:space-between;font-size:12px;gap:12px}.skill-row small{color:var(--muted);font-size:10px}.panel p{font-size:13px;color:var(--muted)}.panel h2{font-size:19px}.recommendation{background:#edf2e2;border:1px solid #dce5cf;padding:22px;border-radius:10px;margin-bottom:15px}.recommendation h3{font-family:var(--serif);font-size:25px;font-weight:400;margin-bottom:10px}.recommendation p{font-size:12px;color:#64735d}.result-header{text-align:center;max-width:780px;margin:20px auto 30px}.result-header .score{font-family:var(--serif);font-size:75px;line-height:1.2;color:var(--green);margin:20px 0 10px}.result-header .score small{font-size:30px;color:var(--muted)}.result-header h1{font-size:38px}.result-header p{color:var(--muted);font-size:13px}.result-details{max-width:790px;margin:auto}.review-item{border:1px solid var(--line);border-radius:9px;background:white;margin-bottom:10px}.review-item summary{padding:16px 18px;cursor:pointer;font-size:12px;font-weight:600;line-height:1.6}.review-item summary .review-status{display:inline-block;margin-right:9px;color:var(--green)}.review-item.incorrect summary .review-status{color:#9b6c28}.review-body{border-top:1px solid var(--line);padding:17px 20px;font-size:12px}.review-body p:last-child{margin:0}.result-actions{display:flex;gap:12px;justify-content:center;margin:25px 0;flex-wrap:wrap}.footer{border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:15px;padding:18px 42px;font-size:10px;color:var(--muted)}.footer .text-button{font-size:10px}dialog{border:1px solid var(--line);border-radius:18px;padding:35px;max-width:590px;width:calc(100% - 30px);color:var(--ink);background:var(--paper);max-height:85vh}dialog::backdrop{background:#152c2ba6;backdrop-filter:blur(3px)}dialog h2{font-family:var(--serif);font-size:33px;font-weight:400;margin:15px 0 25px}dialog p{font-size:13px}.dialog-close{position:absolute;right:16px;top:9px;border:0;background:transparent;font-size:28px}.memo-rule{margin:20px 0}.memo-rule p{margin:6px 0}.memo-formula{font-size:24px;background:#eaf0df;border-radius:8px;padding:17px;margin:20px 0}.memo-formula span{display:block;font-size:16px;margin-top:6px}.reset-area{margin:27px 0 0;font-size:10px;color:var(--muted)}.reset-area button{font-size:10px;color:#8b6b45}.noscript{position:fixed;bottom:0;background:#fff3d9;padding:20px;z-index:100}.empty-state{padding:20px 0}.empty-state p{font-size:13px}.empty-state .button{margin-top:10px}.saved-banner{padding:10px 15px;background:#edf2e2;border-radius:8px;font-size:12px;color:var(--green);max-width:790px;margin:20px auto}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(min-width:1550px){main{padding-top:50px}.hero{gap:60px}.hero-figure{min-height:260px}.learning-grid{grid-template-columns:260px minmax(0,1fr)}.lesson-card{padding:35px}}
+@media(max-width:1180px){.sidebar{width:210px;padding-left:17px;padding-right:17px}.workspace{margin-left:210px}main{padding:28px}.topbar{padding:20px 28px}.hero{gap:20px;grid-template-columns:1fr 1fr}.learning-grid{grid-template-columns:195px minmax(0,1fr);gap:18px}.journey{padding:18px 10px}.lesson-link{gap:7px;padding:10px 7px}.lesson-link strong{font-size:10px}.lesson-card{padding:23px}.species .formula{font-size:27px}.hero-figure{padding:22px 18px}.species{min-width:64px}.species small{font-size:9px}.hero-meta{gap:10px;font-size:10px}.footer{padding:18px 28px}.save-indicator{font-size:9px}}
+@media(max-width:930px){.sidebar{width:180px;padding:26px 12px}.workspace{margin-left:180px}.brand{font-size:26px}.brand-icon{width:38px;height:42px;font-size:32px}.brand small{font-size:8px}.course-label{font-size:8px;margin-top:36px}nav a{padding:12px 10px;gap:9px;font-size:12px}.side-module{padding:16px 12px}.side-module h2{font-size:14px}.topbar{padding:18px 22px;min-height:68px}.desktop-only{display:none}main{padding:26px 22px}.hero{grid-template-columns:1fr}.hero-copy{padding:0}.hero-figure{min-height:200px}.species .formula{font-size:36px}.hero-figure .figure-label{margin-bottom:15px}.pair{justify-content:center;gap:35px}.species{min-width:110px}.learning-grid{grid-template-columns:1fr}.journey{padding:18px}.journey-list{grid-template-columns:repeat(4,1fr);gap:4px}.lesson-link{flex-direction:column;align-items:flex-start;padding:10px}.lesson-link small{font-size:8px}.journey-progress{margin-top:13px;padding-top:13px}.journey-heading{font-size:12px}.journey-subtitle{margin-bottom:12px}.start-grid,.dashboard-grid{grid-template-columns:1fr}.quiet-card{padding:28px}.quiet-card .big-symbol{font-size:44px;margin-bottom:15px}.stat-grid{gap:10px}.stat{padding:18px}.stat .number{font-size:29px}}
+@media(max-width:640px){body{font-size:14px}.sidebar{position:sticky;top:0;width:100%;height:auto;display:block;padding:13px 16px 0;border-right:0;border-bottom:1px solid var(--line)}.brand{font-size:22px;width:fit-content;gap:9px}.brand-icon{width:32px;height:34px;border-radius:9px;font-size:27px}.brand small{font-size:7px;margin-top:4px;letter-spacing:1px}.course-label,.side-module,.side-bottom{display:none}nav{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:12px}nav a{justify-content:center;padding:11px 3px;font-size:10px;border-radius:0;gap:6px;border-bottom:2px solid transparent}nav a>span:first-child{font-size:15px;width:auto}nav a.active{background:transparent;border-bottom-color:var(--green)}.nav-dot{display:none!important}.workspace{margin-left:0}.topbar{min-height:43px;padding:10px 17px;font-size:9px;gap:10px}.save-indicator{font-size:8px;gap:5px;white-space:normal;text-align:right}.save-indicator:before{flex-shrink:0;width:5px;height:5px}main{padding:24px 17px 20px;min-height:calc(100vh - 215px)}.page-top{margin-bottom:22px}.breadcrumb{font-size:8px;letter-spacing:1.1px}.badge{font-size:8px;padding:4px 8px}.hero{margin-top:0;gap:23px;margin-bottom:22px}h1{font-size:38px;letter-spacing:-1.4px}.hero-copy .eyebrow{font-size:9px;margin-bottom:12px}.intro-line{font-size:12px}.hero-meta{font-size:9px;margin-top:17px}.hero-figure{padding:20px;min-height:205px}.pair{gap:10px}.species{min-width:80px}.species .formula{font-size:30px}.figure-label{font-size:8px}.figure-note{font-size:9px}.learning-grid{gap:17px}.journey{padding:16px 11px}.journey-list{gap:2px}.lesson-link{padding:9px 5px}.lesson-link strong{font-size:9px}.lesson-link small{display:none}.step-number{width:23px;height:23px;font-size:10px}.journey-subtitle{font-size:9px}.journey-progress{margin-top:10px;padding-top:12px}.lesson-card,.question-card,.panel{padding:22px 18px}.lesson-card h2{font-size:27px}.lesson-card .eyebrow{font-size:9px}.lesson-description,.lesson-detail,.rule{font-size:12px}.note{font-size:10px}.exercise-label{font-size:9px}.question-title{font-size:15px}.option{font-size:12px;padding:12px}.button{padding:11px 15px;font-size:11px;gap:10px}.actions{gap:15px}.text-button{font-size:10px}.question-card .question-title{font-size:19px}.question-card .option{font-size:13px;padding:14px 12px}.session-top{font-size:10px}.start-grid{gap:18px;margin-top:24px}.start-panel{padding:25px}.start-panel h2{font-size:28px}.start-panel p{font-size:12px}.checklist{font-size:12px}.quiet-card{padding:25px}.quiet-card h3{font-size:25px}.quiet-card p{font-size:12px}.stat-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:25px}.stat{padding:15px 11px}.stat .number{font-size:25px}.stat .label{font-size:9px}.dashboard-grid{gap:18px}.panel h2{font-size:18px}.skill-row>div:first-child{font-size:11px}.skill-row small{font-size:9px}.result-header h1{font-size:31px}.result-header .score{font-size:64px}.footer{padding:17px;flex-wrap:wrap;font-size:9px}.footer .text-button{font-size:9px}dialog{padding:27px 22px}.result-actions .button{flex:1}.review-item summary{font-size:11px}.review-body{font-size:11px;padding:15px}.question-card{margin-top:18px}.question-card .exercise-label{font-size:9px}.section-intro h1{font-size:36px}.formula-input{font-size:22px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
+
+@media(max-width:640px){.long-formula .species .formula{font-size:22px}.long-formula .species{min-width:0;flex:1}.long-formula .transfer{flex:0 0 55px}.transfer small{white-space:nowrap}.long-formula .species small{font-size:8px}}
+
+</style>
+</head>
+<body>
+  <a class="skip" href="#main">Aller au contenu</a>
+  <aside class="sidebar">
+    <a class="brand" href="#apprendre" aria-label="Déclic, accueil"><span class="brand-icon" aria-hidden="true">d.</span><span>Déclic<small>PHYSIQUE · CHIMIE</small></span></a>
+    <div class="course-label">TON ESPACE D’APPRENTISSAGE</div>
+    <nav aria-label="Parcours principal" id="nav">
+      <a href="#apprendre" data-view="apprendre"><span aria-hidden="true">◫</span>Apprendre<span class="nav-dot"></span></a>
+      <a href="#entrainer" data-view="entrainer"><span aria-hidden="true">✧</span>S’entraîner</a>
+      <a href="#tester" data-view="tester"><span aria-hidden="true">✓</span>Se tester</a>
+      <a href="#bilan" data-view="bilan"><span aria-hidden="true">▥</span>Mon bilan</a>
+    </nav>
+    <div class="side-module"><span class="eyebrow">SÉQUENCE 01</span><h2>Constitution et<br>transformations<br>de la matière</h2><div class="fine-rule"></div><p>Terminale · Spécialité</p><span class="module-pill">Module 1 · Acide-base</span></div>
+    <div class="side-bottom"><span class="little-orbit" aria-hidden="true">H⁺</span><p>Un petit pas.<br>Un vrai déclic.</p></div>
+  </aside>
+  <div class="workspace">
+    <header class="topbar"><span>Le laboratoire des idées <span class="desktop-only">/ <strong>Les couples acide-base</strong></span></span><span class="save-indicator" id="save-status">Progression sur cet appareil</span></header>
+    <main id="main" tabindex="-1"></main>
+    <footer class="footer"><span>Déclic · Comprendre avant de retenir.</span><button id="open-memo" class="text-button">L’essentiel à retenir ↗</button></footer>
+  </div>
+  <dialog id="memo-dialog" aria-labelledby="memo-title"><button class="dialog-close" id="close-memo" aria-label="Fermer le mémo">×</button><span class="eyebrow">TA FICHE MÉMO</span><h2 id="memo-title">Le petit essentiel.</h2><div class="memo-rule"><strong>Un acide cède H⁺.</strong><p>Sa base conjuguée a un H de moins et une charge algébrique diminuée de 1.</p></div><div class="memo-rule"><strong>Une base capte H⁺.</strong><p>Son acide conjugué a un H de plus et une charge algébrique augmentée de 1.</p></div><div class="formula memo-formula">Acide / Base <span>exemple : NH₄⁺ / NH₃</span></div><p>Une demi-équation s’écrit : <strong>NH₄⁺ = NH₃ + H⁺</strong>. Les atomes et la charge totale sont conservés. Cette écriture décrit un couple ; lors d’une réaction, H⁺ est transféré à une autre espèce.</p><p class="muted">L’eau peut être base dans H₃O⁺ / H₂O et acide dans H₂O / HO⁻ : son rôle dépend du couple.</p></dialog>
+  <noscript><p class="noscript">Active JavaScript pour suivre le parcours et répondre aux exercices.</p></noscript>
+  <script type="module">
+const STORAGE_KEY = 'declic-acide-base-v1';
+const skills = { role: 'Céder ou capter H⁺', conjugue: 'Trouver l’espèce conjuguée', ordre: 'Écrire un couple', charge: 'Vérifier les charges' };
+function normalizeFormula(value) {
+  return String(value).normalize('NFKC').replace(/[−–‐]/g, '-').replace(/[\s^{}()]/g, '').replace(/OH-/g, 'HO-');
+}
+function isCorrect(question, answer) {
+  return question.type === 'formula'
+    ? question.answers.some(expected => normalizeFormula(expected) === normalizeFormula(answer))
+    : Number.isInteger(answer) && answer === question.correct;
+}
+function shuffle(items, random = Math.random) {
+  const copy = [...items];
+  for (let i = copy.length - 1; i > 0; i--) { const j = Math.floor(random() * (i + 1)); [copy[i], copy[j]] = [copy[j], copy[i]]; }
+  return copy;
+}
+function makeExam(bank, random = Math.random) {
+  return shuffle(Object.keys(skills).flatMap(skill => shuffle(bank.filter(q => q.skill === skill), random).slice(0, 2)), random).map(q => q.id);
+}
+function emptyState() { return { version: 1, lesson: 0, completed: [], history: [], exam: null, lastExam: null }; }
+function readState(storage, bank) {
+  try {
+    const value = JSON.parse(storage.getItem(STORAGE_KEY));
+    if (!value || value.version !== 1) return emptyState();
+    const validIds = new Set(bank.map(q => q.id));
+    const cleanRecords = records => Array.isArray(records) ? records.filter(r => r && validIds.has(r.id) && typeof r.correct === 'boolean' && typeof r.assisted === 'boolean') : [];
+    const state = { ...emptyState(), lesson: Number.isInteger(value.lesson) ? Math.max(0, Math.min(3, value.lesson)) : 0,
+      completed: Array.isArray(value.completed) ? [...new Set(value.completed.filter(n => Number.isInteger(n) && n >= 0 && n < 4))] : [],
+      history: cleanRecords(value.history).slice(-300) };
+    if (value.lastExam && Array.isArray(value.lastExam.answers)) {
+      const answers = cleanRecords(value.lastExam.answers);
+      if (answers.length === 8 && new Set(answers.map(r => r.id)).size === 8) state.lastExam = { answers, date: String(value.lastExam.date || '') };
+    }
+    const e = value.exam;
+    if (e && Array.isArray(e.ids) && e.ids.length === 8 && new Set(e.ids).size === 8 && e.ids.every(id => validIds.has(id)) && Number.isInteger(e.index) && e.index >= 0 && e.index < 8) {
+      const answers = cleanRecords(e.answers);
+      if (answers.length === e.index && answers.every((r, i) => r.id === e.ids[i])) state.exam = { ids: e.ids, index: e.index, answers };
+    }
+    return state;
+  } catch { return emptyState(); }
+}
+function summarize(records, bank) {
+  const totals = Object.fromEntries(Object.keys(skills).map(key => [key, { total: 0, correct: 0 }]));
+  for (const record of records) {
+    const question = bank.find(q => q.id === record.id);
+    if (!question) continue;
+    totals[question.skill].total++;
+    if (record.correct && !record.assisted) totals[question.skill].correct++;
+  }
+  return totals;
+}
+
+const lessons = [
+  { title: 'Céder ou capter ?', short: 'Le rôle de H⁺', duration: '3 min', tag: 'LE POINT DE DÉPART',
+    intro: 'Tout commence par un transfert d’ion hydrogène. Observe ce que fait chaque espèce : c’est son action qui définit son rôle.',
+    rule: 'Un acide peut céder H⁺. Une base peut capter H⁺.',
+    detail: 'Dans NH₄⁺ = NH₃ + H⁺, NH₄⁺ cède un ion H⁺ : c’est l’acide. Dans le sens inverse, NH₃ capte H⁺ : c’est la base.',
+    pair: ['NH₄⁺', 'NH₃'], names: ['ion ammonium', 'ammoniac'], question: 'role-1',
+    note: 'Une base n’est pas forcément négative : NH₃ est une molécule neutre.' },
+  { title: 'Trouver son partenaire', short: 'Les espèces conjuguées', duration: '4 min', tag: 'UNE SEULE DIFFÉRENCE',
+    intro: 'Un acide et sa base conjuguée forment une paire. Pour passer de l’un à l’autre, on ajoute ou on retire exactement un ion H⁺.',
+    rule: 'Deux espèces conjuguées diffèrent d’un seul H⁺.',
+    detail: 'CH₃COOH cède H⁺ et devient CH₃COO⁻. La chaîne carbonée reste la même. Le H du groupe carboxyle est celui qui est cédé.',
+    pair: ['CH₃COOH', 'CH₃COO⁻'], names: ['acide éthanoïque', 'ion éthanoate'], question: 'conjugue-1',
+    note: 'Retirer H⁺ enlève un hydrogène et diminue la charge algébrique de 1. Ce n’est pas retirer un électron.' },
+  { title: 'Le bon ordre', short: 'Écrire un couple', duration: '3 min', tag: 'LA CONVENTION À RETENIR',
+    intro: 'On écrit toujours un couple dans le même ordre : l’acide à gauche de la barre, sa base conjuguée à droite.',
+    rule: 'Un couple se note Acide / Base.',
+    detail: 'H₃O⁺ / H₂O est un couple : H₃O⁺ peut céder H⁺ pour donner H₂O. H₂O / HO⁻ est un autre couple, où l’eau joue cette fois le rôle d’acide.',
+    pair: ['H₃O⁺', 'H₂O'], names: ['ion oxonium', 'eau'], question: 'ordre-1',
+    note: 'L’eau peut céder ou capter H⁺ selon son partenaire : on dit qu’elle est amphotère.' },
+  { title: 'Garder les charges en équilibre', short: 'Vérifier sa réponse', duration: '4 min', tag: 'LE RÉFLEXE DE VÉRIFICATION',
+    intro: 'Compter les hydrogènes ne suffit pas. H⁺ porte la charge +1 : cette charge doit se retrouver dans le bilan.',
+    rule: 'Acide = Base + H⁺ : mêmes atomes, même charge totale.',
+    detail: 'HCO₃⁻ = CO₃²⁻ + H⁺ : à gauche, la charge est −1. À droite, −2 + 1 = −1. Un acide peut donc lui-même être un ion négatif.',
+    pair: ['HCO₃⁻', 'CO₃²⁻'], names: ['ion hydrogénocarbonate', 'ion carbonate'], question: 'charge-1',
+    note: 'La base conjuguée a une charge algébrique inférieure de 1 à celle de l’acide. Exemple : +1 devient 0 ; 0 devient −1 ; −1 devient −2.' }
+];
+const choice = (id, skill, prompt, options, correct, feedback, explanation, hints) => ({ id, skill, prompt, options, correct, feedback, explanation, hints, type: 'choice' });
+const formula = (id, skill, prompt, answers, explanation, hints) => ({ id, skill, prompt, answers, explanation, hints, type: 'formula' });
+const questions = [
+  choice('role-1', 'role', 'NH₄⁺ cède un ion H⁺ pour devenir NH₃. Quel rôle joue NH₄⁺ ?', ['Un acide', 'Une base', 'On ne peut pas savoir'], 0,
+    ['Exact : NH₄⁺ cède H⁺, il joue le rôle d’acide.', 'Tu as inversé les rôles : une base capte H⁺ ; ici, NH₄⁺ le cède.', 'Le verbe « céder » suffit pour identifier le rôle.'], 'Un acide de Brønsted peut céder H⁺ ; une base peut le capter.', ['Repère le verbe : NH₄⁺ cède-t-il ou capte-t-il H⁺ ?', 'Céder H⁺ correspond au rôle d’acide.']),
+  choice('role-2', 'role', 'NH₃ capte H⁺ et devient NH₄⁺. NH₃ joue le rôle…', ['d’un acide', 'd’une base', 'd’un ion hydrogène'], 1,
+    ['Un acide cède H⁺. Ici, NH₃ le capte.', 'Oui : en captant H⁺, NH₃ joue le rôle de base.', 'NH₃ est l’ammoniac. H⁺ est l’ion qu’il capte.'], 'NH₃ + H⁺ = NH₄⁺ : l’ammoniac est la base et l’ammonium son acide conjugué.', ['Observe le devenir de H⁺.', 'Capter H⁺ définit le rôle de base.']),
+  choice('role-3', 'role', 'Une base doit-elle forcément porter une charge négative ?', ['Oui, toujours', 'Non : NH₃, par exemple, est neutre', 'Oui, sauf dans l’eau'], 1,
+    ['La charge ne définit pas le rôle. NH₃, neutre, peut capter H⁺.', 'Exact. C’est la capacité à capter H⁺ qui définit une base.', 'Il n’y a pas cette exception : NH₃ est une base neutre.'], 'Il existe des bases neutres comme NH₃ et des bases négatives comme CH₃COO⁻.', ['Pense à l’ammoniac NH₃.', 'NH₃ capte H⁺ sans porter de charge initiale.']),
+  choice('role-4', 'role', 'Dans le couple H₂O / HO⁻, quel est le rôle de H₂O ?', ['Base : l’eau est toujours une base', 'Acide : elle peut céder H⁺', 'Aucun rôle'], 1,
+    ['Le rôle de l’eau dépend du couple. Ici, elle cède H⁺.', 'Oui : H₂O = HO⁻ + H⁺.', 'H₂O et HO⁻ sont bien conjugués : ils diffèrent d’un H⁺.'], 'L’eau est amphotère : acide dans H₂O / HO⁻, base dans H₃O⁺ / H₂O.', ['Compare les deux formules.', 'H₂O perd H⁺ pour devenir HO⁻.']),
+  choice('role-5', 'role', 'HCO₃⁻ cède H⁺ pour donner CO₃²⁻. Malgré sa charge négative, HCO₃⁻ est ici…', ['un acide', 'une base', 'un électron'], 0,
+    ['Oui : il cède H⁺, donc c’est l’acide de ce couple.', 'Attention : un ion négatif peut être acide. Le critère est le transfert de H⁺.', 'Un ion hydrogénocarbonate contient plusieurs atomes ; ce n’est pas un électron.'], 'HCO₃⁻ / CO₃²⁻ : le premier membre cède H⁺.', ['Ne te fie pas au signe de la charge.', 'Le verbe « céder » indique le rôle d’acide.']),
+  choice('role-6', 'role', 'Dans H₃O⁺ / H₂O, que fait l’eau pour devenir H₃O⁺ ?', ['Elle cède H⁺', 'Elle capte H⁺', 'Elle cède un électron'], 1,
+    ['Céder H⁺ donnerait HO⁻, pas H₃O⁺.', 'Exact : H₂O + H⁺ = H₃O⁺.', 'Le passage entre ces espèces correspond à un transfert de H⁺.'], 'L’eau est la base du couple H₃O⁺ / H₂O.', ['H₃O⁺ contient un H de plus que H₂O.', 'Pour obtenir un H de plus et une charge +1, on capte H⁺.']),
+  formula('conjugue-1', 'conjugue', 'NH₄⁺ cède H⁺. Écris la formule de sa base conjuguée.', ['NH3'], 'NH₄⁺ = NH₃ + H⁺. On retire un H et la charge passe de +1 à 0.', ['Retire un seul H à NH₄⁺.', '4 − 1 = 3 hydrogènes ; +1 − 1 = 0 pour la charge.']),
+  formula('conjugue-2', 'conjugue', 'CH₃COOH cède H⁺. Écris la formule de sa base conjuguée.', ['CH3COO-'], 'CH₃COOH = CH₃COO⁻ + H⁺. La base conjuguée est l’ion éthanoate.', ['Le H du groupe COOH est cédé.', 'Le groupe COOH devient COO⁻.']),
+  formula('conjugue-3', 'conjugue', 'H₂O capte H⁺. Écris la formule de son acide conjugué.', ['H3O+'], 'H₂O + H⁺ = H₃O⁺ : un H de plus et une charge +1.', ['Capter H⁺ ajoute un hydrogène.', '2 + 1 = 3 hydrogènes ; 0 + 1 = +1 pour la charge.']),
+  formula('conjugue-4', 'conjugue', 'HO⁻ capte H⁺. Quelle espèce obtient-on ?', ['H2O'], 'HO⁻ + H⁺ = H₂O : les charges −1 et +1 se compensent.', ['Ajoute un H à HO⁻.', 'La charge finale vaut −1 + 1 = 0.']),
+  formula('conjugue-5', 'conjugue', 'HNO₃ cède H⁺. Écris la formule de sa base conjuguée.', ['NO3-'], 'HNO₃ = NO₃⁻ + H⁺. Les trois oxygènes restent présents.', ['Seul H⁺ est retiré, pas un oxygène.', 'Une espèce neutre qui perd H⁺ porte ensuite la charge −1.']),
+  formula('conjugue-6', 'conjugue', 'HCO₃⁻ cède H⁺. Écris la formule de sa base conjuguée.', ['CO3^2-'], 'HCO₃⁻ = CO₃²⁻ + H⁺ : la charge passe de −1 à −2.', ['Retire un H et diminue la charge de 1.', 'Pour écrire une charge −2 au clavier, utilise ^2-.']),
+  choice('ordre-1', 'ordre', 'Quel couple est écrit dans l’ordre conventionnel ?', ['NH₃ / NH₄⁺', 'NH₄⁺ / NH₃', 'NH₄⁺ / H⁺'], 1,
+    ['Ce sont les bonnes espèces, mais l’ordre est inversé.', 'Exact : acide à gauche, base conjuguée à droite.', 'Ces espèces ne diffèrent pas d’un seul H⁺ : le squelette N n’est pas conservé.'], 'Le couple se note acide / base : NH₄⁺ / NH₃.', ['Place en premier l’espèce qui peut céder H⁺.', 'NH₄⁺ cède H⁺ pour devenir NH₃.']),
+  choice('ordre-2', 'ordre', 'Quel couple associe correctement un acide à sa base conjuguée ?', ['CH₃COOH / CH₃COO⁻', 'CH₃COOH / NH₃', 'CH₃COO⁻ / CH₃COOH'], 0,
+    ['Oui : les deux espèces diffèrent d’un seul H⁺ et l’acide est en premier.', 'Un acide et une base quelconques ne sont pas forcément conjugués.', 'L’ordre est inversé : l’acide doit être en premier.'], 'CH₃COOH / CH₃COO⁻ est le couple acide éthanoïque / ion éthanoate.', ['Vérifie le squelette des deux espèces.', 'Puis vérifie que l’acide figure à gauche.']),
+  choice('ordre-3', 'ordre', 'L’eau est la base conjuguée de H₃O⁺. Quel couple faut-il écrire ?', ['H₂O / H₃O⁺', 'H₃O⁺ / H₂O', 'H₃O⁺ / HO⁻'], 1,
+    ['Tu as inversé la convention acide / base.', 'Oui : H₃O⁺ cède H⁺ et donne H₂O.', 'H₃O⁺ et HO⁻ diffèrent de deux H⁺, pas d’un seul.'], 'H₃O⁺ / H₂O : l’acide oxonium précède sa base conjuguée.', ['La base se place à droite de la barre.', 'L’acide est H₃O⁺.']),
+  choice('ordre-4', 'ordre', 'Pourquoi H₃O⁺ / HO⁻ n’est-il pas un couple conjugué ?', ['Parce qu’un couple ne contient jamais deux ions', 'Parce que ces espèces diffèrent de deux H⁺', 'Parce que l’oxygène est interdit'], 1,
+    ['Un couple peut contenir deux ions, comme HCO₃⁻ / CO₃²⁻.', 'Exact : le passage de H₃O⁺ à HO⁻ retire deux H⁺.', 'L’oxygène peut bien sûr être présent dans les espèces du couple.'], 'Les espèces d’un couple conjugué diffèrent exactement d’un H⁺.', ['Compare le nombre d’hydrogènes : 3 et 1.', 'La différence vaut 2, alors qu’on attend 1.']),
+  choice('ordre-5', 'ordre', 'Quelle demi-équation décrit le couple NH₄⁺ / NH₃ ?', ['NH₄⁺ = NH₃ + H⁺', 'NH₄⁺ + H⁺ = NH₃', 'NH₄⁺ = NH₃ + e⁻'], 0,
+    ['Oui : un H⁺ est cédé et les charges sont conservées.', 'Avec un H⁺ en plus à gauche, les atomes et les charges ne sont plus conservés.', 'Il s’agit d’un transfert de H⁺, pas d’électron e⁻.'], 'La forme utile est Acide = Base + H⁺.', ['Le H⁺ apparaît du côté de la base.', 'Vérifie 4 H à gauche et 3 + 1 à droite.']),
+  choice('ordre-6', 'ordre', 'À partir de HNO₃ = NO₃⁻ + H⁺, quel couple écris-tu ?', ['NO₃⁻ / HNO₃', 'HNO₃ / NO₃⁻', 'HNO₃ / H⁺'], 1,
+    ['Les espèces sont conjuguées, mais l’ordre est inversé.', 'Oui : HNO₃ est l’acide, NO₃⁻ sa base conjuguée.', 'H⁺ est l’ion cédé ; ce n’est pas la base conjuguée de HNO₃.'], 'Le couple s’écrit HNO₃ / NO₃⁻.', ['Identifie d’abord l’acide qui cède H⁺.', 'HNO₃ se place avant la barre.']),
+  choice('charge-1', 'charge', 'Dans HCO₃⁻ = CO₃²⁻ + H⁺, quelle est la charge totale à droite ?', ['−3', '−1', '+1'], 1,
+    ['Il faut ajouter +1, et non −1 : H⁺ est positif.', 'Exact : −2 + 1 = −1, comme à gauche.', 'N’oublie pas la charge −2 de CO₃²⁻.'], 'On additionne algébriquement les charges : −2 + (+1) = −1.', ['Relève les deux charges : −2 et +1.', 'Une charge positive compense une unité de charge négative.']),
+  choice('charge-2', 'charge', 'Un acide neutre cède H⁺. Quelle charge porte sa base conjuguée ?', ['+1', '0', '−1'], 2,
+    ['Perdre une charge positive diminue la charge totale.', 'La perte de H⁺ change aussi la charge.', 'Oui : 0 − (+1) = −1.'], 'Par exemple : CH₃COOH = CH₃COO⁻ + H⁺.', ['Écris 0 = charge de la base + 1.', 'La charge recherchée est 0 − 1.']),
+  choice('charge-3', 'charge', 'Une base de charge −1 capte H⁺. Quelle est la charge de l’acide obtenu ?', ['−2', '0', '+2'], 1,
+    ['Capter H⁺ augmente la charge de 1, il ne la diminue pas.', 'Oui : −1 + 1 = 0.', 'Il faut partir de −1, puis ajouter une seule charge positive.'], 'Par exemple : CH₃COO⁻ + H⁺ = CH₃COOH.', ['Additionne −1 et +1.', 'Les deux charges se compensent.']),
+  choice('charge-4', 'charge', 'Quelle écriture conserve les atomes et les charges ?', ['NH₄⁺ = NH₃⁻ + H⁺', 'NH₄⁺ = NH₃ + H⁺', 'NH₄⁺ = NH₂ + H⁺'], 1,
+    ['La charge à droite vaut 0, alors qu’elle vaut +1 à gauche.', 'Exact : 4 H et une charge +1 de chaque côté.', 'Il manque un hydrogène à droite : 2 + 1 = 3, pas 4.'], 'Vérifie séparément le nombre d’atomes et la somme des charges.', ['Compte les H de chaque côté.', 'Puis vérifie que la charge totale à droite est +1.']),
+  choice('charge-5', 'charge', 'Une base neutre capte H⁺. Quelle charge porte son acide conjugué ?', ['−1', '+1', '0'], 1,
+    ['Capter une charge positive augmente la charge.', 'Exact : 0 + 1 = +1, comme pour NH₃ / NH₄⁺.', 'L’ajout de H⁺ apporte aussi sa charge +1.'], 'NH₃ + H⁺ = NH₄⁺ : l’acide conjugué est un cation.', ['Pars de la charge 0.', 'Ajoute la charge de H⁺, soit +1.']),
+  choice('charge-6', 'charge', 'H₂O = HO⁻ + H⁺ : quelle est la somme des charges à droite ?', ['0', '+2', '−2'], 0,
+    ['Oui : −1 + 1 = 0. L’eau à gauche est neutre.', 'HO⁻ porte −1, pas +1.', 'H⁺ porte +1, pas −1.'], 'La charge totale est nulle des deux côtés.', ['Additionne les charges de HO⁻ et de H⁺.', '−1 et +1 se compensent.'])
+];
+
+
+const $ = id => document.getElementById(id);
+const esc = value => String(value).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const byId = id => questions.find(q => q.id === id);
+let storage;
+try { storage = window.localStorage; } catch { storage = null; }
+let state = readState(storage, questions);
+let view = 'apprendre';
+let practice = null;
+let showingExamResult = false;
+let activity = freshActivity();
+function freshActivity() { return { selected: null, hints: 0, attempts: 0, done: false, firstCorrect: null, feedback: null, recorded: false }; }
+function save() {
+  try { if (!storage) throw new Error(); storage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+  catch { $('save-status').textContent = 'Sauvegarde indisponible · session en cours'; $('save-status').classList.add('warning'); }
+}
+save();
+function pageTop(label) { return `<div class="page-top"><span class="breadcrumb">SÉQUENCE 01 &nbsp; / &nbsp; MODULE 01</span><span class="badge">${label}</span></div>`; }
+function progress(value, max, label) { return `<div class="progress-track" role="progressbar" aria-label="${esc(label)}" aria-valuenow="${value}" aria-valuemin="0" aria-valuemax="${max}"><span style="width:${max ? Math.round(value / max * 100) : 0}%"></span></div>`; }
+function pairFigure(lesson) { return `<div class="hero-figure ${lesson.pair[0].length > 6 ? 'long-formula' : ''}" aria-label="Exemple de couple : ${lesson.pair.join(' et ')}"><div class="figure-label">DEUX ESPÈCES. UN SEUL H⁺ DE DIFFÉRENCE.</div><div class="pair"><div class="species"><span class="formula">${lesson.pair[0]}</span><small>${lesson.names[0]}</small><span class="species-role">ACIDE</span></div><div class="transfer"><span class="proton">− H⁺</span><span class="arrow" aria-hidden="true">⟶</span><small>cède H⁺</small></div><div class="species"><span class="formula">${lesson.pair[1]}</span><small>${lesson.names[1]}</small><span class="species-role base">BASE CONJUGUÉE</span></div></div><p class="figure-note">Dans l’autre sens, la base capte H⁺ et retrouve son acide.</p></div>`; }
+function activeQuestion() {
+  if (view === 'apprendre') return byId(lessons[state.lesson].question);
+  if (view === 'entrainer' && practice && !practice.done) return byId(practice.ids[practice.index]);
+  if (view === 'tester' && state.exam && !showingExamResult) return byId(state.exam.ids[state.exam.index]);
+  return null;
+}
+function questionUI(q, exam = false) {
+  const selected = activity.selected;
+  const answerArea = q.type === 'choice' ? `<div class="options" role="group" aria-label="Choix de réponse">${q.options.map((option, i) => {
+    let status = selected === i ? ' selected' : '';
+    if (activity.done && !exam) { if (i === q.correct) status += ' correct'; else if (i === selected) status += ' wrong'; }
+    return `<button type="button" class="option${status}" data-choice="${i}" aria-pressed="${selected === i}" ${activity.done ? 'disabled' : ''}><span class="option-letter" aria-hidden="true">${'ABC'[i]}</span><span>${option}</span></button>`;
+  }).join('')}</div>` : `<label class="formula-label" for="formula-answer">Ta formule</label><input class="formula-input" id="formula-answer" name="answer" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Écris la formule ici…" aria-describedby="input-help" value="${esc(selected ?? '')}" ${activity.done ? 'disabled' : ''}><p class="input-help" id="input-help">Au clavier : NH4+, CH3COO-, CO3^2-. Les indices et charges Unicode sont aussi acceptés. Respecte les majuscules.</p>`;
+  return `<form id="answer-form"><h3 class="question-title">${q.prompt}</h3>${answerArea}
+    ${!exam && activity.hints ? `<div class="hint" role="status"><strong>Indice ${activity.hints} / ${q.hints.length}</strong><br>${q.hints[activity.hints - 1]}</div>` : ''}
+    ${activity.feedback && !exam ? `<div class="feedback ${activity.feedback.correct ? '' : 'needs-work'}" role="status" aria-live="polite"><strong>${activity.feedback.correct ? 'Bien vu. Tu as compris le lien !' : 'On reprend ce point ensemble.'}</strong><p>${activity.feedback.text}</p>${activity.feedback.correct ? '' : `<p>${q.explanation}</p>`}</div>` : ''}
+    <div class="actions">${exam ? '<span class="muted"><small>La correction arrive à la fin.</small></span>' : `<button type="button" class="text-button" data-action="hint" ${activity.done || activity.hints >= q.hints.length ? 'disabled' : ''}>${activity.hints ? 'Un autre indice' : '☼ Un petit indice'}${activity.hints >= q.hints.length ? ' · tous lus' : ''}</button>`}
+    ${activity.done ? `<button type="button" class="button" data-action="next">${view === 'apprendre' ? (state.lesson === 3 ? 'Passer à l’entraînement' : 'Étape suivante') : practice.index === practice.ids.length - 1 ? 'Voir mon bilan' : 'Question suivante'} <span aria-hidden="true">→</span></button>` : `<button type="submit" class="button" id="validate-answer" ${selected === null || selected === '' ? 'disabled' : ''}>${exam ? (state.exam.index === 7 ? 'Terminer le test' : 'Enregistrer et continuer') : 'Vérifier ma réponse'} <span aria-hidden="true">→</span></button>`}</div>
+  </form>`;
+}
+function learnPage() {
+  const lesson = lessons[state.lesson];
+  return `${pageTop('Apprentissage guidé')}<section class="hero"><div class="hero-copy"><span class="eyebrow">COMPRENDRE, UN DÉCLIC À LA FOIS.</span><h1>Les couples<br><em>acide-base.</em></h1><p class="intro-line">Un ion H⁺ change de partenaire. Et tout s’éclaire.<br>Observe, essaie, puis construis ton raisonnement.</p><div class="hero-meta"><span>◷ &nbsp; Environ 15 min</span><span>4 étapes à ton rythme</span><span>Terminale</span></div></div>${pairFigure(lesson)}</section>
+  <div class="learning-grid"><section class="journey" aria-label="Étapes du parcours"><h2 class="journey-heading">Ton chemin vers le déclic</h2><p class="journey-subtitle">Une idée, un exemple, à toi de jouer.</p><div class="journey-list">${lessons.map((l, i) => `<button class="lesson-link ${i === state.lesson ? 'current' : ''} ${state.completed.includes(i) ? 'complete' : ''}" data-lesson="${i}" ${i === state.lesson ? 'aria-current="step"' : ''}><span class="step-number">${state.completed.includes(i) ? '✓' : `0${i + 1}`}</span><span><strong>${l.title}</strong><small>${l.short} · ${l.duration}</small></span></button>`).join('')}</div><div class="journey-progress"><div><span>Étapes validées</span><strong>${state.completed.length} / 4</strong></div>${progress(state.completed.length, 4, 'Étapes validées')}</div></section>
+    <section class="lesson-card"><span class="eyebrow">ÉTAPE 0${state.lesson + 1} &nbsp; · &nbsp; ${lesson.tag}</span><h2>${lesson.title}</h2><p class="lesson-description">${lesson.intro}</p><div class="rule"><strong>${lesson.rule}</strong></div><p class="lesson-detail">${lesson.detail}</p><div class="note"><span aria-hidden="true">↳</span><div>${lesson.note}</div></div><div class="exercise-divider"></div><div class="exercise-label"><span>À TOI DE JOUER</span><span class="muted">Tu peux demander un indice.</span></div>${questionUI(activeQuestion())}</section></div>`;
+}
+function startPage(exam) {
+  return `${pageTop(exam ? 'En autonomie' : 'Avec un coup de pouce')}<section class="section-intro"><span class="eyebrow">${exam ? 'FAIS LE POINT, SANS PRESSION.' : 'C’EST EN ESSAYANT QUE ÇA SE FIXE.'}</span><h1>${exam ? 'Prêt pour le déclic ?' : 'À toi de faire les liens.'}</h1><p class="intro-line">${exam ? 'Huit questions pour voir ce que tu sais faire seul. Prends ton temps : il n’y a pas de chronomètre.' : 'Retrouve les espèces conjuguées, écris les couples et vérifie les charges. Chaque réponse t’aide à comprendre.'}</p></section><div class="start-grid"><section class="start-panel"><h2>${exam ? 'Ton test de compréhension' : 'Un entraînement accompagné'}</h2><ul class="checklist"><li>8 questions, réparties sur les 4 compétences</li><li>${exam ? 'Sans indice ni correction pendant le test' : 'Des choix et des formules à saisir'}</li><li>${exam ? 'Toutes les réponses expliquées à la fin' : 'Deux indices disponibles pour chaque question'}</li><li>${exam ? 'Tu peux quitter cette page et reprendre plus tard' : 'Une correction pour comprendre chaque erreur'}</li></ul><button class="button" data-action="${exam ? 'start-exam' : 'start-practice'}">${exam ? 'Commencer le test' : 'Commencer l’entraînement'} <span aria-hidden="true">→</span></button></section><aside class="quiet-card"><div class="big-symbol" aria-hidden="true">${exam ? 'H⁺' : '↔'}</div><h3>${exam ? 'Pas besoin de tout réussir.' : 'L’erreur fait partie du chemin.'}</h3><p>${exam ? 'Le bilan sert à choisir ce qu’il faut revoir. Un résultat est un repère, pas une étiquette.' : 'Essaie d’abord avec ce que tu sais. Puis utilise un indice si tu en as besoin : l’important est de comprendre pourquoi.'}</p></aside></div>`;
+}
+function sessionPage(exam) {
+  const session = exam ? state.exam : practice;
+  return `${pageTop(exam ? 'Test en cours' : 'Entraînement en cours')}<section class="section-intro"><span class="eyebrow">${exam ? 'FAIS CONFIANCE À TON RAISONNEMENT.' : 'CHAQUE ESSAI TE FAIT AVANCER.'}</span><h1>${exam ? 'Voyons ce qui est acquis.' : 'Pratique le déclic.'}</h1></section><div class="session-progress"><div class="session-top"><strong>Question ${session.index + 1} sur ${session.ids.length}</strong><span>${exam ? 'Sans aide · à ton rythme' : skills[activeQuestion().skill]}</span></div>${progress(session.index, session.ids.length, 'Questions terminées')}</div>${exam && session.index ? '<div class="saved-banner" role="status">Réponse précédente enregistrée. La correction sera disponible à la fin.</div>' : ''}<section class="question-card"><div class="exercise-label"><span>${exam ? 'À TOI DE RÉPONDRE' : 'CONSTRUIS TON RAISONNEMENT'}</span><span class="muted">${activeQuestion().type === 'formula' ? 'Écris une formule' : 'Une seule réponse attendue'}</span></div>${questionUI(activeQuestion(), exam)}</section>`;
+}
+function reviewItems(records) { return records.map((r, i) => {
+  const q = byId(r.id); const correctAnswer = q.type === 'formula' ? q.answers[0] : q.options[q.correct];
+  const given = q.type === 'formula' ? r.answer : q.options[r.answer];
+  return `<details class="review-item ${r.correct ? '' : 'incorrect'}"><summary><span class="review-status">${r.correct ? '✓' : '↻'}</span>${i + 1}. ${q.prompt}</summary><div class="review-body"><p><strong>Ta réponse :</strong> ${esc(given ?? 'Réponse non conservée')}${r.assisted ? ' · avec aide ou après correction' : ''}</p><p><strong>Réponse attendue :</strong> ${esc(correctAnswer)}</p><p>${q.explanation}</p></div></details>`;
+}).join(''); }
+function resultPage(exam) {
+  const records = exam ? state.lastExam.answers : practice.answers;
+  const score = records.filter(r => r.correct && !r.assisted).length;
+  return `${pageTop(exam ? 'Test terminé' : 'Entraînement terminé')}<div class="result-header"><span class="eyebrow">CHAQUE RÉPONSE EST UN REPÈRE.</span><div class="score">${score}<small> / ${records.length}</small></div><h1>${score >= 6 ? 'Les liens se construisent.' : 'Tu sais maintenant quoi retravailler.'}</h1><p>${exam ? 'Réponses correctes au test, sans aide.' : 'Réponses correctes au premier essai et sans indice.'}<br>Ouvre une question pour retrouver son explication.</p></div><div class="result-details">${reviewItems(records)}</div><div class="result-actions"><a class="button" href="#bilan">Voir mes compétences →</a><button class="button secondary" data-action="${exam ? 'start-exam' : 'start-practice'}">${exam ? 'Faire un nouveau test' : 'Un nouvel entraînement'}</button></div>`;
+}
+function dashboard() {
+  const recent = state.history.slice(-40);
+  const stats = summarize(recent, questions);
+  const count = state.history.length;
+  const rate = recent.length ? Math.round(recent.filter(r => r.correct && !r.assisted).length / recent.length * 100) : null;
+  const lastScore = state.lastExam ? state.lastExam.answers.filter(r => r.correct).length : null;
+  const weakest = Object.entries(stats).filter(([, s]) => s.total).sort((a,b) => a[1].correct / a[1].total - b[1].correct / b[1].total)[0];
+  const target = weakest ? Object.keys(skills).indexOf(weakest[0]) : state.completed.length < 4 ? lessons.findIndex((_, i) => !state.completed.includes(i)) : 0;
+  return `${pageTop('Tes repères')}<section class="section-intro"><span class="eyebrow">LE CHEMIN COMPTE AUSSI.</span><h1>Ton déclic prend forme.</h1><p class="intro-line">Voici ce que tes essais nous apprennent. Reviens sur une notion, entraîne-toi, puis vérifie si tu peux réussir sans aide.</p></section><div class="stat-grid"><div class="stat"><div class="number">${state.completed.length}<span class="muted"> / 4</span></div><div class="label">étapes du cours validées</div></div><div class="stat"><div class="number">${count}</div><div class="label">questions travaillées</div></div><div class="stat"><div class="number">${rate === null ? '—' : `${rate}<span class="muted"> %</span>`}</div><div class="label">réussite au premier essai, sans aide</div></div></div><div class="dashboard-grid"><section class="panel"><h2>Les quatre compétences</h2><p>Sur les ${recent.length} dernières réponses (40 maximum). Un indice ou une erreur au premier essai indique un point à consolider.</p>${Object.entries(skills).map(([key, name]) => { const s = stats[key]; const percent = s.total ? Math.round(s.correct / s.total * 100) : 0; return `<div class="skill-row"><div><strong>${name}</strong><small>${s.total ? `${s.correct} / ${s.total} sans aide` : 'Pas encore travaillé'}</small></div>${progress(s.correct, s.total || 1, `${name} : ${percent} %` )}</div>`; }).join('')}</section><section><div class="recommendation"><span class="eyebrow">TON PROCHAIN PETIT PAS</span><h3>${weakest ? skills[weakest[0]] : 'Commencer par comprendre'}</h3><p>${weakest ? 'Reprends cette étape avec l’exemple, puis vérifie ton raisonnement dans un nouvel entraînement.' : 'Quelques questions suffiront pour faire apparaître tes premiers repères.'}</p><button class="button" data-lesson="${target}">Revoir l’étape ${target + 1} →</button></div><div class="panel"><h2>Ton dernier test</h2>${lastScore === null ? '<p>Pas encore de test terminé. Il sera disponible quand tu voudras faire le point.</p><a class="text-button" href="#tester">Découvrir le test →</a>' : `<p><strong>${lastScore} / 8</strong> réponses correctes, sans aide.</p><button class="text-button" data-action="last-result">Revoir la correction →</button>`}</div></section></div><div class="reset-area">Progression conservée dans ce navigateur, sur cet appareil. Aucun compte élève requis.<br><button class="text-button" data-action="reset">Effacer ma progression sur cet appareil</button></div>`;
+}
+function render(focus = false) {
+  $('open-memo').hidden = view === 'tester' && state.exam !== null && !showingExamResult;
+  document.querySelectorAll('#nav a').forEach(a => { const active = a.dataset.view === view; a.classList.toggle('active', active); if (active) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
+  $('main').innerHTML = view === 'apprendre' ? learnPage() : view === 'bilan' ? dashboard() : view === 'entrainer' ? (practice ? practice.done ? resultPage(false) : sessionPage(false) : startPage(false)) : showingExamResult && state.lastExam ? resultPage(true) : state.exam ? sessionPage(true) : startPage(true);
+  if (focus) { $('main').focus({ preventScroll: true }); window.scrollTo({ top: 0, behavior: 'instant' }); }
+}
+function route() {
+  const hash = location.hash.slice(1);
+  view = ['apprendre', 'entrainer', 'tester', 'bilan'].includes(hash) ? hash : 'apprendre';
+  activity = freshActivity();
+  render(true);
+}
+function record(q, answer, correct, assisted, mode) { return { id: q.id, answer, correct, assisted, mode, date: new Date().toISOString() }; }
+function appendHistory(records) { state.history.push(...records); state.history = state.history.slice(-300); }
+function submitAnswer() {
+  const q = activeQuestion();
+  if (!q || activity.done || activity.selected === null || activity.selected === '') return;
+  const answer = activity.selected;
+  const correct = isCorrect(q, answer);
+  if (view === 'tester') {
+    state.exam.answers.push(record(q, answer, correct, false, 'test'));
+    if (state.exam.index === state.exam.ids.length - 1) {
+      state.lastExam = { answers: state.exam.answers, date: new Date().toISOString() };
+      appendHistory(state.exam.answers); state.exam = null; showingExamResult = true;
+    } else { state.exam.index++; }
+    save(); activity = freshActivity(); render(true); return;
+  }
+  if (activity.attempts === 0) activity.firstCorrect = correct;
+  activity.attempts++;
+  activity.feedback = { correct, text: q.type === 'choice' ? q.feedback[answer] : correct ? q.explanation : 'Compare le nombre de H et la charge. La correction ci-dessous t’aide à retrouver la formule.' };
+  if (view === 'apprendre' && !correct) {
+    activity.selected = null;
+    render();
+    $('main').querySelector('.feedback')?.scrollIntoView({ block: 'nearest' });
+    return;
+  }
+  activity.done = true;
+  const result = record(q, answer, activity.firstCorrect, activity.hints > 0 || activity.attempts > 1, view === 'apprendre' ? 'cours' : 'entrainement');
+  appendHistory([result]);
+  if (view === 'apprendre') { if (!state.completed.includes(state.lesson)) state.completed.push(state.lesson); }
+  else { practice.answers.push(result); }
+  save(); render();
+  $('main').querySelector('.feedback')?.scrollIntoView({ block: 'nearest' });
+}
+$('main').addEventListener('click', event => {
+  const choice = event.target.closest('[data-choice]');
+  if (choice && !activity.done) {
+    activity.selected = Number(choice.dataset.choice);
+    $('main').querySelectorAll('[data-choice]').forEach(b => { const selected = Number(b.dataset.choice) === activity.selected; b.classList.toggle('selected', selected); b.setAttribute('aria-pressed', String(selected)); });
+    $('validate-answer').disabled = false; return;
+  }
+  const lessonButton = event.target.closest('[data-lesson]');
+  if (lessonButton) {
+    state.lesson = Number(lessonButton.dataset.lesson); save(); activity = freshActivity();
+    if (view !== 'apprendre') location.hash = 'apprendre'; else render();
+    return;
+  }
+  const action = event.target.closest('[data-action]')?.dataset.action;
+  if (!action) return;
+  if (action === 'hint') { const q = activeQuestion(); if (q && activity.hints < q.hints.length && !activity.done) { activity.hints++; render(); } }
+  if (action === 'next' && activity.done) {
+    activity = freshActivity();
+    if (view === 'apprendre') {
+      if (state.lesson < 3) { state.lesson++; save(); render(true); }
+      else { location.hash = 'entrainer'; }
+    } else if (view === 'entrainer') {
+      if (practice.index === practice.ids.length - 1) practice.done = true; else practice.index++;
+      render(true);
+    }
+  }
+  if (action === 'start-practice') { practice = { ids: makeExam(questions), index: 0, answers: [], done: false }; activity = freshActivity(); render(true); }
+  if (action === 'start-exam') {
+    state.exam = { ids: makeExam(questions), index: 0, answers: [] }; showingExamResult = false; activity = freshActivity(); save(); render(true);
+  }
+  if (action === 'last-result') { showingExamResult = true; location.hash = 'tester'; }
+  if (action === 'reset' && window.confirm('Effacer les étapes validées, les réponses et les résultats sur cet appareil ?')) {
+    try { storage?.removeItem(STORAGE_KEY); } catch { /* Session memory remains available. */ }
+    state = readState(null, questions); practice = null; showingExamResult = false; activity = freshActivity(); save(); render(true);
+  }
+});
+$('main').addEventListener('input', event => {
+  if (event.target.id !== 'formula-answer') return;
+  activity.selected = event.target.value.trim();
+  $('validate-answer').disabled = !activity.selected;
+});
+$('main').addEventListener('submit', event => { if (event.target.id === 'answer-form') { event.preventDefault(); submitAnswer(); } });
+$('open-memo').addEventListener('click', () => $('memo-dialog').showModal());
+$('close-memo').addEventListener('click', () => $('memo-dialog').close());
+$('memo-dialog').addEventListener('click', event => { if (event.target === $('memo-dialog')) { const r = event.target.getBoundingClientRect(); if (event.clientX < r.left || event.clientX > r.right || event.clientY < r.top || event.clientY > r.bottom) event.target.close(); } });
+window.addEventListener('hashchange', route);
+route();
+
+</script>
+</body>
+</html>
