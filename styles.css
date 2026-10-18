@@ -7,3 +7,37 @@
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
 
 @media(max-width:640px){.long-formula .species .formula{font-size:22px}.long-formula .species{min-width:0;flex:1}.long-formula .transfer{flex:0 0 55px}.transfer small{white-space:nowrap}.long-formula .species small{font-size:8px}}
+
+
+/* Midnight Science: theme switch, independent of learning progress */
+.topbar-actions{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.theme-toggle{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:8px 12px;border:1px solid var(--line);border-radius:999px;background:var(--white);color:var(--ink);font-size:12px;font-weight:650;white-space:nowrap}
+.theme-toggle:hover{border-color:var(--green)}
+.theme-toggle:focus-visible{outline:3px solid var(--green);outline-offset:3px}
+.theme-icon{font-size:17px;line-height:1}
+@media(max-width:650px){.topbar-actions{gap:8px}.theme-toggle{padding:7px 10px}.theme-label{display:none}.topbar{gap:8px}.save-indicator{white-space:normal}}
+html[data-theme="dark"]{color-scheme:dark;--ink:#edf4fb;--green:#65d7ed;--deep:#101827;--muted:#a8bacb;--paper:#101827;--line:#34465a;--lime:#264a51;--gold:#f1cf80;--white:#1b293c;background:#101827}
+html[data-theme="dark"] body{background:#101827;color:var(--ink)}
+html[data-theme="dark"] .sidebar,html[data-theme="dark"] .topbar{background:#162235;border-color:var(--line)}
+html[data-theme="dark"] .brand-icon{background:#263b50;color:#65d7ed}
+html[data-theme="dark"] nav a{color:#b8c9d8}
+html[data-theme="dark"] nav a:hover,html[data-theme="dark"] nav a.active{background:#273e53;color:#8ce6f3}
+html[data-theme="dark"] .side-module,html[data-theme="dark"] .journey,html[data-theme="dark"] .panel,html[data-theme="dark"] .lesson-card,html[data-theme="dark"] .question-card,html[data-theme="dark"] .start-panel,html[data-theme="dark"] .quiet-card,html[data-theme="dark"] .stat,html[data-theme="dark"] .review-item,html[data-theme="dark"] dialog{background:#1b293c;border-color:#34465a;color:#edf4fb}
+html[data-theme="dark"] .hero-figure{background:#22364a;border-color:#3a5267}
+html[data-theme="dark"] .figure-label,html[data-theme="dark"] .species small,html[data-theme="dark"] .figure-note{color:#b5c9d8}
+html[data-theme="dark"] .species-role{background:#254e55;color:#9be8f0}
+html[data-theme="dark"] .species-role.base{background:#59482d;color:#f6d99a}
+html[data-theme="dark"] .module-pill,html[data-theme="dark"] .badge{background:#28424c;color:#a2ebf5;border-color:#3a6570}
+html[data-theme="dark"] .lesson-link,html[data-theme="dark"] .option,html[data-theme="dark"] .theme-toggle{background:#223348;color:#e9f2fa;border-color:#3b5065}
+html[data-theme="dark"] .lesson-link:hover,html[data-theme="dark"] .option:hover:not(:disabled){background:#30465c}
+html[data-theme="dark"] .lesson-link.current,html[data-theme="dark"] .option.selected{background:#254653;border-color:#65d7ed;color:#f4fcff}
+html[data-theme="dark"] .option.correct{background:#183e36;border-color:#3cc69b;color:#dcfff3}
+html[data-theme="dark"] .option.wrong{background:#4c2933;border-color:#ee8294;color:#ffe4e9}
+html[data-theme="dark"] .button{background:#65d7ed;color:#101827;border-color:#65d7ed}
+html[data-theme="dark"] .button:hover:not(:disabled){background:#93e7f2}
+html[data-theme="dark"] input,html[data-theme="dark"] textarea{background:#17263a;color:#f1f5fa;border-color:#476077}
+html[data-theme="dark"] input::placeholder{color:#9bafc2}
+html[data-theme="dark"] .progress-track{background:#35485d}
+html[data-theme="dark"] .progress-track>span{background:#65d7ed}
+html[data-theme="dark"] .skip{background:#1b293c;color:#edf4fb}
+html[data-theme="dark"] button:focus-visible,html[data-theme="dark"] a:focus-visible,html[data-theme="dark"] input:focus-visible{outline-color:#65d7ed}
