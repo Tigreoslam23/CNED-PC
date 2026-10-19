@@ -1,5 +1,6 @@
 import { lessons, questions } from './content.js';
 import { STORAGE_KEY, skills, isCorrect, makeExam, readState, summarize } from './core.js';
+import { reactionPanel, mountReaction } from './reaction.js';
 
 const $ = id => document.getElementById(id);
 const esc = value => String(value).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -11,6 +12,8 @@ let view = 'apprendre';
 let practice = null;
 let showingExamResult = false;
 let activity = freshActivity();
+const reactionSession = { progress: 0 };
+let disposeReaction = () => {};
 function freshActivity() { return { selected: null, hints: 0, attempts: 0, done: false, firstCorrect: null, feedback: null, recorded: false }; }
 function save() {
   try { if (!storage) throw new Error(); storage.setItem(STORAGE_KEY, JSON.stringify(state)); }
@@ -43,6 +46,7 @@ function questionUI(q, exam = false) {
 function learnPage() {
   const lesson = lessons[state.lesson];
   return `${pageTop('Apprentissage guidé')}<section class="hero"><div class="hero-copy"><span class="eyebrow">COMPRENDRE, UN DÉCLIC À LA FOIS.</span><h1>Les couples<br><em>acide-base.</em></h1><p class="intro-line">Un ion H⁺ change de partenaire. Et tout s’éclaire.<br>Observe, essaie, puis construis ton raisonnement.</p><div class="hero-meta"><span>◷ &nbsp; Environ 15 min</span><span>4 étapes à ton rythme</span><span>Terminale</span></div></div>${pairFigure(lesson)}</section>
+  ${reactionPanel()}
   <div class="learning-grid"><section class="journey" aria-label="Étapes du parcours"><h2 class="journey-heading">Ton chemin vers le déclic</h2><p class="journey-subtitle">Une idée, un exemple, à toi de jouer.</p><div class="journey-list">${lessons.map((l, i) => `<button class="lesson-link ${i === state.lesson ? 'current' : ''} ${state.completed.includes(i) ? 'complete' : ''}" data-lesson="${i}" ${i === state.lesson ? 'aria-current="step"' : ''}><span class="step-number">${state.completed.includes(i) ? '✓' : `0${i + 1}`}</span><span><strong>${l.title}</strong><small>${l.short} · ${l.duration}</small></span></button>`).join('')}</div><div class="journey-progress"><div><span>Étapes validées</span><strong>${state.completed.length} / 4</strong></div>${progress(state.completed.length, 4, 'Étapes validées')}</div></section>
     <section class="lesson-card"><span class="eyebrow">ÉTAPE 0${state.lesson + 1} &nbsp; · &nbsp; ${lesson.tag}</span><h2>${lesson.title}</h2><p class="lesson-description">${lesson.intro}</p><div class="rule"><strong>${lesson.rule}</strong></div><p class="lesson-detail">${lesson.detail}</p><div class="note"><span aria-hidden="true">↳</span><div>${lesson.note}</div></div><div class="exercise-divider"></div><div class="exercise-label"><span>À TOI DE JOUER</span><span class="muted">Tu peux demander un indice.</span></div>${questionUI(activeQuestion())}</section></div>`;
 }
@@ -74,9 +78,11 @@ function dashboard() {
   return `${pageTop('Tes repères')}<section class="section-intro"><span class="eyebrow">LE CHEMIN COMPTE AUSSI.</span><h1>Ton déclic prend forme.</h1><p class="intro-line">Voici ce que tes essais nous apprennent. Reviens sur une notion, entraîne-toi, puis vérifie si tu peux réussir sans aide.</p></section><div class="stat-grid"><div class="stat"><div class="number">${state.completed.length}<span class="muted"> / 4</span></div><div class="label">étapes du cours validées</div></div><div class="stat"><div class="number">${count}</div><div class="label">questions travaillées</div></div><div class="stat"><div class="number">${rate === null ? '—' : `${rate}<span class="muted"> %</span>`}</div><div class="label">réussite au premier essai, sans aide</div></div></div><div class="dashboard-grid"><section class="panel"><h2>Les quatre compétences</h2><p>Sur les ${recent.length} dernières réponses (40 maximum). Un indice ou une erreur au premier essai indique un point à consolider.</p>${Object.entries(skills).map(([key, name]) => { const s = stats[key]; const percent = s.total ? Math.round(s.correct / s.total * 100) : 0; return `<div class="skill-row"><div><strong>${name}</strong><small>${s.total ? `${s.correct} / ${s.total} sans aide` : 'Pas encore travaillé'}</small></div>${progress(s.correct, s.total || 1, `${name} : ${percent} %` )}</div>`; }).join('')}</section><section><div class="recommendation"><span class="eyebrow">TON PROCHAIN PETIT PAS</span><h3>${weakest ? skills[weakest[0]] : 'Commencer par comprendre'}</h3><p>${weakest ? 'Reprends cette étape avec l’exemple, puis vérifie ton raisonnement dans un nouvel entraînement.' : 'Quelques questions suffiront pour faire apparaître tes premiers repères.'}</p><button class="button" data-lesson="${target}">Revoir l’étape ${target + 1} →</button></div><div class="panel"><h2>Ton dernier test</h2>${lastScore === null ? '<p>Pas encore de test terminé. Il sera disponible quand tu voudras faire le point.</p><a class="text-button" href="#tester">Découvrir le test →</a>' : `<p><strong>${lastScore} / 8</strong> réponses correctes, sans aide.</p><button class="text-button" data-action="last-result">Revoir la correction →</button>`}</div></section></div><div class="reset-area">Progression conservée dans ce navigateur, sur cet appareil. Aucun compte élève requis.<br><button class="text-button" data-action="reset">Effacer ma progression sur cet appareil</button></div>`;
 }
 function render(focus = false) {
+  disposeReaction();
   $('open-memo').hidden = view === 'tester' && state.exam !== null && !showingExamResult;
   document.querySelectorAll('#nav a').forEach(a => { const active = a.dataset.view === view; a.classList.toggle('active', active); if (active) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
   $('main').innerHTML = view === 'apprendre' ? learnPage() : view === 'bilan' ? dashboard() : view === 'entrainer' ? (practice ? practice.done ? resultPage(false) : sessionPage(false) : startPage(false)) : showingExamResult && state.lastExam ? resultPage(true) : state.exam ? sessionPage(true) : startPage(true);
+  disposeReaction = mountReaction($('reaction-lab'), reactionSession);
   if (focus) { $('main').focus({ preventScroll: true }); window.scrollTo({ top: 0, behavior: 'instant' }); }
 }
 function route() {

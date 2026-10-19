@@ -53,6 +53,14 @@ html[data-theme="dark"] .progress-track{background:#35485d}
 html[data-theme="dark"] .progress-track>span{background:#65d7ed}
 html[data-theme="dark"] .skip{background:#1b293c;color:#edf4fb}
 html[data-theme="dark"] button:focus-visible,html[data-theme="dark"] a:focus-visible,html[data-theme="dark"] input:focus-visible{outline-color:#65d7ed}
+/* The reaction models keep their atom labels and colors in both application themes. */
+.reaction-lab{--rx-panel:var(--white);--rx-wash:#f3f6ef;--rx-one:#a34135;--rx-two:#315da2;--rx-atom-ink:#203837;background:var(--rx-panel);border:1px solid var(--line);border-radius:17px;margin:0 0 30px;padding:28px;scroll-margin-top:25px}
+.rx-heading{display:flex;justify-content:space-between;align-items:flex-start;gap:20px}.rx-heading h2{font-family:var(--serif);font-size:32px;font-weight:400;margin:10px 0 9px;letter-spacing:-.8px}.rx-heading p{font-size:13px;color:var(--muted);max-width:650px;margin-bottom:0}.rx-model-badge{font-size:10px;white-space:nowrap;color:var(--muted);border:1px solid var(--line);border-radius:30px;padding:5px 10px;margin-top:2px}.rx-equation{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;font-family:var(--serif);font-size:28px;background:var(--rx-wash);border-radius:10px;padding:14px;margin-top:23px}.rx-equation b{font-size:20px;font-weight:400;color:var(--muted)}.rx-family-one{color:var(--rx-one)}.rx-family-two{color:var(--rx-two)}.rx-layout{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(220px,.85fr);gap:30px;align-items:center;margin:24px 0 20px}.rx-models{min-width:0}.rx-partners{display:grid;grid-template-columns:1fr 1fr;text-align:center;gap:20px}.rx-partners strong{display:block;font-family:var(--serif);font-size:29px;font-weight:400;line-height:1.3}.rx-partners span{display:block;color:var(--muted);font-size:11px;line-height:1.5;margin-top:5px}.rx-scene{display:block;width:100%;height:auto;overflow:visible}.rx-scene .rx-shadow{fill:var(--ink);opacity:.055}.rx-scene .rx-bonds{stroke:#a8b9ac;stroke-width:12;stroke-linecap:round}.rx-scene .rx-transferred-bond{stroke:#b69445}.rx-scene .rx-atom text{font-family:'Segoe UI',Arial,sans-serif;font-size:30px;font-weight:650;text-anchor:middle;dominant-baseline:middle;fill:var(--rx-atom-ink);pointer-events:none}.rx-scene .rx-oxygen circle{fill:url(#rx-oxygen-shade)}.rx-scene .rx-nitrogen circle{fill:url(#rx-nitrogen-shade)}.rx-scene .rx-oxygen text,.rx-scene .rx-nitrogen text{fill:#fff;font-size:32px}.rx-scene .rx-hydrogen circle{fill:url(#rx-hydrogen-shade);stroke:#b2c3b7;stroke-width:1.5}.rx-scene .rx-proton circle{fill:url(#rx-proton-shade);stroke:#b79535;stroke-width:1.5}.rx-scene .rx-proton .rx-proton-ring{fill:none;stroke:#b79535;stroke-width:1.5;stroke-dasharray:4 5;opacity:.65}.rx-scene .rx-proton .rx-follow-label{fill:var(--muted);font-size:18px;font-weight:500}.rx-scene .rx-ion path{stroke:var(--green);stroke-width:2.5;fill:none}.rx-scene .rx-ion text{fill:var(--green);font-family:'Segoe UI',Arial,sans-serif;font-size:31px;font-weight:600;text-anchor:middle}.rx-o-light{stop-color:#f9a08c}.rx-o-dark{stop-color:#bd4940}.rx-n-light{stop-color:#9ebde9}.rx-n-dark{stop-color:#365d9c}.rx-h-light{stop-color:#fff}.rx-h-dark{stop-color:#dce7de}.rx-p-light{stop-color:#fff4c0}.rx-p-dark{stop-color:#e4bc54}.rx-legend{display:flex;justify-content:center;gap:11px 17px;flex-wrap:wrap;font-size:10px;color:var(--muted)}.rx-legend span{display:inline-flex;align-items:center;gap:6px}.rx-legend i{width:10px;height:10px;display:inline-block;border-radius:50%;flex-shrink:0}.rx-key-oxygen{background:#bd4940}.rx-key-nitrogen{background:#365d9c}.rx-key-hydrogen{background:#dce7de;border:1px solid #849c8e}.rx-key-proton{background:#e4bc54;border:1px solid #ad8b2b}.rx-story{background:var(--rx-wash);padding:23px;border-radius:12px;min-height:260px;display:flex;flex-direction:column;justify-content:center}.rx-story .eyebrow{font-size:10px}.rx-story h3{font-family:var(--serif);font-size:25px;font-weight:400;line-height:1.2;margin:14px 0}.rx-story>p:not(.sr-only){font-size:13px;color:var(--muted);line-height:1.7}.rx-charge-status{padding-top:14px;border-top:1px solid var(--line);font-size:11px}.rx-charge-status strong,.rx-charge-status span{display:block}.rx-charge-status span{color:var(--muted);margin-top:4px}.rx-controls{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:21px}.rx-step-controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.rx-controls .button{font-size:11px;padding:10px 14px}.rx-controls .text-button{font-size:10px}.rx-step-list{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin:20px 0 0}.rx-step-list button{display:flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--line);background:transparent;color:var(--muted);padding:10px 7px;font-size:11px;border-radius:8px}.rx-step-list button span{display:inline-grid;place-items:center;width:21px;height:21px;background:var(--rx-wash);border-radius:50%;font-size:10px;flex-shrink:0}.rx-step-list button[aria-current="step"]{border-color:var(--green);color:var(--green);background:var(--rx-wash)}.rx-step-list button[aria-current="step"] span{background:var(--green);color:var(--rx-panel)}.rx-couples{border-top:1px solid var(--line);margin:23px 0 0;padding-top:17px}.rx-couples summary{font-size:12px;font-weight:600;cursor:pointer;color:var(--green)}.rx-couple-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:18px}.rx-couple-grid>div{padding:15px;background:var(--rx-wash);border-radius:9px}.rx-couple-grid strong{font-family:var(--serif);font-size:22px;font-weight:400}.rx-couple-grid p{font-size:12px;color:var(--muted);margin:8px 0 0}.rx-couples-note{font-size:12px;margin:15px 0 0;color:var(--muted)}.rx-caveat{font-size:11px;color:var(--muted);margin:18px 0 0;line-height:1.7}
+html[data-theme="dark"] .reaction-lab{--rx-wash:#22364a;--rx-one:#ffb5a7;--rx-two:#a5c9ff}
+html[data-theme="dark"] .rx-step-list button[aria-current="step"] span{color:#101827}
+html[data-theme="dark"] .rx-scene .rx-bonds{stroke:#8fa4af}
+@media(max-width:1180px){.rx-layout{grid-template-columns:minmax(0,1fr);gap:20px}.rx-models{max-width:660px;width:100%;margin:auto}.rx-story{min-height:0;padding:21px}.rx-story h3{margin:9px 0}.rx-story>p:not(.sr-only){margin-bottom:13px}.rx-controls{align-items:stretch}.rx-step-controls{gap:8px}.rx-heading{flex-wrap:wrap;gap:12px}.rx-model-badge{margin:0}.rx-heading h2{font-size:30px}}
+@media(max-width:640px){.reaction-lab{padding:20px 15px;margin-bottom:22px;scroll-margin-top:115px}.rx-heading .eyebrow{font-size:9px;letter-spacing:1px}.rx-heading h2{font-size:27px}.rx-heading p{font-size:12px}.rx-model-badge{font-size:10px}.rx-equation{font-size:23px;gap:10px;padding:12px 8px;margin-top:18px}.rx-equation b{font-size:17px}.rx-layout{gap:17px;margin:20px 0}.rx-partners{gap:12px}.rx-partners strong{font-size:25px}.rx-partners span{font-size:11px}.rx-scene .rx-follow-label{display:none}.rx-legend{font-size:10px;gap:7px 11px;margin-top:8px}.rx-story{padding:18px}.rx-story h3{font-size:23px}.rx-story>p:not(.sr-only){font-size:12px}.rx-controls{gap:13px}.rx-controls>.button{width:100%}.rx-step-controls{width:100%;display:grid;grid-template-columns:1fr 1fr;gap:9px}.rx-step-controls .button{font-size:10px;padding:10px 6px}.rx-step-controls .text-button{grid-column:1/-1;justify-self:center;margin-top:3px}.rx-step-list{gap:5px}.rx-step-list button{flex-direction:column;gap:6px;font-size:10px;padding:10px 3px}.rx-couple-grid{grid-template-columns:1fr;gap:12px}.rx-couples summary{font-size:12px}.rx-caveat{font-size:11px}.rx-charge-status{font-size:11px}}
 
 </style>
 </head>
@@ -205,6 +213,128 @@ const questions = [
     ['Oui : −1 + 1 = 0. L’eau à gauche est neutre.', 'HO⁻ porte −1, pas +1.', 'H⁺ porte +1, pas −1.'], 'La charge totale est nulle des deux côtés.', ['Additionne les charges de HO⁻ et de H⁺.', '−1 et +1 se compensent.'])
 ];
 
+const reactionStages = [
+  { title: 'Deux partenaires au départ', text: 'H₃O⁺ est l’acide : il peut céder H⁺. NH₃ est la base : elle peut capter H⁺. Le H repéré en jaune est celui qui sera transféré.' },
+  { title: 'L’acide cède H⁺', text: 'L’ion oxonium perd H⁺ et devient une molécule d’eau H₂O. La liaison avec le H repéré se rompt ; aucun atome O ou N ne change de partenaire.' },
+  { title: 'La base capte H⁺', text: 'Le H⁺ se rapproche de l’ammoniac. Il sera lié à l’azote N : NH₃ capte H⁺ pour devenir NH₄⁺. Un proton est transféré, pas une molécule entière.' },
+  { title: 'Deux nouvelles espèces', text: 'H₃O⁺ est devenu H₂O ; NH₃ est devenu NH₄⁺. Le même H est maintenant lié à N. Les 6 hydrogènes et la charge totale +1 sont conservés.' }
+];
+
+// One transferred proton plus five hydrogens that remain on their original partners.
+function reactionFrame(value) {
+  const p = Math.max(0, Math.min(1, Number(value) || 0));
+  const moved = Math.max(0, Math.min(1, (p - 0.13) / 0.74));
+  const ease = moved * moved * (3 - 2 * moved);
+  const donorCharge = p < 0.18 ? 1 : 0;
+  const acceptorCharge = p >= 0.86 ? 1 : 0;
+  const protonCharge = 1 - donorCharge - acceptorCharge;
+  return { progress: p, x: 185 + 275 * ease, y: 100 - 42 * Math.sin(Math.PI * ease),
+    donorCharge, acceptorCharge, protonCharge,
+    donorBond: Math.max(0, 1 - p / 0.18), acceptorBond: Math.max(0, Math.min(1, (p - 0.80) / 0.14)),
+    donorFormula: donorCharge ? 'H₃O⁺' : 'H₂O', acceptorFormula: acceptorCharge ? 'NH₄⁺' : 'NH₃',
+    stage: p < 0.18 ? 0 : p < 0.5 ? 1 : p < 0.86 ? 2 : 3,
+    atoms: { H: 6, O: 1, N: 1 }, totalCharge: donorCharge + acceptorCharge + protonCharge };
+}
+
+function reactionPanel() {
+  return `<section class="reaction-lab" id="reaction-lab" aria-labelledby="rx-title">
+    <div class="rx-heading"><div><span class="eyebrow">OBSERVER POUR COMPRENDRE · MISSIONS 1 À 3</span><h2 id="rx-title">Un H⁺ change de partenaire.</h2><p>Observe les modèles, puis avance à ton rythme. Le H en jaune restera le même du début à la fin.</p></div><span class="rx-model-badge">Modèles simplifiés en 2D</span></div>
+    <div class="rx-equation" aria-label="Ion oxonium plus ammoniac donne eau plus ion ammonium"><span class="rx-family-one">H₃O⁺</span><b>+</b><span class="rx-family-two">NH₃</span><b>→</b><span class="rx-family-one">H₂O</span><b>+</b><span class="rx-family-two">NH₄⁺</span></div>
+    <div class="rx-layout"><div class="rx-models">
+      <div class="rx-partners"><div><strong data-rx="donor-formula">H₃O⁺</strong><span data-rx="donor-name">Ion oxonium · acide</span></div><div><strong data-rx="acceptor-formula">NH₃</strong><span data-rx="acceptor-name">Ammoniac · base</span></div></div>
+      <svg class="rx-scene" viewBox="0 0 640 310" role="img" aria-labelledby="rx-svg-title rx-svg-description">
+        <title id="rx-svg-title">Transfert d’un H⁺ de H₃O⁺ vers NH₃</title><desc id="rx-svg-description">Au départ, O est lié à trois H et N à trois H. Un H passe de O à N. À l’arrivée, O est lié à deux H et N à quatre H. Les crochets et le signe plus indiquent l’ion entier.</desc>
+        <defs><radialGradient id="rx-oxygen-shade" cx="32%" cy="25%"><stop class="rx-o-light"/><stop offset="100%" class="rx-o-dark"/></radialGradient><radialGradient id="rx-nitrogen-shade" cx="32%" cy="25%"><stop class="rx-n-light"/><stop offset="100%" class="rx-n-dark"/></radialGradient><radialGradient id="rx-hydrogen-shade" cx="32%" cy="25%"><stop class="rx-h-light"/><stop offset="100%" class="rx-h-dark"/></radialGradient><radialGradient id="rx-proton-shade" cx="32%" cy="25%"><stop class="rx-p-light"/><stop offset="100%" class="rx-p-dark"/></radialGradient></defs>
+        <ellipse class="rx-shadow" cx="155" cy="278" rx="103" ry="12"/><ellipse class="rx-shadow" cx="485" cy="278" rx="103" ry="12"/>
+        <g class="rx-bonds"><line x1="155" y1="180" x2="85" y2="205"/><line x1="155" y1="180" x2="195" y2="245"/><line x1="485" y1="180" x2="415" y2="215"/><line x1="485" y1="180" x2="525" y2="245"/><line x1="485" y1="180" x2="550" y2="155"/>
+          <line data-rx="donor-bond" class="rx-transferred-bond" x1="155" y1="180" x2="185" y2="100"/><line data-rx="acceptor-bond" class="rx-transferred-bond" x1="485" y1="180" x2="460" y2="100" opacity="0"/>
+        </g>
+        <g class="rx-atom rx-oxygen"><circle cx="155" cy="180" r="34"/><text x="155" y="182">O</text></g>
+        <g class="rx-atom rx-nitrogen"><circle cx="485" cy="180" r="34"/><text x="485" y="182">N</text></g>
+        <g class="rx-atom rx-hydrogen"><circle cx="85" cy="205" r="24"/><text x="85" y="207">H</text><circle cx="195" cy="245" r="24"/><text x="195" y="247">H</text><circle cx="415" cy="215" r="24"/><text x="415" y="217">H</text><circle cx="525" cy="245" r="24"/><text x="525" y="247">H</text><circle cx="550" cy="155" r="24"/><text x="550" y="157">H</text></g>
+        <g data-rx="donor-ion" class="rx-ion"><path d="M65 65H49V274H65 M230 65H246V274H230"/><text x="263" y="67">+</text></g>
+        <g data-rx="acceptor-ion" class="rx-ion" opacity="0"><path d="M389 65H373V274H389 M580 65H596V274H580"/><text x="613" y="67">+</text></g>
+        <g data-rx="proton" transform="translate(185 100)" class="rx-atom rx-proton"><circle class="rx-proton-ring" r="31"/><circle r="24"/><text data-rx="proton-label" x="0" y="2">H</text><text class="rx-follow-label" x="0" y="-44">H repéré</text></g>
+      </svg>
+      <div class="rx-legend" aria-label="Légende des modèles"><span><i class="rx-key-oxygen"></i>Oxygène O</span><span><i class="rx-key-nitrogen"></i>Azote N</span><span><i class="rx-key-hydrogen"></i>Hydrogène H</span><span><i class="rx-key-proton"></i>H transféré</span></div>
+    </div><div class="rx-story"><span class="eyebrow" data-rx="counter">ÉTAPE 1 / 4</span><h3 data-rx="stage-title">Deux partenaires au départ</h3><p data-rx="stage-text">${reactionStages[0].text}</p><div class="rx-charge-status"><strong>Charge totale conservée : +1</strong><span>6 H · 1 O · 1 N, avant comme après.</span></div><p class="rx-live sr-only" data-rx="live" role="status" aria-live="polite"></p></div></div>
+    <div class="rx-controls"><button type="button" class="button" data-rx-action="play">Lire l’animation</button><div class="rx-step-controls"><button type="button" class="button secondary" data-rx-action="previous" disabled>← Étape précédente</button><button type="button" class="button secondary" data-rx-action="next">Étape suivante →</button><button type="button" class="text-button" data-rx-action="reset">Revenir au début</button></div></div>
+    <div class="rx-step-list" aria-label="Étapes de l’animation">${['Observer', 'Céder H⁺', 'Capter H⁺', 'Faire le bilan'].map((name,i)=>`<button type="button" data-rx-stage="${i}" ${i===0?'aria-current="step"':''}><span>${i+1}</span>${name}</button>`).join('')}</div>
+    <details class="rx-couples"><summary>Retrouver les deux couples acide-base</summary><div class="rx-couple-grid"><div class="rx-family-one"><strong>H₃O⁺ / H₂O</strong><p>L’acide H₃O⁺ donne H⁺ et devient sa base conjuguée H₂O.</p></div><div class="rx-family-two"><strong>NH₄⁺ / NH₃</strong><p>La base NH₃ reçoit H⁺ et devient son acide conjugué NH₄⁺. Le couple s’écrit toujours acide / base.</p></div></div><p class="rx-couples-note">H₃O⁺ et NH₃ réagissent ensemble, mais ils appartiennent à deux couples différents.</p></details>
+    <p class="rx-caveat">Les boules représentent les atomes, les traits les liaisons, les crochets et le signe + la charge de l’ion entier. Le H⁺ est montré à part pendant le transfert pour aider à raisonner : dans l’eau, il n’est pas isolé durablement. Les positions et les tailles sont schématiques.</p>
+  </section>`;
+}
+
+function mountReaction(root, session = { progress: 0 }) {
+  if (!root) return () => {};
+  const get = key => root.querySelector(`[data-rx="${key}"]`);
+  const position = [0, 1 / 3, 2 / 3, 1];
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let playing = false;
+  let raf = null;
+  let previousTime = null;
+  let announcedStage = -1;
+  let disposed = false;
+  function paint() {
+    const f = reactionFrame(session.progress);
+    session.progress = f.progress;
+    get('proton').setAttribute('transform', `translate(${f.x} ${f.y})`);
+    get('proton-label').textContent = f.protonCharge ? 'H⁺' : 'H';
+    get('donor-bond').setAttribute('opacity', f.donorBond);
+    get('acceptor-bond').setAttribute('opacity', f.acceptorBond);
+    get('donor-ion').setAttribute('opacity', f.donorCharge);
+    get('acceptor-ion').setAttribute('opacity', f.acceptorCharge);
+    get('donor-formula').textContent = f.donorFormula;
+    get('acceptor-formula').textContent = f.acceptorFormula;
+    get('donor-name').textContent = f.donorCharge ? 'Ion oxonium · acide' : 'Eau · base conjuguée';
+    get('acceptor-name').textContent = f.acceptorCharge ? 'Ion ammonium · acide conjugué' : 'Ammoniac · base';
+    get('counter').textContent = `ÉTAPE ${f.stage + 1} / 4`;
+    get('stage-title').textContent = reactionStages[f.stage].title;
+    get('stage-text').textContent = reactionStages[f.stage].text;
+    root.querySelectorAll('[data-rx-stage]').forEach(button => {
+      if (Number(button.dataset.rxStage) === f.stage) button.setAttribute('aria-current', 'step'); else button.removeAttribute('aria-current');
+    });
+    const play = root.querySelector('[data-rx-action="play"]');
+    play.disabled = reduced.matches;
+    play.textContent = reduced.matches ? 'Mode sans mouvement' : playing ? 'Mettre en pause' : f.progress >= 1 ? 'Rejouer l’animation' : f.progress > 0 ? 'Reprendre l’animation' : 'Lire l’animation';
+    root.querySelector('[data-rx-action="previous"]').disabled = f.progress <= 0;
+    root.querySelector('[data-rx-action="next"]').disabled = f.progress >= 1;
+    if (announcedStage !== f.stage) {
+      get('live').textContent = `${reactionStages[f.stage].title}. ${reactionStages[f.stage].text}`;
+      announcedStage = f.stage;
+    }
+  }
+  function stop() { playing = false; previousTime = null; if (raf !== null) cancelAnimationFrame(raf); raf = null; }
+  function tick(time) {
+    if (disposed || !playing) return;
+    if (previousTime !== null) session.progress = Math.min(1, session.progress + Math.min(time - previousTime, 80) / 12000);
+    previousTime = time;
+    if (session.progress >= 1) stop();
+    paint();
+    if (playing) raf = requestAnimationFrame(tick);
+  }
+  function go(value) { stop(); session.progress = value; paint(); }
+  function handleClick(event) {
+    const stage = event.target.closest('[data-rx-stage]');
+    if (stage) { go(position[Number(stage.dataset.rxStage)]); return; }
+    const action = event.target.closest('[data-rx-action]')?.dataset.rxAction;
+    if (action === 'play' && !reduced.matches) {
+      if (playing) stop(); else { if (session.progress >= 1) session.progress = 0; playing = true; raf = requestAnimationFrame(tick); }
+      paint();
+    }
+    if (action === 'reset') go(0);
+    if (action === 'next') go(position.find(p => p > session.progress + 0.001) ?? 1);
+    if (action === 'previous') go([...position].reverse().find(p => p < session.progress - 0.001) ?? 0);
+  }
+  function motionChanged() { if (reduced.matches) stop(); paint(); }
+  function visibilityChanged() { if (document.hidden) { stop(); paint(); } }
+  root.addEventListener('click', handleClick);
+  reduced.addEventListener('change', motionChanged);
+  document.addEventListener('visibilitychange', visibilityChanged);
+  paint();
+  return () => { disposed = true; stop(); root.removeEventListener('click', handleClick); reduced.removeEventListener('change', motionChanged); document.removeEventListener('visibilitychange', visibilityChanged); };
+}
+
 
 const $ = id => document.getElementById(id);
 const esc = value => String(value).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -216,6 +346,8 @@ let view = 'apprendre';
 let practice = null;
 let showingExamResult = false;
 let activity = freshActivity();
+const reactionSession = { progress: 0 };
+let disposeReaction = () => {};
 function freshActivity() { return { selected: null, hints: 0, attempts: 0, done: false, firstCorrect: null, feedback: null, recorded: false }; }
 function save() {
   try { if (!storage) throw new Error(); storage.setItem(STORAGE_KEY, JSON.stringify(state)); }
@@ -248,6 +380,7 @@ function questionUI(q, exam = false) {
 function learnPage() {
   const lesson = lessons[state.lesson];
   return `${pageTop('Apprentissage guidé')}<section class="hero"><div class="hero-copy"><span class="eyebrow">COMPRENDRE, UN DÉCLIC À LA FOIS.</span><h1>Les couples<br><em>acide-base.</em></h1><p class="intro-line">Un ion H⁺ change de partenaire. Et tout s’éclaire.<br>Observe, essaie, puis construis ton raisonnement.</p><div class="hero-meta"><span>◷ &nbsp; Environ 15 min</span><span>4 étapes à ton rythme</span><span>Terminale</span></div></div>${pairFigure(lesson)}</section>
+  ${reactionPanel()}
   <div class="learning-grid"><section class="journey" aria-label="Étapes du parcours"><h2 class="journey-heading">Ton chemin vers le déclic</h2><p class="journey-subtitle">Une idée, un exemple, à toi de jouer.</p><div class="journey-list">${lessons.map((l, i) => `<button class="lesson-link ${i === state.lesson ? 'current' : ''} ${state.completed.includes(i) ? 'complete' : ''}" data-lesson="${i}" ${i === state.lesson ? 'aria-current="step"' : ''}><span class="step-number">${state.completed.includes(i) ? '✓' : `0${i + 1}`}</span><span><strong>${l.title}</strong><small>${l.short} · ${l.duration}</small></span></button>`).join('')}</div><div class="journey-progress"><div><span>Étapes validées</span><strong>${state.completed.length} / 4</strong></div>${progress(state.completed.length, 4, 'Étapes validées')}</div></section>
     <section class="lesson-card"><span class="eyebrow">ÉTAPE 0${state.lesson + 1} &nbsp; · &nbsp; ${lesson.tag}</span><h2>${lesson.title}</h2><p class="lesson-description">${lesson.intro}</p><div class="rule"><strong>${lesson.rule}</strong></div><p class="lesson-detail">${lesson.detail}</p><div class="note"><span aria-hidden="true">↳</span><div>${lesson.note}</div></div><div class="exercise-divider"></div><div class="exercise-label"><span>À TOI DE JOUER</span><span class="muted">Tu peux demander un indice.</span></div>${questionUI(activeQuestion())}</section></div>`;
 }
@@ -279,9 +412,11 @@ function dashboard() {
   return `${pageTop('Tes repères')}<section class="section-intro"><span class="eyebrow">LE CHEMIN COMPTE AUSSI.</span><h1>Ton déclic prend forme.</h1><p class="intro-line">Voici ce que tes essais nous apprennent. Reviens sur une notion, entraîne-toi, puis vérifie si tu peux réussir sans aide.</p></section><div class="stat-grid"><div class="stat"><div class="number">${state.completed.length}<span class="muted"> / 4</span></div><div class="label">étapes du cours validées</div></div><div class="stat"><div class="number">${count}</div><div class="label">questions travaillées</div></div><div class="stat"><div class="number">${rate === null ? '—' : `${rate}<span class="muted"> %</span>`}</div><div class="label">réussite au premier essai, sans aide</div></div></div><div class="dashboard-grid"><section class="panel"><h2>Les quatre compétences</h2><p>Sur les ${recent.length} dernières réponses (40 maximum). Un indice ou une erreur au premier essai indique un point à consolider.</p>${Object.entries(skills).map(([key, name]) => { const s = stats[key]; const percent = s.total ? Math.round(s.correct / s.total * 100) : 0; return `<div class="skill-row"><div><strong>${name}</strong><small>${s.total ? `${s.correct} / ${s.total} sans aide` : 'Pas encore travaillé'}</small></div>${progress(s.correct, s.total || 1, `${name} : ${percent} %` )}</div>`; }).join('')}</section><section><div class="recommendation"><span class="eyebrow">TON PROCHAIN PETIT PAS</span><h3>${weakest ? skills[weakest[0]] : 'Commencer par comprendre'}</h3><p>${weakest ? 'Reprends cette étape avec l’exemple, puis vérifie ton raisonnement dans un nouvel entraînement.' : 'Quelques questions suffiront pour faire apparaître tes premiers repères.'}</p><button class="button" data-lesson="${target}">Revoir l’étape ${target + 1} →</button></div><div class="panel"><h2>Ton dernier test</h2>${lastScore === null ? '<p>Pas encore de test terminé. Il sera disponible quand tu voudras faire le point.</p><a class="text-button" href="#tester">Découvrir le test →</a>' : `<p><strong>${lastScore} / 8</strong> réponses correctes, sans aide.</p><button class="text-button" data-action="last-result">Revoir la correction →</button>`}</div></section></div><div class="reset-area">Progression conservée dans ce navigateur, sur cet appareil. Aucun compte élève requis.<br><button class="text-button" data-action="reset">Effacer ma progression sur cet appareil</button></div>`;
 }
 function render(focus = false) {
+  disposeReaction();
   $('open-memo').hidden = view === 'tester' && state.exam !== null && !showingExamResult;
   document.querySelectorAll('#nav a').forEach(a => { const active = a.dataset.view === view; a.classList.toggle('active', active); if (active) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
   $('main').innerHTML = view === 'apprendre' ? learnPage() : view === 'bilan' ? dashboard() : view === 'entrainer' ? (practice ? practice.done ? resultPage(false) : sessionPage(false) : startPage(false)) : showingExamResult && state.lastExam ? resultPage(true) : state.exam ? sessionPage(true) : startPage(true);
+  disposeReaction = mountReaction($('reaction-lab'), reactionSession);
   if (focus) { $('main').focus({ preventScroll: true }); window.scrollTo({ top: 0, behavior: 'instant' }); }
 }
 function route() {

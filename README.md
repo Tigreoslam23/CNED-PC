@@ -11,6 +11,7 @@ Depuis GitHub, ouvrir le fichier puis choisir **Download raw file** (Télécharg
 ## Le parcours
 
 - **Apprendre** : quatre étapes (céder/capter H⁺, espèces conjuguées, ordre du couple, conservation des charges), exemples et questions guidées.
+- **Observer une réaction** (dans Apprendre) : modèles animés en boules et liaisons pour H₃O⁺ + NH₃ → H₂O + NH₄⁺. Lecture, pause, retour au début et progression manuelle en quatre étapes ; les deux couples et la conservation des atomes et de la charge sont expliqués. Les modèles fonctionnent aussi sans connexion dans le fichier autonome. Ils sont schématiques et ne représentent pas une trajectoire moléculaire réelle. Avec la préférence système « réduire les animations », les étapes restent disponibles sans mouvement.
 - **S’entraîner** : huit questions tirées d’une banque de 24 questions, deux indices progressifs et une correction expliquée. Les formules peuvent être saisies au clavier.
 - **Se tester** : huit questions équilibrées entre les quatre compétences, sans indices ni correction avant la fin. Le test en cours reprend après un rechargement ou un retour à l’application.
 - **Mon bilan** : étapes validées, réussite au premier essai sans aide, résultats par compétence et proposition de révision.
@@ -35,6 +36,6 @@ npm run build
 
 Ouvrir `http://127.0.0.1:4173`. La commande de compilation régénère uniquement le fichier HTML autonome. Après toute modification du code ou des contenus, régénérer ce fichier avant de l’enregistrer dans GitHub.
 
-Les fichiers `content.js` (leçons, questions et explications), `core.js` (notation et sauvegarde), `app.js` (interface) et `styles.css` constituent les sources. Les tests couvrent la notation des formules et des charges, la répartition des tests, les résultats avec aide et la reprise des données sauvegardées.
+Les fichiers `content.js` (leçons, questions et explications), `core.js` (notation et sauvegarde), `reaction.js` (modèles et animation), `app.js` (interface) et `styles.css` constituent les sources. Les tests couvrent la notation des formules et des charges, la répartition des tests, les résultats avec aide, la reprise des données sauvegardées et la conservation des atomes et de la charge dans le modèle de réaction.
 
 Les contenus sont des explications et exercices originaux, préparés pour le périmètre du premier module de la séquence 1. Aucune reproduction des PDF CNED n’est publiée. L’application n’est pas un produit officiel du CNED.
