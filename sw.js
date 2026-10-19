@@ -1,6 +1,6 @@
 // Généré par build-standalone.mjs ; régénérer après chaque modification.
 const PREFIX='declic-'+encodeURIComponent(self.registration.scope)+'-';
-const CACHE=PREFIX+"4e25b9843b97f8ef";
+const CACHE=PREFIX+"f3e390a51ecb304f";
 const ASSETS=["./","./index.html","./styles.css","./core.js","./content.js","./reaction.js","./module-two-content.js","./module-two-reaction.js","./module-three-content.js","./module-three-models.js","./install.js","./app.js","./manifest.webmanifest","./icon.svg","./icon-192.png","./icon-512.png","./icon-maskable.png"];
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS.map(asset=>new Request(new URL(asset,self.registration.scope),{cache:'reload'}))))));
 self.addEventListener('activate',event=>event.waitUntil((async()=>{for(const key of await caches.keys())if(key.startsWith(PREFIX)&&key!==CACHE)await caches.delete(key);await self.clients.claim();})()));

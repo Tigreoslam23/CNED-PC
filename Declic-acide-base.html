@@ -4,6 +4,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>
+  // Mémoriser la proposition même si les modules de l’application chargent encore.
+  window.declicInstallPrompt=null;
+  window.addEventListener('beforeinstallprompt',event=>{event.preventDefault();window.declicInstallPrompt=event;});
+  </script>
   <meta name="theme-color" content="#163b3b">
   <script>try{if(localStorage.getItem("declic-theme")==="dark"){document.documentElement.dataset.theme="dark";document.querySelector('meta[name="theme-color"]').content="#101827"}}catch(e){}</script>
   <meta name="description" content="Comprends les réactions acide-base et les modèles de Lewis, puis entraîne-toi et teste tes acquis. Un parcours guidé de physique-chimie en terminale.">
@@ -88,6 +93,8 @@ html[data-theme="dark"] .m3-bond{stroke:#70c7eb;fill:#70c7eb}html[data-theme="da
 
 html[data-theme="dark"] .install-status{background:#233c40;color:#c8e8c0}
 
+.install-state{border-left:3px solid var(--green);padding:12px 14px;background:var(--white);font-weight:650;line-height:1.7}.install-steps h3{font-family:var(--serif);font-size:23px;font-weight:400;margin:22px 0 12px}.install-steps ol{padding-left:23px;font-size:13px;line-height:1.9}.install-steps li{padding:4px 0}.install-steps code{display:inline-block;background:var(--rx-wash);padding:1px 6px;border:1px solid var(--line);border-radius:4px;font-size:13px}.install-offline-explainer{font-size:12px!important;color:var(--muted);margin-top:25px}.install-state[hidden]{display:none}
+
 </style>
 </head>
 <body>
@@ -110,7 +117,7 @@ html[data-theme="dark"] .install-status{background:#233c40;color:#c8e8c0}
     <main id="main" tabindex="-1"></main>
     <footer class="footer"><span>Déclic · Comprendre avant de retenir.</span><button id="open-memo" class="text-button">L’essentiel à retenir ↗</button></footer>
   </div>
-  <dialog id="install-dialog" aria-labelledby="install-title"><button type="button" class="dialog-close" id="close-install" aria-label="Fermer l’installation">×</button><span class="eyebrow">DÉCLIC À PORTÉE DE MAIN</span><h2 id="install-title">Ton labo, même sans réseau.</h2><p>Une icône sur ton PC ou ta tablette, pour retrouver les trois modules, leurs animations et les exercices hors connexion.</p><p id="install-message">Si ton navigateur propose l’installation, utilise le bouton ci-dessous. Sinon, suis le guide correspondant à ton appareil.</p><button type="button" class="button" id="confirm-install" hidden>Installer sur cet appareil</button><p id="offline-status" class="install-status" role="status" aria-live="polite">Préparation hors connexion…</p><button type="button" class="button secondary" id="update-app" hidden>Mettre Déclic à jour</button><details open><summary>PC · Chrome ou Edge</summary><p>Ouvre la version en ligne. Clique sur l’icône d’installation dans la barre d’adresse, ou sur « Installer » dans le menu du navigateur. Confirme ensuite l’installation.</p></details><details><summary>Tablette Android · Chrome</summary><p>Ouvre la version en ligne dans Chrome. Dans le menu ⋮, choisis « Ajouter à l’écran d’accueil » ou « Installer l’application », puis confirme.</p></details><details><summary>iPad · Safari</summary><p>Ouvre la version en ligne dans Safari. Touche Partager, puis « Sur l’écran d’accueil ». Active « Ouvrir comme app web » si cette option apparaît, puis touche Ajouter.</p></details><p class="muted">Attends le message « prêts hors connexion » avant de couper Internet. La progression est conservée sur cet appareil ; elle n’est pas synchronisée avec les autres appareils. Le navigateur peut supprimer les données si tu effaces son stockage.</p></dialog>
+  <dialog id="install-dialog" aria-labelledby="install-title"><button type="button" class="dialog-close" id="close-install" aria-label="Fermer l’installation">×</button><span class="eyebrow">DÉCLIC À PORTÉE DE MAIN</span><h2 id="install-title">Installer Déclic sur ton appareil.</h2><p>Deux étapes : confirmer l’installation dans ton navigateur, puis choisir où placer le raccourci.</p><p id="install-state" class="install-state" role="status" aria-live="polite">Installation à confirmer dans le navigateur</p><p id="install-message">Ouvre le menu de Chrome pour installer l’application.</p><button type="button" class="button" id="confirm-install" hidden>Installer sur cet appareil</button><details id="install-manual" open><summary>PC · Installer et ajouter une icône au bureau</summary><div class="install-steps"><h3>1 · Installer l’application dans Chrome</h3><ol><li>Reste sur la <a href="https://tigreoslam23.github.io/CNED-PC/" target="_blank" rel="noopener">version en ligne de Déclic</a>.</li><li>Ouvre le menu <strong>⋮ en haut à droite de Chrome</strong>.</li><li>Choisis <strong>Caster, enregistrer et partager → Installer la page en tant qu’appli</strong>.</li><li>Confirme avec <strong>Installer</strong> dans la fenêtre de Chrome.</li></ol><p>Si une icône d’installation apparaît dans la barre d’adresse, tu peux aussi l’utiliser. Dans Edge : menu ⋯ → Applications → Installer ce site en tant qu’application.</p><h3>2 · Créer l’icône sur le bureau</h3><ol><li>Après l’installation, saisis <code>chrome://apps</code> dans la barre d’adresse de Chrome.</li><li>Fais un clic droit sur <strong>Déclic</strong>, puis choisis <strong>Créer un raccourci</strong>.</li><li>Coche <strong>Bureau</strong>, puis confirme avec <strong>Créer</strong>.</li></ol><p>Si Déclic figure déjà dans cette liste, passe directement à cette deuxième étape.</p><a href="https://support.google.com/chrome/answer/9658361?hl=fr&amp;co=GENIE.Platform%3DDesktop" target="_blank" rel="noopener">Voir l’aide officielle de Chrome ↗</a></div></details><details><summary>Tablette Android · Chrome</summary><p>Ouvre la version en ligne dans Chrome. Dans le menu ⋮, choisis « Ajouter à l’écran d’accueil » ou « Installer l’application », puis confirme.</p></details><details><summary>iPad · Safari</summary><p>Ouvre la version en ligne dans Safari. Touche Partager, puis « Sur l’écran d’accueil ». Active « Ouvrir comme app web » si cette option apparaît, puis touche Ajouter.</p></details><p class="install-offline-explainer">La préparation hors connexion est indépendante de l’installation et de l’icône :</p><p id="offline-status" class="install-status" role="status" aria-live="polite">Préparation hors connexion…</p><button type="button" class="button secondary" id="update-app" hidden>Mettre Déclic à jour</button><p class="muted">Attends le message « prêts hors connexion » avant de couper Internet. La progression est conservée sur cet appareil ; elle n’est pas synchronisée avec les autres appareils. Le navigateur peut supprimer les données si tu effaces son stockage.</p></dialog>
   <dialog id="memo-dialog" aria-labelledby="memo-title"><button class="dialog-close" id="close-memo" aria-label="Fermer le mémo">×</button><div id="memo-content"><span class="eyebrow">TA FICHE MÉMO</span><h2 id="memo-title">Le petit essentiel.</h2><div class="memo-rule"><strong>Un acide cède H⁺.</strong><p>Sa base conjuguée a un H de moins et une charge algébrique diminuée de 1.</p></div><div class="memo-rule"><strong>Une base capte H⁺.</strong><p>Son acide conjugué a un H de plus et une charge algébrique augmentée de 1.</p></div><div class="formula memo-formula">Acide / Base <span>exemple : NH₄⁺ / NH₃</span></div><p>Une demi-équation s’écrit : <strong>NH₄⁺ = NH₃ + H⁺</strong>. Les atomes et la charge totale sont conservés. Cette écriture décrit un couple ; lors d’une réaction, H⁺ est transféré à une autre espèce.</p><p class="muted">L’eau peut être base dans H₃O⁺ / H₂O et acide dans H₂O / HO⁻ : son rôle dépend du couple.</p></div></dialog>
   <noscript><p class="noscript">Active JavaScript pour suivre le parcours et répondre aux exercices.</p></noscript>
   <script>
@@ -632,21 +639,38 @@ function mountInstall(){
   const status=document.getElementById('offline-status');
   const message=document.getElementById('install-message');
   const update=document.getElementById('update-app');
+  const installState=document.getElementById('install-state');
+  const manual=document.getElementById('install-manual');
   const standalone=window.matchMedia('(display-mode: standalone)');
   const isStandalone=()=>standalone.matches||navigator.standalone===true;
   const local=location.protocol==='file:';
-  let prompt=null,registration=null;
-  function sync(){button.innerHTML=`<span aria-hidden="true">${isStandalone()?'✓':'↓'}</span> ${isStandalone()?'Application installée':'Installer l’application'}`;action.hidden=!prompt||isStandalone();}
-  button.addEventListener('click',()=>{sync();dialog.showModal();});
+  let prompt=window.declicInstallPrompt||null,registration=null;
+  let installed=false,busy=false,outcome='';
+  function sync(){
+    const confirmed=installed||isStandalone();
+    button.innerHTML=`<span aria-hidden="true">${confirmed?'✓':'↓'}</span> ${confirmed?'Application installée':'Installer l’application'}`;
+    action.hidden=!prompt||confirmed;action.disabled=busy;button.disabled=busy;
+    installState.textContent=local?'Fichier local · ouvre la version en ligne pour installer Déclic':confirmed?'✓ Installation confirmée · voir ci-dessous pour l’icône du bureau':busy?'Confirmation dans la fenêtre de Chrome…':outcome==='accepted'?'Demande acceptée · le navigateur termine l’installation':outcome==='dismissed'?'Installation annulée · aucune installation confirmée':prompt?'La confirmation d’installation du navigateur est disponible':'Installation à confirmer depuis le menu de Chrome';
+    manual.open=!prompt||confirmed;
+    if(!outcome&&!busy&&!confirmed&&!local)message.textContent=prompt?'Clique sur « Installer sur cet appareil », puis confirme dans la fenêtre de ton navigateur.':'Dans Chrome, suis l’étape 1 pour installer Déclic. L’étape 2 ajoute son icône sur le bureau.';
+    if(confirmed)message.textContent='Déclic est installé. Si son icône manque sur le bureau, suis l’étape 2 ci-dessous.';
+  }
+  async function requestInstall(){
+    if(!prompt||busy)return;
+    const current=prompt;prompt=null;window.declicInstallPrompt=null;busy=true;sync();
+    try{
+      // L’appel reste dans le clic de l’utilisateur pour conserver son activation.
+      await current.prompt();const choice=await current.userChoice;outcome=choice.outcome;
+      message.textContent=choice.outcome==='accepted'?'Chrome a accepté la demande. Lorsque l’installation est terminée, retrouve Déclic dans tes applications, puis crée son raccourci avec l’étape 2.':'Tu as annulé la confirmation. Tu peux réessayer depuis le menu de Chrome, à l’étape 1.';
+    }catch{outcome='error';message.textContent='La confirmation n’a pas pu s’ouvrir. Utilise le menu de Chrome décrit à l’étape 1.';}
+    finally{busy=false;sync();}
+  }
+  button.addEventListener('click',()=>{sync();if(!dialog.open)dialog.showModal();if(prompt&&!isStandalone())void requestInstall();});
   document.getElementById('close-install').addEventListener('click',()=>dialog.close());
-  window.addEventListener('beforeinstallprompt',event=>{event.preventDefault();prompt=event;sync();});
-  window.addEventListener('appinstalled',()=>{prompt=null;message.textContent='Déclic est installé. Retrouve son icône parmi tes applications.';sync();});
+  window.addEventListener('beforeinstallprompt',event=>{event.preventDefault();prompt=event;window.declicInstallPrompt=event;outcome='';sync();});
+  window.addEventListener('appinstalled',()=>{prompt=null;window.declicInstallPrompt=null;installed=true;sync();});
   standalone.addEventListener('change',sync);
-  action.addEventListener('click',async()=>{
-    if(!prompt)return;const current=prompt;prompt=null;sync();
-    try{await current.prompt();const choice=await current.userChoice;message.textContent=choice.outcome==='accepted'?'Installation acceptée. Retrouve Déclic parmi tes applications.':'Installation annulée. Tu peux continuer à utiliser Déclic dans le navigateur.';}
-    catch{message.textContent='Utilise le menu du navigateur pour installer Déclic, puis suis les étapes ci-dessous.';}
-  });
+  action.addEventListener('click',requestInstall);
   update.addEventListener('click',()=>{if(registration?.waiting){update.disabled=true;registration.waiting.postMessage({type:'ACTIVATE_UPDATE'});}});
   let reloading=false;
   navigator.serviceWorker?.addEventListener('controllerchange',()=>{if(update.disabled&&!reloading){reloading=true;location.reload();}});

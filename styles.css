@@ -74,3 +74,5 @@ html[data-theme="dark"] .m3-bond{stroke:#70c7eb;fill:#70c7eb}html[data-theme="da
 @media(max-width:359px){.topbar>span:first-child{display:none}}
 
 html[data-theme="dark"] .install-status{background:#233c40;color:#c8e8c0}
+
+.install-state{border-left:3px solid var(--green);padding:12px 14px;background:var(--white);font-weight:650;line-height:1.7}.install-steps h3{font-family:var(--serif);font-size:23px;font-weight:400;margin:22px 0 12px}.install-steps ol{padding-left:23px;font-size:13px;line-height:1.9}.install-steps li{padding:4px 0}.install-steps code{display:inline-block;background:var(--rx-wash);padding:1px 6px;border:1px solid var(--line);border-radius:4px;font-size:13px}.install-offline-explainer{font-size:12px!important;color:var(--muted);margin-top:25px}.install-state[hidden]{display:none}
