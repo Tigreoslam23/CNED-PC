@@ -14,12 +14,13 @@ export function shuffle(items, random = Math.random) {
   return copy;
 }
 export function makeExam(bank, random = Math.random) {
-  return shuffle(Object.keys(skills).flatMap(skill => shuffle(bank.filter(q => q.skill === skill), random).slice(0, 2)), random).map(q => q.id);
+  const bankSkills = [...new Set(bank.map(q => q.skill))];
+  return shuffle(bankSkills.flatMap(skill => shuffle(bank.filter(q => q.skill === skill), random).slice(0, 2)), random).map(q => q.id);
 }
 export function emptyState() { return { version: 1, lesson: 0, completed: [], history: [], exam: null, lastExam: null }; }
-export function readState(storage, bank) {
+export function readState(storage, bank, storageKey = STORAGE_KEY) {
   try {
-    const value = JSON.parse(storage.getItem(STORAGE_KEY));
+    const value = JSON.parse(storage.getItem(storageKey));
     if (!value || value.version !== 1) return emptyState();
     const validIds = new Set(bank.map(q => q.id));
     const cleanRecords = records => Array.isArray(records) ? records.filter(r => r && validIds.has(r.id) && typeof r.correct === 'boolean' && typeof r.assisted === 'boolean') : [];
@@ -39,7 +40,7 @@ export function readState(storage, bank) {
   } catch { return emptyState(); }
 }
 export function summarize(records, bank) {
-  const totals = Object.fromEntries(Object.keys(skills).map(key => [key, { total: 0, correct: 0 }]));
+  const totals = Object.fromEntries([...new Set(bank.map(q => q.skill))].map(key => [key, { total: 0, correct: 0 }]));
   for (const record of records) {
     const question = bank.find(q => q.id === record.id);
     if (!question) continue;

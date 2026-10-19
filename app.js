@@ -1,30 +1,41 @@
 import { lessons, questions } from './content.js';
 import { STORAGE_KEY, skills, isCorrect, makeExam, readState, summarize } from './core.js';
 import { reactionPanel, mountReaction } from './reaction.js';
+import { moduleTwoLessons, moduleTwoQuestions, moduleTwoSkills, moduleTwoMemo } from './module-two-content.js';
+import { moduleTwoHero, moduleTwoReactionPanel, mountModuleTwoReaction } from './module-two-reaction.js';
 
 const $ = id => document.getElementById(id);
 const esc = value => String(value).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-const byId = id => questions.find(q => q.id === id);
+const byId = id => activeQuestions.find(q => q.id === id);
 let storage;
 try { storage = window.localStorage; } catch { storage = null; }
-let state = readState(storage, questions);
+const moduleCatalog = [
+  { id: '1', title: 'Les couples acide-base', heading: 'Les couples<br><em>acide-base.</em>', intro: 'Un ion H⁺ change de partenaire. Et tout s’éclaire.<br>Observe, essaie, puis construis ton raisonnement.', lessons, questions, skills, storageKey: STORAGE_KEY, time: '15 min', missions: 'Missions 1 et 2 · introduction aux missions 3 et 4' },
+  { id: '2', title: 'Réactions et espèces amphotères', heading: 'Une réaction.<br><em>Deux partenaires.</em>', intro: 'Du vinaigre, du bicarbonate… et des bulles.<br>Suis le transfert, construis le bilan, puis change de partenaire.', lessons: moduleTwoLessons, questions: moduleTwoQuestions, skills: moduleTwoSkills, storageKey: 'declic-reactions-amphoteres-v1', time: '20 min', missions: 'Missions 3 et 4 · vinaigre, bicarbonate et amphotères' }
+];
+let storedModule = '1';
+try { storedModule = storage?.getItem('declic-active-module') || '1'; } catch {}
+let activeModule = moduleCatalog.find(module => module.id === storedModule) || moduleCatalog[0];
+let activeLessons = activeModule.lessons, activeQuestions = activeModule.questions, activeSkills = activeModule.skills, activeStorageKey = activeModule.storageKey;
+const moduleOneMemo = $('memo-content').innerHTML;
+let state = readState(storage, activeQuestions, activeStorageKey);
 let view = 'apprendre';
 let practice = null;
 let showingExamResult = false;
 let activity = freshActivity();
-const reactionSession = { progress: 0 };
+const reactionSessions = { '1': { progress: 0 }, '2': { progress: 0, ampho: 'base', assembled: false } };
 let disposeReaction = () => {};
 function freshActivity() { return { selected: null, hints: 0, attempts: 0, done: false, firstCorrect: null, feedback: null, recorded: false }; }
 function save() {
-  try { if (!storage) throw new Error(); storage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+  try { if (!storage) throw new Error(); storage.setItem(activeStorageKey, JSON.stringify(state)); }
   catch { $('save-status').textContent = 'Sauvegarde indisponible · session en cours'; $('save-status').classList.add('warning'); }
 }
 save();
-function pageTop(label) { return `<div class="page-top"><span class="breadcrumb">SÉQUENCE 01 &nbsp; / &nbsp; MODULE 01</span><span class="badge">${label}</span></div>`; }
+function pageTop(label) { return `<div class="page-top"><span class="breadcrumb">SÉQUENCE 01 &nbsp; / &nbsp; MODULE ${activeModule.id.padStart(2, '0')}</span><span class="badge">${label}</span></div>`; }
 function progress(value, max, label) { return `<div class="progress-track" role="progressbar" aria-label="${esc(label)}" aria-valuenow="${value}" aria-valuemin="0" aria-valuemax="${max}"><span style="width:${max ? Math.round(value / max * 100) : 0}%"></span></div>`; }
 function pairFigure(lesson) { return `<div class="hero-figure ${lesson.pair[0].length > 6 ? 'long-formula' : ''}" aria-label="Exemple de couple : ${lesson.pair.join(' et ')}"><div class="figure-label">DEUX ESPÈCES. UN SEUL H⁺ DE DIFFÉRENCE.</div><div class="pair"><div class="species"><span class="formula">${lesson.pair[0]}</span><small>${lesson.names[0]}</small><span class="species-role">ACIDE</span></div><div class="transfer"><span class="proton">− H⁺</span><span class="arrow" aria-hidden="true">⟶</span><small>cède H⁺</small></div><div class="species"><span class="formula">${lesson.pair[1]}</span><small>${lesson.names[1]}</small><span class="species-role base">BASE CONJUGUÉE</span></div></div><p class="figure-note">Dans l’autre sens, la base capte H⁺ et retrouve son acide.</p></div>`; }
 function activeQuestion() {
-  if (view === 'apprendre') return byId(lessons[state.lesson].question);
+  if (view === 'apprendre') return byId(activeLessons[state.lesson].question);
   if (view === 'entrainer' && practice && !practice.done) return byId(practice.ids[practice.index]);
   if (view === 'tester' && state.exam && !showingExamResult) return byId(state.exam.ids[state.exam.index]);
   return null;
@@ -44,18 +55,18 @@ function questionUI(q, exam = false) {
   </form>`;
 }
 function learnPage() {
-  const lesson = lessons[state.lesson];
-  return `${pageTop('Apprentissage guidé')}<section class="hero"><div class="hero-copy"><span class="eyebrow">COMPRENDRE, UN DÉCLIC À LA FOIS.</span><h1>Les couples<br><em>acide-base.</em></h1><p class="intro-line">Un ion H⁺ change de partenaire. Et tout s’éclaire.<br>Observe, essaie, puis construis ton raisonnement.</p><div class="hero-meta"><span>◷ &nbsp; Environ 15 min</span><span>4 étapes à ton rythme</span><span>Terminale</span></div></div>${pairFigure(lesson)}</section>
-  ${reactionPanel()}
-  <div class="learning-grid"><section class="journey" aria-label="Étapes du parcours"><h2 class="journey-heading">Ton chemin vers le déclic</h2><p class="journey-subtitle">Une idée, un exemple, à toi de jouer.</p><div class="journey-list">${lessons.map((l, i) => `<button class="lesson-link ${i === state.lesson ? 'current' : ''} ${state.completed.includes(i) ? 'complete' : ''}" data-lesson="${i}" ${i === state.lesson ? 'aria-current="step"' : ''}><span class="step-number">${state.completed.includes(i) ? '✓' : `0${i + 1}`}</span><span><strong>${l.title}</strong><small>${l.short} · ${l.duration}</small></span></button>`).join('')}</div><div class="journey-progress"><div><span>Étapes validées</span><strong>${state.completed.length} / 4</strong></div>${progress(state.completed.length, 4, 'Étapes validées')}</div></section>
+  const lesson = activeLessons[state.lesson];
+  return `${pageTop('Apprentissage guidé')}<section class="hero"><div class="hero-copy"><span class="eyebrow">COMPRENDRE, UN DÉCLIC À LA FOIS.</span><h1>${activeModule.heading}</h1><p class="intro-line">${activeModule.intro}</p><div class="hero-meta"><span>◷ &nbsp; Environ ${activeModule.time}</span><span>4 étapes à ton rythme</span><span>Terminale</span></div></div>${activeModule.id === '2' ? moduleTwoHero() : pairFigure(lesson)}</section>
+  ${activeModule.id === '2' ? moduleTwoReactionPanel(state.lesson) : reactionPanel()}
+  <div class="learning-grid"><section class="journey" aria-label="Étapes du parcours"><h2 class="journey-heading">Ton chemin vers le déclic</h2><p class="journey-subtitle">Une idée, un exemple, à toi de jouer.</p><div class="journey-list">${activeLessons.map((l, i) => `<button class="lesson-link ${i === state.lesson ? 'current' : ''} ${state.completed.includes(i) ? 'complete' : ''}" data-lesson="${i}" ${i === state.lesson ? 'aria-current="step"' : ''}><span class="step-number">${state.completed.includes(i) ? '✓' : `0${i + 1}`}</span><span><strong>${l.title}</strong><small>${l.short} · ${l.duration}</small></span></button>`).join('')}</div><div class="journey-progress"><div><span>Étapes validées</span><strong>${state.completed.length} / 4</strong></div>${progress(state.completed.length, 4, 'Étapes validées')}</div></section>
     <section class="lesson-card"><span class="eyebrow">ÉTAPE 0${state.lesson + 1} &nbsp; · &nbsp; ${lesson.tag}</span><h2>${lesson.title}</h2><p class="lesson-description">${lesson.intro}</p><div class="rule"><strong>${lesson.rule}</strong></div><p class="lesson-detail">${lesson.detail}</p><div class="note"><span aria-hidden="true">↳</span><div>${lesson.note}</div></div><div class="exercise-divider"></div><div class="exercise-label"><span>À TOI DE JOUER</span><span class="muted">Tu peux demander un indice.</span></div>${questionUI(activeQuestion())}</section></div>`;
 }
 function startPage(exam) {
-  return `${pageTop(exam ? 'En autonomie' : 'Avec un coup de pouce')}<section class="section-intro"><span class="eyebrow">${exam ? 'FAIS LE POINT, SANS PRESSION.' : 'C’EST EN ESSAYANT QUE ÇA SE FIXE.'}</span><h1>${exam ? 'Prêt pour le déclic ?' : 'À toi de faire les liens.'}</h1><p class="intro-line">${exam ? 'Huit questions pour voir ce que tu sais faire seul. Prends ton temps : il n’y a pas de chronomètre.' : 'Retrouve les espèces conjuguées, écris les couples et vérifie les charges. Chaque réponse t’aide à comprendre.'}</p></section><div class="start-grid"><section class="start-panel"><h2>${exam ? 'Ton test de compréhension' : 'Un entraînement accompagné'}</h2><ul class="checklist"><li>8 questions, réparties sur les 4 compétences</li><li>${exam ? 'Sans indice ni correction pendant le test' : 'Des choix et des formules à saisir'}</li><li>${exam ? 'Toutes les réponses expliquées à la fin' : 'Deux indices disponibles pour chaque question'}</li><li>${exam ? 'Tu peux quitter cette page et reprendre plus tard' : 'Une correction pour comprendre chaque erreur'}</li></ul><button class="button" data-action="${exam ? 'start-exam' : 'start-practice'}">${exam ? 'Commencer le test' : 'Commencer l’entraînement'} <span aria-hidden="true">→</span></button></section><aside class="quiet-card"><div class="big-symbol" aria-hidden="true">${exam ? 'H⁺' : '↔'}</div><h3>${exam ? 'Pas besoin de tout réussir.' : 'L’erreur fait partie du chemin.'}</h3><p>${exam ? 'Le bilan sert à choisir ce qu’il faut revoir. Un résultat est un repère, pas une étiquette.' : 'Essaie d’abord avec ce que tu sais. Puis utilise un indice si tu en as besoin : l’important est de comprendre pourquoi.'}</p></aside></div>`;
+  return `${pageTop(exam ? 'En autonomie' : 'Avec un coup de pouce')}<section class="section-intro"><span class="eyebrow">${exam ? 'FAIS LE POINT, SANS PRESSION.' : 'C’EST EN ESSAYANT QUE ÇA SE FIXE.'}</span><h1>${exam ? 'Prêt pour le déclic ?' : 'À toi de faire les liens.'}</h1><p class="intro-line">${exam ? 'Huit questions pour voir ce que tu sais faire seul. Prends ton temps : il n’y a pas de chronomètre.' : activeModule.id === '2' ? 'Identifie les partenaires, construis le bilan et explique les bulles. Puis retrouve les deux rôles des espèces amphotères.' : 'Retrouve les espèces conjuguées, écris les couples et vérifie les charges. Chaque réponse t’aide à comprendre.'}</p></section><div class="start-grid"><section class="start-panel"><h2>${exam ? 'Ton test de compréhension' : 'Un entraînement accompagné'}</h2><ul class="checklist"><li>8 questions, réparties sur les 4 compétences</li><li>${exam ? 'Sans indice ni correction pendant le test' : 'Des choix et des formules à saisir'}</li><li>${exam ? 'Toutes les réponses expliquées à la fin' : 'Deux indices disponibles pour chaque question'}</li><li>${exam ? 'Tu peux quitter cette page et reprendre plus tard' : 'Une correction pour comprendre chaque erreur'}</li></ul><button class="button" data-action="${exam ? 'start-exam' : 'start-practice'}">${exam ? 'Commencer le test' : 'Commencer l’entraînement'} <span aria-hidden="true">→</span></button></section><aside class="quiet-card"><div class="big-symbol" aria-hidden="true">${exam ? 'H⁺' : '↔'}</div><h3>${exam ? 'Pas besoin de tout réussir.' : 'L’erreur fait partie du chemin.'}</h3><p>${exam ? 'Le bilan sert à choisir ce qu’il faut revoir. Un résultat est un repère, pas une étiquette.' : 'Essaie d’abord avec ce que tu sais. Puis utilise un indice si tu en as besoin : l’important est de comprendre pourquoi.'}</p></aside></div>`;
 }
 function sessionPage(exam) {
   const session = exam ? state.exam : practice;
-  return `${pageTop(exam ? 'Test en cours' : 'Entraînement en cours')}<section class="section-intro"><span class="eyebrow">${exam ? 'FAIS CONFIANCE À TON RAISONNEMENT.' : 'CHAQUE ESSAI TE FAIT AVANCER.'}</span><h1>${exam ? 'Voyons ce qui est acquis.' : 'Pratique le déclic.'}</h1></section><div class="session-progress"><div class="session-top"><strong>Question ${session.index + 1} sur ${session.ids.length}</strong><span>${exam ? 'Sans aide · à ton rythme' : skills[activeQuestion().skill]}</span></div>${progress(session.index, session.ids.length, 'Questions terminées')}</div>${exam && session.index ? '<div class="saved-banner" role="status">Réponse précédente enregistrée. La correction sera disponible à la fin.</div>' : ''}<section class="question-card"><div class="exercise-label"><span>${exam ? 'À TOI DE RÉPONDRE' : 'CONSTRUIS TON RAISONNEMENT'}</span><span class="muted">${activeQuestion().type === 'formula' ? 'Écris une formule' : 'Une seule réponse attendue'}</span></div>${questionUI(activeQuestion(), exam)}</section>`;
+  return `${pageTop(exam ? 'Test en cours' : 'Entraînement en cours')}<section class="section-intro"><span class="eyebrow">${exam ? 'FAIS CONFIANCE À TON RAISONNEMENT.' : 'CHAQUE ESSAI TE FAIT AVANCER.'}</span><h1>${exam ? 'Voyons ce qui est acquis.' : 'Pratique le déclic.'}</h1></section><div class="session-progress"><div class="session-top"><strong>Question ${session.index + 1} sur ${session.ids.length}</strong><span>${exam ? 'Sans aide · à ton rythme' : activeSkills[activeQuestion().skill]}</span></div>${progress(session.index, session.ids.length, 'Questions terminées')}</div>${exam && session.index ? '<div class="saved-banner" role="status">Réponse précédente enregistrée. La correction sera disponible à la fin.</div>' : ''}<section class="question-card"><div class="exercise-label"><span>${exam ? 'À TOI DE RÉPONDRE' : 'CONSTRUIS TON RAISONNEMENT'}</span><span class="muted">${activeQuestion().type === 'formula' ? 'Écris une formule' : 'Une seule réponse attendue'}</span></div>${questionUI(activeQuestion(), exam)}</section>`;
 }
 function reviewItems(records) { return records.map((r, i) => {
   const q = byId(r.id); const correctAnswer = q.type === 'formula' ? q.answers[0] : q.options[q.correct];
@@ -69,20 +80,21 @@ function resultPage(exam) {
 }
 function dashboard() {
   const recent = state.history.slice(-40);
-  const stats = summarize(recent, questions);
+  const stats = summarize(recent, activeQuestions);
   const count = state.history.length;
   const rate = recent.length ? Math.round(recent.filter(r => r.correct && !r.assisted).length / recent.length * 100) : null;
   const lastScore = state.lastExam ? state.lastExam.answers.filter(r => r.correct).length : null;
   const weakest = Object.entries(stats).filter(([, s]) => s.total).sort((a,b) => a[1].correct / a[1].total - b[1].correct / b[1].total)[0];
-  const target = weakest ? Object.keys(skills).indexOf(weakest[0]) : state.completed.length < 4 ? lessons.findIndex((_, i) => !state.completed.includes(i)) : 0;
-  return `${pageTop('Tes repères')}<section class="section-intro"><span class="eyebrow">LE CHEMIN COMPTE AUSSI.</span><h1>Ton déclic prend forme.</h1><p class="intro-line">Voici ce que tes essais nous apprennent. Reviens sur une notion, entraîne-toi, puis vérifie si tu peux réussir sans aide.</p></section><div class="stat-grid"><div class="stat"><div class="number">${state.completed.length}<span class="muted"> / 4</span></div><div class="label">étapes du cours validées</div></div><div class="stat"><div class="number">${count}</div><div class="label">questions travaillées</div></div><div class="stat"><div class="number">${rate === null ? '—' : `${rate}<span class="muted"> %</span>`}</div><div class="label">réussite au premier essai, sans aide</div></div></div><div class="dashboard-grid"><section class="panel"><h2>Les quatre compétences</h2><p>Sur les ${recent.length} dernières réponses (40 maximum). Un indice ou une erreur au premier essai indique un point à consolider.</p>${Object.entries(skills).map(([key, name]) => { const s = stats[key]; const percent = s.total ? Math.round(s.correct / s.total * 100) : 0; return `<div class="skill-row"><div><strong>${name}</strong><small>${s.total ? `${s.correct} / ${s.total} sans aide` : 'Pas encore travaillé'}</small></div>${progress(s.correct, s.total || 1, `${name} : ${percent} %` )}</div>`; }).join('')}</section><section><div class="recommendation"><span class="eyebrow">TON PROCHAIN PETIT PAS</span><h3>${weakest ? skills[weakest[0]] : 'Commencer par comprendre'}</h3><p>${weakest ? 'Reprends cette étape avec l’exemple, puis vérifie ton raisonnement dans un nouvel entraînement.' : 'Quelques questions suffiront pour faire apparaître tes premiers repères.'}</p><button class="button" data-lesson="${target}">Revoir l’étape ${target + 1} →</button></div><div class="panel"><h2>Ton dernier test</h2>${lastScore === null ? '<p>Pas encore de test terminé. Il sera disponible quand tu voudras faire le point.</p><a class="text-button" href="#tester">Découvrir le test →</a>' : `<p><strong>${lastScore} / 8</strong> réponses correctes, sans aide.</p><button class="text-button" data-action="last-result">Revoir la correction →</button>`}</div></section></div><div class="reset-area">Progression conservée dans ce navigateur, sur cet appareil. Aucun compte élève requis.<br><button class="text-button" data-action="reset">Effacer ma progression sur cet appareil</button></div>`;
+  const target = weakest ? Object.keys(activeSkills).indexOf(weakest[0]) : state.completed.length < 4 ? activeLessons.findIndex((_, i) => !state.completed.includes(i)) : 0;
+  return `${pageTop('Tes repères')}<section class="section-intro"><span class="eyebrow">LE CHEMIN COMPTE AUSSI.</span><h1>Ton déclic prend forme.</h1><p class="intro-line">Voici ce que tes essais nous apprennent. Reviens sur une notion, entraîne-toi, puis vérifie si tu peux réussir sans aide.</p></section><div class="stat-grid"><div class="stat"><div class="number">${state.completed.length}<span class="muted"> / 4</span></div><div class="label">étapes du cours validées</div></div><div class="stat"><div class="number">${count}</div><div class="label">questions travaillées</div></div><div class="stat"><div class="number">${rate === null ? '—' : `${rate}<span class="muted"> %</span>`}</div><div class="label">réussite au premier essai, sans aide</div></div></div><div class="dashboard-grid"><section class="panel"><h2>Les quatre compétences</h2><p>Sur les ${recent.length} dernières réponses (40 maximum). Un indice ou une erreur au premier essai indique un point à consolider.</p>${Object.entries(activeSkills).map(([key, name]) => { const s = stats[key]; const percent = s.total ? Math.round(s.correct / s.total * 100) : 0; return `<div class="skill-row"><div><strong>${name}</strong><small>${s.total ? `${s.correct} / ${s.total} sans aide` : 'Pas encore travaillé'}</small></div>${progress(s.correct, s.total || 1, `${name} : ${percent} %` )}</div>`; }).join('')}</section><section><div class="recommendation"><span class="eyebrow">TON PROCHAIN PETIT PAS</span><h3>${weakest ? activeSkills[weakest[0]] : 'Commencer par comprendre'}</h3><p>${weakest ? 'Reprends cette étape avec l’exemple, puis vérifie ton raisonnement dans un nouvel entraînement.' : 'Quelques questions suffiront pour faire apparaître tes premiers repères.'}</p><button class="button" data-lesson="${target}">Revoir l’étape ${target + 1} →</button></div><div class="panel"><h2>Ton dernier test</h2>${lastScore === null ? '<p>Pas encore de test terminé. Il sera disponible quand tu voudras faire le point.</p><a class="text-button" href="#tester">Découvrir le test →</a>' : `<p><strong>${lastScore} / 8</strong> réponses correctes, sans aide.</p><button class="text-button" data-action="last-result">Revoir la correction →</button>`}</div></section></div><div class="reset-area">Progression conservée dans ce navigateur, sur cet appareil. Aucun compte élève requis.<br><button class="text-button" data-action="reset">Effacer la progression de ce module</button></div>`;
 }
 function render(focus = false) {
   disposeReaction();
+  syncModuleChrome();
   $('open-memo').hidden = view === 'tester' && state.exam !== null && !showingExamResult;
   document.querySelectorAll('#nav a').forEach(a => { const active = a.dataset.view === view; a.classList.toggle('active', active); if (active) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
   $('main').innerHTML = view === 'apprendre' ? learnPage() : view === 'bilan' ? dashboard() : view === 'entrainer' ? (practice ? practice.done ? resultPage(false) : sessionPage(false) : startPage(false)) : showingExamResult && state.lastExam ? resultPage(true) : state.exam ? sessionPage(true) : startPage(true);
-  disposeReaction = mountReaction($('reaction-lab'), reactionSession);
+  disposeReaction = activeModule.id === '2' ? mountModuleTwoReaction($('module-two-lab'), reactionSessions['2']) : mountReaction($('reaction-lab'), reactionSessions['1']);
   if (focus) { $('main').focus({ preventScroll: true }); window.scrollTo({ top: 0, behavior: 'instant' }); }
 }
 function route() {
@@ -149,14 +161,14 @@ $('main').addEventListener('click', event => {
       render(true);
     }
   }
-  if (action === 'start-practice') { practice = { ids: makeExam(questions), index: 0, answers: [], done: false }; activity = freshActivity(); render(true); }
+  if (action === 'start-practice') { practice = { ids: makeExam(activeQuestions), index: 0, answers: [], done: false }; activity = freshActivity(); render(true); }
   if (action === 'start-exam') {
-    state.exam = { ids: makeExam(questions), index: 0, answers: [] }; showingExamResult = false; activity = freshActivity(); save(); render(true);
+    state.exam = { ids: makeExam(activeQuestions), index: 0, answers: [] }; showingExamResult = false; activity = freshActivity(); save(); render(true);
   }
   if (action === 'last-result') { showingExamResult = true; location.hash = 'tester'; }
-  if (action === 'reset' && window.confirm('Effacer les étapes validées, les réponses et les résultats sur cet appareil ?')) {
-    try { storage?.removeItem(STORAGE_KEY); } catch { /* Session memory remains available. */ }
-    state = readState(null, questions); practice = null; showingExamResult = false; activity = freshActivity(); save(); render(true);
+  if (action === 'reset' && window.confirm('Effacer les étapes, réponses et résultats du module sélectionné sur cet appareil ?')) {
+    try { storage?.removeItem(activeStorageKey); } catch { /* Session memory remains available. */ }
+    state = readState(null, activeQuestions); practice = null; showingExamResult = false; activity = freshActivity(); save(); render(true);
   }
 });
 $('main').addEventListener('input', event => {
@@ -168,5 +180,24 @@ $('main').addEventListener('submit', event => { if (event.target.id === 'answer-
 $('open-memo').addEventListener('click', () => $('memo-dialog').showModal());
 $('close-memo').addEventListener('click', () => $('memo-dialog').close());
 $('memo-dialog').addEventListener('click', event => { if (event.target === $('memo-dialog')) { const r = event.target.getBoundingClientRect(); if (event.clientX < r.left || event.clientX > r.right || event.clientY < r.top || event.clientY > r.bottom) event.target.close(); } });
+function syncModuleChrome() {
+  $('module-select').value = activeModule.id;
+  document.querySelector('.module-pill').textContent = `Module ${activeModule.id} · ${activeModule.id === '1' ? 'Couples acide-base' : 'Réactions et amphotères'}`;
+  document.querySelector('.desktop-only strong').textContent = activeModule.title;
+  document.title = `Déclic — Module ${activeModule.id} · ${activeModule.title}`;
+  $('memo-content').innerHTML = activeModule.id === '2' ? moduleTwoMemo : moduleOneMemo;
+}
+function switchModule(id) {
+  const nextModule = moduleCatalog.find(module => module.id === id);
+  if (!nextModule || nextModule.id === activeModule.id) return;
+  save(); disposeReaction();
+  activeModule = nextModule;
+  activeLessons = nextModule.lessons; activeQuestions = nextModule.questions; activeSkills = nextModule.skills; activeStorageKey = nextModule.storageKey;
+  state = readState(storage, activeQuestions, activeStorageKey);
+  practice = null; showingExamResult = false; activity = freshActivity();
+  try { storage?.setItem('declic-active-module', activeModule.id); } catch {}
+  history.replaceState(null, '', '#apprendre'); view = 'apprendre'; save(); render(true);
+}
+$('module-select').addEventListener('change', event => switchModule(event.target.value));
 window.addEventListener('hashchange', route);
 route();
