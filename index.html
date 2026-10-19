@@ -5,9 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#163b3b">
   <script>try{if(localStorage.getItem("declic-theme")==="dark"){document.documentElement.dataset.theme="dark";document.querySelector('meta[name="theme-color"]').content="#101827"}}catch(e){}</script>
-  <meta name="description" content="Comprends les couples acide-base, entraîne-toi avec des indices et teste tes acquis. Un parcours guidé de physique-chimie en terminale.">
+  <meta name="description" content="Comprends les réactions acide-base et les modèles de Lewis, puis entraîne-toi et teste tes acquis. Un parcours guidé de physique-chimie en terminale.">
   <title>Déclic — Les couples acide-base</title>
   <link rel="icon" href="./icon.svg" type="image/svg+xml">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="apple-touch-icon" href="./icon-192.png">
+  <meta name="apple-mobile-web-app-title" content="Déclic">
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
@@ -15,7 +18,7 @@
   <aside class="sidebar">
     <a class="brand" href="#apprendre" aria-label="Déclic, accueil"><span class="brand-icon" aria-hidden="true">d.</span><span>Déclic<small>PHYSIQUE · CHIMIE</small></span></a>
     <div class="course-label">TON ESPACE D’APPRENTISSAGE</div>
-    <label class="module-picker" for="module-select">Ton module<select id="module-select"><option value="1">1 · Couples acide-base</option><option value="2">2 · Réactions et amphotères</option></select></label>
+    <label class="module-picker" for="module-select">Ton module<select id="module-select"><option value="1">1 · Couples acide-base</option><option value="2">2 · Réactions et amphotères</option><option value="3">3 · Lewis et doublets</option></select></label>
     <nav aria-label="Parcours principal" id="nav">
       <a href="#apprendre" data-view="apprendre"><span aria-hidden="true">◫</span>Apprendre<span class="nav-dot"></span></a>
       <a href="#entrainer" data-view="entrainer"><span aria-hidden="true">✧</span>S’entraîner</a>
@@ -26,10 +29,11 @@
     <div class="side-bottom"><span class="little-orbit" aria-hidden="true">H⁺</span><p>Un petit pas.<br>Un vrai déclic.</p></div>
   </aside>
   <div class="workspace">
-    <header class="topbar"><span>Le laboratoire des idées <span class="desktop-only">/ <strong>Les couples acide-base</strong></span></span><div class="topbar-actions"><button type="button" id="theme-toggle" class="theme-toggle" aria-label="Activer le thème sombre" aria-pressed="false"><span class="theme-icon" aria-hidden="true">☾</span><span class="theme-label">Mode sombre</span></button><span class="save-indicator" id="save-status">Progression sur cet appareil</span></div></header>
+    <header class="topbar"><span>Le laboratoire des idées <span class="desktop-only">/ <strong>Les couples acide-base</strong></span></span><div class="topbar-actions"><span class="save-indicator" id="save-status">Progression sur cet appareil</span><button type="button" id="theme-toggle" class="theme-toggle" aria-label="Activer le thème sombre" aria-pressed="false"><span class="theme-icon" aria-hidden="true">☾</span><span class="theme-label">Mode sombre</span></button><button type="button" id="install-app" class="install-button"><span aria-hidden="true">↓</span> Installer l’application</button></div></header>
     <main id="main" tabindex="-1"></main>
     <footer class="footer"><span>Déclic · Comprendre avant de retenir.</span><button id="open-memo" class="text-button">L’essentiel à retenir ↗</button></footer>
   </div>
+  <dialog id="install-dialog" aria-labelledby="install-title"><button type="button" class="dialog-close" id="close-install" aria-label="Fermer l’installation">×</button><span class="eyebrow">DÉCLIC À PORTÉE DE MAIN</span><h2 id="install-title">Ton labo, même sans réseau.</h2><p>Une icône sur ton PC ou ta tablette, pour retrouver les trois modules, leurs animations et les exercices hors connexion.</p><p id="install-message">Si ton navigateur propose l’installation, utilise le bouton ci-dessous. Sinon, suis le guide correspondant à ton appareil.</p><button type="button" class="button" id="confirm-install" hidden>Installer sur cet appareil</button><p id="offline-status" class="install-status" role="status" aria-live="polite">Préparation hors connexion…</p><button type="button" class="button secondary" id="update-app" hidden>Mettre Déclic à jour</button><details open><summary>PC · Chrome ou Edge</summary><p>Ouvre la version en ligne. Clique sur l’icône d’installation dans la barre d’adresse, ou sur « Installer » dans le menu du navigateur. Confirme ensuite l’installation.</p></details><details><summary>Tablette Android · Chrome</summary><p>Ouvre la version en ligne dans Chrome. Dans le menu ⋮, choisis « Ajouter à l’écran d’accueil » ou « Installer l’application », puis confirme.</p></details><details><summary>iPad · Safari</summary><p>Ouvre la version en ligne dans Safari. Touche Partager, puis « Sur l’écran d’accueil ». Active « Ouvrir comme app web » si cette option apparaît, puis touche Ajouter.</p></details><p class="muted">Attends le message « prêts hors connexion » avant de couper Internet. La progression est conservée sur cet appareil ; elle n’est pas synchronisée avec les autres appareils. Le navigateur peut supprimer les données si tu effaces son stockage.</p></dialog>
   <dialog id="memo-dialog" aria-labelledby="memo-title"><button class="dialog-close" id="close-memo" aria-label="Fermer le mémo">×</button><div id="memo-content"><span class="eyebrow">TA FICHE MÉMO</span><h2 id="memo-title">Le petit essentiel.</h2><div class="memo-rule"><strong>Un acide cède H⁺.</strong><p>Sa base conjuguée a un H de moins et une charge algébrique diminuée de 1.</p></div><div class="memo-rule"><strong>Une base capte H⁺.</strong><p>Son acide conjugué a un H de plus et une charge algébrique augmentée de 1.</p></div><div class="formula memo-formula">Acide / Base <span>exemple : NH₄⁺ / NH₃</span></div><p>Une demi-équation s’écrit : <strong>NH₄⁺ = NH₃ + H⁺</strong>. Les atomes et la charge totale sont conservés. Cette écriture décrit un couple ; lors d’une réaction, H⁺ est transféré à une autre espèce.</p><p class="muted">L’eau peut être base dans H₃O⁺ / H₂O et acide dans H₂O / HO⁻ : son rôle dépend du couple.</p></div></dialog>
   <noscript><p class="noscript">Active JavaScript pour suivre le parcours et répondre aux exercices.</p></noscript>
   <script>

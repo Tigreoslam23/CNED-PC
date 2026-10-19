@@ -3,6 +3,9 @@ import { STORAGE_KEY, skills, isCorrect, makeExam, readState, summarize } from '
 import { reactionPanel, mountReaction } from './reaction.js';
 import { moduleTwoLessons, moduleTwoQuestions, moduleTwoSkills, moduleTwoMemo } from './module-two-content.js';
 import { moduleTwoHero, moduleTwoReactionPanel, mountModuleTwoReaction } from './module-two-reaction.js';
+import { moduleThreeLessons, moduleThreeQuestions, moduleThreeSkills, moduleThreeMemo } from './module-three-content.js';
+import { moduleThreeHero, moduleThreePanel, mountModuleThree } from './module-three-models.js';
+import { mountInstall } from './install.js';
 
 const $ = id => document.getElementById(id);
 const esc = value => String(value).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -11,8 +14,12 @@ let storage;
 try { storage = window.localStorage; } catch { storage = null; }
 const moduleCatalog = [
   { id: '1', title: 'Les couples acide-base', heading: 'Les couples<br><em>acide-base.</em>', intro: 'Un ion H⁺ change de partenaire. Et tout s’éclaire.<br>Observe, essaie, puis construis ton raisonnement.', lessons, questions, skills, storageKey: STORAGE_KEY, time: '15 min', missions: 'Missions 1 et 2 · introduction aux missions 3 et 4' },
-  { id: '2', title: 'Réactions et espèces amphotères', heading: 'Une réaction.<br><em>Deux partenaires.</em>', intro: 'Du vinaigre, du bicarbonate… et des bulles.<br>Suis le transfert, construis le bilan, puis change de partenaire.', lessons: moduleTwoLessons, questions: moduleTwoQuestions, skills: moduleTwoSkills, storageKey: 'declic-reactions-amphoteres-v1', time: '20 min', missions: 'Missions 3 et 4 · vinaigre, bicarbonate et amphotères' }
+  { id: '2', title: 'Réactions et espèces amphotères', heading: 'Une réaction.<br><em>Deux partenaires.</em>', intro: 'Du vinaigre, du bicarbonate… et des bulles.<br>Suis le transfert, construis le bilan, puis change de partenaire.', lessons: moduleTwoLessons, questions: moduleTwoQuestions, skills: moduleTwoSkills, storageKey: 'declic-reactions-amphoteres-v1', time: '20 min', missions: 'Missions 3 et 4 · vinaigre, bicarbonate et amphotères' },
+  { id: '3', title: 'Lewis et capture de H⁺', heading: 'Des doublets.<br><em>De nouvelles liaisons.</em>', intro: 'Deux électrons disponibles, une liaison qui se forme.<br>Explore Lewis, puis explique le rôle d’une base.', lessons: moduleThreeLessons, questions: moduleThreeQuestions, skills: moduleThreeSkills, storageKey: 'declic-lewis-protons-v1', time: '20 min', missions: 'Missions 5 et 6 · Lewis, doublets et capture de H⁺' }
 ];
+Object.assign(moduleCatalog[0], { shortTitle:'Couples acide-base', hero:pairFigure, panel:()=>reactionPanel(), mount:session=>mountReaction($('reaction-lab'),session), practiceIntro:'Retrouve les espèces conjuguées, écris les couples et vérifie les charges. Chaque réponse t’aide à comprendre.' });
+Object.assign(moduleCatalog[1], { shortTitle:'Réactions et amphotères', hero:moduleTwoHero, panel:moduleTwoReactionPanel, mount:session=>mountModuleTwoReaction($('module-two-lab'),session), memo:moduleTwoMemo, practiceIntro:'Identifie les partenaires, construis le bilan et explique les bulles. Puis retrouve les deux rôles des espèces amphotères.' });
+Object.assign(moduleCatalog[2], { shortTitle:'Lewis et doublets', hero:moduleThreeHero, panel:moduleThreePanel, mount:session=>mountModuleThree($('lewis-lab'),session), memo:moduleThreeMemo, practiceIntro:'Lis les doublets, vérifie duet et octet, puis explique la capture de H⁺ et les familles acide-base.' });
 let storedModule = '1';
 try { storedModule = storage?.getItem('declic-active-module') || '1'; } catch {}
 let activeModule = moduleCatalog.find(module => module.id === storedModule) || moduleCatalog[0];
@@ -23,7 +30,7 @@ let view = 'apprendre';
 let practice = null;
 let showingExamResult = false;
 let activity = freshActivity();
-const reactionSessions = { '1': { progress: 0 }, '2': { progress: 0, ampho: 'base', assembled: false } };
+const reactionSessions = { '1': { progress: 0 }, '2': { progress: 0, ampho: 'base', assembled: false }, '3': { progress:0 } };
 let disposeReaction = () => {};
 function freshActivity() { return { selected: null, hints: 0, attempts: 0, done: false, firstCorrect: null, feedback: null, recorded: false }; }
 function save() {
@@ -46,7 +53,7 @@ function questionUI(q, exam = false) {
     let status = selected === i ? ' selected' : '';
     if (activity.done && !exam) { if (i === q.correct) status += ' correct'; else if (i === selected) status += ' wrong'; }
     return `<button type="button" class="option${status}" data-choice="${i}" aria-pressed="${selected === i}" ${activity.done ? 'disabled' : ''}><span class="option-letter" aria-hidden="true">${'ABC'[i]}</span><span>${option}</span></button>`;
-  }).join('')}</div>` : `<label class="formula-label" for="formula-answer">Ta formule</label><input class="formula-input" id="formula-answer" name="answer" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Écris la formule ici…" aria-describedby="input-help" value="${esc(selected ?? '')}" ${activity.done ? 'disabled' : ''}><p class="input-help" id="input-help">Au clavier : NH4+, CH3COO-, CO3^2-. Les indices et charges Unicode sont aussi acceptés. Respecte les majuscules.</p>`;
+  }).join('')}</div>` : `<label class="formula-label" for="formula-answer">Ta formule</label><input class="formula-input" id="formula-answer" name="answer" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Écris la formule ici…" aria-describedby="input-help" value="${esc(selected ?? '')}" ${activity.done ? 'disabled' : ''}><p class="input-help" id="input-help">Au clavier : Na+, SO4^2-. Les indices et charges Unicode sont aussi acceptés. Respecte les majuscules.</p>`;
   return `<form id="answer-form"><h3 class="question-title">${q.prompt}</h3>${answerArea}
     ${!exam && activity.hints ? `<div class="hint" role="status"><strong>Indice ${activity.hints} / ${q.hints.length}</strong><br>${q.hints[activity.hints - 1]}</div>` : ''}
     ${activity.feedback && !exam ? `<div class="feedback ${activity.feedback.correct ? '' : 'needs-work'}" role="status" aria-live="polite"><strong>${activity.feedback.correct ? 'Bien vu. Tu as compris le lien !' : 'On reprend ce point ensemble.'}</strong><p>${activity.feedback.text}</p>${activity.feedback.correct ? '' : `<p>${q.explanation}</p>`}</div>` : ''}
@@ -56,13 +63,13 @@ function questionUI(q, exam = false) {
 }
 function learnPage() {
   const lesson = activeLessons[state.lesson];
-  return `${pageTop('Apprentissage guidé')}<section class="hero"><div class="hero-copy"><span class="eyebrow">COMPRENDRE, UN DÉCLIC À LA FOIS.</span><h1>${activeModule.heading}</h1><p class="intro-line">${activeModule.intro}</p><div class="hero-meta"><span>◷ &nbsp; Environ ${activeModule.time}</span><span>4 étapes à ton rythme</span><span>Terminale</span></div></div>${activeModule.id === '2' ? moduleTwoHero() : pairFigure(lesson)}</section>
-  ${activeModule.id === '2' ? moduleTwoReactionPanel(state.lesson) : reactionPanel()}
+  return `${pageTop('Apprentissage guidé')}<section class="hero"><div class="hero-copy"><span class="eyebrow">COMPRENDRE, UN DÉCLIC À LA FOIS.</span><h1>${activeModule.heading}</h1><p class="intro-line">${activeModule.intro}</p><div class="hero-meta"><span>◷ &nbsp; Environ ${activeModule.time}</span><span>4 étapes à ton rythme</span><span>Terminale</span></div></div>${activeModule.hero(lesson)}</section>
+  ${activeModule.panel(state.lesson)}
   <div class="learning-grid"><section class="journey" aria-label="Étapes du parcours"><h2 class="journey-heading">Ton chemin vers le déclic</h2><p class="journey-subtitle">Une idée, un exemple, à toi de jouer.</p><div class="journey-list">${activeLessons.map((l, i) => `<button class="lesson-link ${i === state.lesson ? 'current' : ''} ${state.completed.includes(i) ? 'complete' : ''}" data-lesson="${i}" ${i === state.lesson ? 'aria-current="step"' : ''}><span class="step-number">${state.completed.includes(i) ? '✓' : `0${i + 1}`}</span><span><strong>${l.title}</strong><small>${l.short} · ${l.duration}</small></span></button>`).join('')}</div><div class="journey-progress"><div><span>Étapes validées</span><strong>${state.completed.length} / 4</strong></div>${progress(state.completed.length, 4, 'Étapes validées')}</div></section>
     <section class="lesson-card"><span class="eyebrow">ÉTAPE 0${state.lesson + 1} &nbsp; · &nbsp; ${lesson.tag}</span><h2>${lesson.title}</h2><p class="lesson-description">${lesson.intro}</p><div class="rule"><strong>${lesson.rule}</strong></div><p class="lesson-detail">${lesson.detail}</p><div class="note"><span aria-hidden="true">↳</span><div>${lesson.note}</div></div><div class="exercise-divider"></div><div class="exercise-label"><span>À TOI DE JOUER</span><span class="muted">Tu peux demander un indice.</span></div>${questionUI(activeQuestion())}</section></div>`;
 }
 function startPage(exam) {
-  return `${pageTop(exam ? 'En autonomie' : 'Avec un coup de pouce')}<section class="section-intro"><span class="eyebrow">${exam ? 'FAIS LE POINT, SANS PRESSION.' : 'C’EST EN ESSAYANT QUE ÇA SE FIXE.'}</span><h1>${exam ? 'Prêt pour le déclic ?' : 'À toi de faire les liens.'}</h1><p class="intro-line">${exam ? 'Huit questions pour voir ce que tu sais faire seul. Prends ton temps : il n’y a pas de chronomètre.' : activeModule.id === '2' ? 'Identifie les partenaires, construis le bilan et explique les bulles. Puis retrouve les deux rôles des espèces amphotères.' : 'Retrouve les espèces conjuguées, écris les couples et vérifie les charges. Chaque réponse t’aide à comprendre.'}</p></section><div class="start-grid"><section class="start-panel"><h2>${exam ? 'Ton test de compréhension' : 'Un entraînement accompagné'}</h2><ul class="checklist"><li>8 questions, réparties sur les 4 compétences</li><li>${exam ? 'Sans indice ni correction pendant le test' : 'Des choix et des formules à saisir'}</li><li>${exam ? 'Toutes les réponses expliquées à la fin' : 'Deux indices disponibles pour chaque question'}</li><li>${exam ? 'Tu peux quitter cette page et reprendre plus tard' : 'Une correction pour comprendre chaque erreur'}</li></ul><button class="button" data-action="${exam ? 'start-exam' : 'start-practice'}">${exam ? 'Commencer le test' : 'Commencer l’entraînement'} <span aria-hidden="true">→</span></button></section><aside class="quiet-card"><div class="big-symbol" aria-hidden="true">${exam ? 'H⁺' : '↔'}</div><h3>${exam ? 'Pas besoin de tout réussir.' : 'L’erreur fait partie du chemin.'}</h3><p>${exam ? 'Le bilan sert à choisir ce qu’il faut revoir. Un résultat est un repère, pas une étiquette.' : 'Essaie d’abord avec ce que tu sais. Puis utilise un indice si tu en as besoin : l’important est de comprendre pourquoi.'}</p></aside></div>`;
+  return `${pageTop(exam ? 'En autonomie' : 'Avec un coup de pouce')}<section class="section-intro"><span class="eyebrow">${exam ? 'FAIS LE POINT, SANS PRESSION.' : 'C’EST EN ESSAYANT QUE ÇA SE FIXE.'}</span><h1>${exam ? 'Prêt pour le déclic ?' : 'À toi de faire les liens.'}</h1><p class="intro-line">${exam ? 'Huit questions pour voir ce que tu sais faire seul. Prends ton temps : il n’y a pas de chronomètre.' : activeModule.practiceIntro}</p></section><div class="start-grid"><section class="start-panel"><h2>${exam ? 'Ton test de compréhension' : 'Un entraînement accompagné'}</h2><ul class="checklist"><li>8 questions, réparties sur les 4 compétences</li><li>${exam ? 'Sans indice ni correction pendant le test' : 'Des choix et des formules à saisir'}</li><li>${exam ? 'Toutes les réponses expliquées à la fin' : 'Deux indices disponibles pour chaque question'}</li><li>${exam ? 'Tu peux quitter cette page et reprendre plus tard' : 'Une correction pour comprendre chaque erreur'}</li></ul><button class="button" data-action="${exam ? 'start-exam' : 'start-practice'}">${exam ? 'Commencer le test' : 'Commencer l’entraînement'} <span aria-hidden="true">→</span></button></section><aside class="quiet-card"><div class="big-symbol" aria-hidden="true">${exam ? 'H⁺' : '↔'}</div><h3>${exam ? 'Pas besoin de tout réussir.' : 'L’erreur fait partie du chemin.'}</h3><p>${exam ? 'Le bilan sert à choisir ce qu’il faut revoir. Un résultat est un repère, pas une étiquette.' : 'Essaie d’abord avec ce que tu sais. Puis utilise un indice si tu en as besoin : l’important est de comprendre pourquoi.'}</p></aside></div>`;
 }
 function sessionPage(exam) {
   const session = exam ? state.exam : practice;
@@ -94,7 +101,7 @@ function render(focus = false) {
   $('open-memo').hidden = view === 'tester' && state.exam !== null && !showingExamResult;
   document.querySelectorAll('#nav a').forEach(a => { const active = a.dataset.view === view; a.classList.toggle('active', active); if (active) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
   $('main').innerHTML = view === 'apprendre' ? learnPage() : view === 'bilan' ? dashboard() : view === 'entrainer' ? (practice ? practice.done ? resultPage(false) : sessionPage(false) : startPage(false)) : showingExamResult && state.lastExam ? resultPage(true) : state.exam ? sessionPage(true) : startPage(true);
-  disposeReaction = activeModule.id === '2' ? mountModuleTwoReaction($('module-two-lab'), reactionSessions['2']) : mountReaction($('reaction-lab'), reactionSessions['1']);
+  disposeReaction = activeModule.mount(reactionSessions[activeModule.id]);
   if (focus) { $('main').focus({ preventScroll: true }); window.scrollTo({ top: 0, behavior: 'instant' }); }
 }
 function route() {
@@ -182,10 +189,10 @@ $('close-memo').addEventListener('click', () => $('memo-dialog').close());
 $('memo-dialog').addEventListener('click', event => { if (event.target === $('memo-dialog')) { const r = event.target.getBoundingClientRect(); if (event.clientX < r.left || event.clientX > r.right || event.clientY < r.top || event.clientY > r.bottom) event.target.close(); } });
 function syncModuleChrome() {
   $('module-select').value = activeModule.id;
-  document.querySelector('.module-pill').textContent = `Module ${activeModule.id} · ${activeModule.id === '1' ? 'Couples acide-base' : 'Réactions et amphotères'}`;
+  document.querySelector('.module-pill').textContent = `Module ${activeModule.id} · ${activeModule.shortTitle}`;
   document.querySelector('.desktop-only strong').textContent = activeModule.title;
   document.title = `Déclic — Module ${activeModule.id} · ${activeModule.title}`;
-  $('memo-content').innerHTML = activeModule.id === '2' ? moduleTwoMemo : moduleOneMemo;
+  $('memo-content').innerHTML = activeModule.memo || moduleOneMemo;
 }
 function switchModule(id) {
   const nextModule = moduleCatalog.find(module => module.id === id);
@@ -200,4 +207,5 @@ function switchModule(id) {
 }
 $('module-select').addEventListener('change', event => switchModule(event.target.value));
 window.addEventListener('hashchange', route);
+mountInstall();
 route();

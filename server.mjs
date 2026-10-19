@@ -3,8 +3,8 @@ import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 const root = path.dirname(fileURLToPath(import.meta.url));
-const types = { '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.svg': 'image/svg+xml' };
-const allowed = new Set(['index.html', 'styles.css', 'app.js', 'core.js', 'content.js', 'reaction.js', 'module-two-content.js', 'module-two-reaction.js', 'icon.svg']);
+const types = { '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.svg': 'image/svg+xml', '.png':'image/png', '.webmanifest':'application/manifest+json' };
+const allowed = new Set(['index.html', 'styles.css', 'app.js', 'core.js', 'content.js', 'reaction.js', 'module-two-content.js', 'module-two-reaction.js', 'module-three-content.js', 'module-three-models.js', 'install.js', 'sw.js', 'manifest.webmanifest', 'icon.svg', 'icon-192.png', 'icon-512.png', 'icon-maskable.png']);
 const server = http.createServer(async (req, res) => {
   const filename = new URL(req.url, 'http://localhost').pathname.slice(1) || 'index.html';
   if (!allowed.has(filename)) { res.writeHead(404); res.end('Not found'); return; }
