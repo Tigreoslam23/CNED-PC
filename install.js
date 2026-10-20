@@ -55,7 +55,7 @@ export function mountInstall(){
       function watch(worker){if(!worker)return;worker.addEventListener('statechange',()=>{if(worker.state==='installed')showUpdate();if(worker.state==='redundant'){status.textContent='Préparation incomplète · reconnecte-toi puis recharge';status.classList.add('warning');}});}
       watch(reg.installing);reg.addEventListener('updatefound',()=>watch(reg.installing));
       return navigator.serviceWorker.ready;
-    }).then(()=>{status.textContent='✓ Les 5 modules sont prêts hors connexion';status.classList.remove('warning');}).catch(()=>{status.textContent='Préparation hors connexion échouée · recharge en ligne';status.classList.add('warning');});
+    }).then(()=>{status.textContent='✓ Les 6 modules sont prêts hors connexion';status.classList.remove('warning');}).catch(()=>{status.textContent='Préparation hors connexion échouée · recharge en ligne';status.classList.add('warning');});
   }
   sync();
 }
