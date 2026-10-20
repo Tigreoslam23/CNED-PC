@@ -16,14 +16,14 @@
   <link rel="manifest" href="./manifest.webmanifest">
   <link rel="apple-touch-icon" href="./icon-192.png">
   <meta name="apple-mobile-web-app-title" content="Déclic">
-  <link rel="stylesheet" href="./styles.css?v=53e757312a47">
+  <link rel="stylesheet" href="./styles.css?v=2e385fe52824">
 </head>
 <body>
   <a class="skip" href="#main">Aller au contenu</a>
   <aside class="sidebar">
     <a class="brand" href="#apprendre" aria-label="Déclic, accueil"><span class="brand-icon" aria-hidden="true">d.</span><span>Déclic<small>PHYSIQUE · CHIMIE</small></span></a>
     <div class="course-label">TON ESPACE D’APPRENTISSAGE</div>
-    <label class="module-picker" for="module-select">Ton module<select id="module-select"><option value="1">1 · Couples acide-base</option><option value="2">2 · Réactions et amphotères</option><option value="3">3 · Lewis et doublets</option></select></label>
+    <label class="module-picker" for="module-select">Ton module<select id="module-select"><option value="1">1 · Couples acide-base</option><option value="2">2 · Réactions et amphotères</option><option value="3">3 · Lewis et doublets</option><option value="4">4 · pH et concentration</option></select></label>
     <nav aria-label="Parcours principal" id="nav">
       <a href="#apprendre" data-view="apprendre"><span aria-hidden="true">◫</span>Apprendre<span class="nav-dot"></span></a>
       <a href="#entrainer" data-view="entrainer"><span aria-hidden="true">✧</span>S’entraîner</a>
@@ -44,6 +44,6 @@
   <script>
   (()=>{const button=document.getElementById("theme-toggle");const root=document.documentElement;const meta=document.querySelector('meta[name="theme-color"]');function sync(){const dark=root.dataset.theme==="dark";button.setAttribute("aria-pressed",String(dark));button.setAttribute("aria-label",dark?"Activer le thème clair":"Activer le thème sombre");button.querySelector(".theme-icon").textContent=dark?"☀":"☾";button.querySelector(".theme-label").textContent=dark?"Mode clair":"Mode sombre";meta.content=dark?"#101827":"#163b3b";}button.addEventListener("click",()=>{const dark=root.dataset.theme!=="dark";root.dataset.theme=dark?"dark":"light";try{localStorage.setItem("declic-theme",dark?"dark":"light")}catch(e){}sync()});sync()})();
   </script>
-  <script type="module" src="./app.js?v=53e757312a47"></script>
+  <script type="module" src="./app.js?v=2e385fe52824"></script>
 </body>
 </html>
