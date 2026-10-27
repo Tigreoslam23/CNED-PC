@@ -21,6 +21,12 @@ Une application en français pour comprendre les réactions acide-base et les me
 
 Chaque module possède sa propre banque de 24 questions, un entraînement et un test de huit questions. Les étapes validées, les réponses et les tests en cours sont enregistrés séparément. Le module 1 conserve sa clé de sauvegarde d’origine ; ajouter les modules suivants n’efface pas les acquis précédents. Le bouton d’effacement concerne uniquement le module sélectionné. Le dernier module utilisé est mémorisé.
 
+## Calculs et présentation
+
+Les quotients mathématiques du cours, des ateliers, des indices et des corrections sont composés avec une barre horizontale. La notation chimique des couples acide-base est conservée. Les exemples numériques résolus et les valeurs initiales des ateliers des modules 4 à 8 sont distincts de ceux des exercices guidés correspondants.
+
+Un bouton avec une icône de calculatrice apparaît près du bouton de validation, dans le cours, les entraînements et les tests. La calculatrice fonctionne sans réseau : parenthèses, puissances, logarithmes, racines, trigonométrie en degrés/radians, fonctions inverses, constantes, pourcentages, factorielle et mémoire Ans. Elle propose une écriture décimale ou scientifique et un aperçu des divisions en fractions. Le résultat peut être reporté dans une réponse numérique sans validation automatique ni modification du suivi pédagogique. Le calcul utilise un analyseur à opérations autorisées, sans exécution de code saisi.
+
 ## Utiliser l’application dans Chrome
 
 Télécharger **Declic-acide-base.html**, puis ouvrir ce fichier avec Google Chrome. Cette version autonome contient toute l’application et fonctionne sans connexion, sans installation et sans clé d’API.
