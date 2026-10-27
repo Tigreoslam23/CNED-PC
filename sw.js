@@ -1,6 +1,6 @@
 // Généré par build-standalone.mjs ; régénérer après chaque modification.
 const PREFIX='declic-'+encodeURIComponent(self.registration.scope)+'-';
-const CACHE=PREFIX+"a55351d71853185a";
+const CACHE=PREFIX+"6f9fa9cb13d4b06a";
 const ASSETS=["./","./index.html","./styles.css","./core.js","./content.js","./reaction.js","./module-two-content.js","./module-two-reaction.js","./module-three-content.js","./module-three-models.js","./module-four-content.js","./module-four-lab.js","./module-five-content.js","./module-five-lab.js","./module-six-content.js","./module-six-lab.js","./module-seven-content.js","./module-seven-lab.js","./module-eight-content.js","./module-eight-lab.js","./math-format.js","./calculator-engine.js","./calculator.js","./install.js","./app.js","./manifest.webmanifest","./icon.svg","./icon-192.png","./icon-512.png","./icon-maskable.png"];
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS.map(asset=>new Request(new URL(asset,self.registration.scope),{cache:'reload'}))))));
 self.addEventListener('activate',event=>event.waitUntil((async()=>{for(const key of await caches.keys())if(key.startsWith(PREFIX)&&key!==CACHE)await caches.delete(key);await self.clients.claim();})()));
