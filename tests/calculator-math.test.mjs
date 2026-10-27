@@ -2,6 +2,7 @@ import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {parseCalculator,evaluateCalculator,calculatorScientific,calculatorMathHTML,calculatorAnswer} from '../calculator-engine.js';
 import {formatFractionHTML} from '../math-format.js';
+import {parseNumericAnswer,isCorrect} from '../core.js';
 const calculatorClose=(actual,expected)=>assert.ok(Math.abs(actual-expected)<Math.max(1e-12,Math.abs(expected)*1e-12),`${actual} ≈ ${expected}`);
 test('calculator respects arithmetic priority, grouping, unary signs and right-associative powers',()=>{
   for(const [source,result] of [['2+3*4',14],['(2+3)*4',20],['8/2/2',2],['2^3^2',512],['-2^2',-4],['(-2)^2',4],['2^-3',.125],['1-(2-3)',2],['2(3+4)',14]])calculatorClose(evaluateCalculator(source),result);
@@ -35,4 +36,12 @@ test('chemical couples, progress counters and HTML attributes keep their own not
   assert.equal((formatFractionHTML('Indice 1 / 2 : I / I₀').match(/class="math-frac"/g)||[]).length,1);
 });
 
-test('answer transfer removes binary rounding artifacts and retains usable scientific notation',()=>{assert.equal(calculatorAnswer(.1*12/10),'0,12');assert.equal(calculatorAnswer(1e-20),'1e-20');for(const value of [1/3,-.0000123456789,Math.PI,1e100])calculatorClose(Number(calculatorAnswer(value).replace(',','.')),value);assert.equal(calculatorAnswer(Infinity),'');});
+test('answer transfer removes binary rounding artifacts without losing numeric precision',()=>{assert.equal(calculatorAnswer(.1*12/10),'0,12');assert.equal(calculatorAnswer(1e-20),'0,00000000000000000001');for(const value of [1/3,-.0000123456789,Math.PI,1e100])calculatorClose(Number(calculatorAnswer(value).replace(',','.')),value);assert.equal(calculatorAnswer(Infinity),'');});
+
+test('transfer follows the selected decimal or scientific mode and remains gradable',()=>{
+  assert.equal(calculatorAnswer(.00403,'scientific'),'4,03 × 10⁻³');assert.equal(calculatorAnswer(.00403,'decimal'),'0,00403');assert.equal(calculatorAnswer(1200,'scientific'),'1,2 × 10³');assert.equal(calculatorAnswer(-.12,'scientific'),'-1,2 × 10⁻¹');assert.equal(calculatorAnswer(0,'scientific'),'0 × 10⁰');
+  for(const value of [.00403,-.12,0,1e-20,1e100,Number.MAX_VALUE,Number.MIN_VALUE])for(const mode of ['decimal','scientific']){const answer=calculatorAnswer(value,mode),parsed=parseNumericAnswer(answer);assert.ok(Number.isFinite(parsed),answer);assert.ok(isCorrect({type:'number',value,relativeTolerance:1e-13},answer),answer);if(mode==='scientific')assert.match(answer,/ × 10[⁻⁰¹²³⁴⁵⁶⁷⁸⁹]+$/);else assert.ok(!/[eE×]/.test(answer));}
+});
+test('scientific display normalizes a mantissa rounded across a power of ten',()=>{
+  assert.deepEqual(calculatorScientific(9.99999999999),{mantissa:'1',exponent:1});assert.deepEqual(calculatorScientific(-.00999999999999),{mantissa:'-1',exponent:-2});
+});

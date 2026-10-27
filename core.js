@@ -16,7 +16,7 @@ export function parseNumericAnswer(input) {
   let text = String(input ?? '').trim().replace(/[⁰¹²³⁴⁵⁶⁷⁸⁹⁺⁻]+/g, part => '^' + part.normalize('NFKC')).replace(/[−–]/g, '-').replace(/\s/g, '').replace(/,/g, '.').replace(/[×·]/g, '*').replace(/[()]/g, '');
   if (/^[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:e[+-]?\d+)?$/i.test(text)) return Number(text);
   const power = text.match(/^(?:([+-]?(?:\d+(?:\.\d*)?|\.\d+))\*)?10\^([+-]?\d+)$/);
-  return power ? Number(power[1] ?? 1) * 10 ** Number(power[2]) : NaN;
+  return power ? Number(`${power[1] ?? 1}e${power[2]}`) : NaN;
 }
 export function shuffle(items, random = Math.random) {
   const copy = [...items];
