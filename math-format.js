@@ -4,7 +4,7 @@ export function formatFractionHTML(source){
   const pool=[];const save=html=>'\uE000'+(pool.push(html)-1)+'\uE001';
   const decode=text=>text.replace(/\uE000(\d+)\uE001/g,(_,i)=>decode(pool[Number(i)]));
   let html=String(source).replace(/<(sub|sup)\b[^>]*>[\s\S]*?<\/\1>/gi,save);
-  const marker=String.raw`\uE000\d+\uE001`,number=String.raw`[−-]?(?:\d{1,3}(?:[ \u00A0\u202F]\d{3})+|\d+)(?:[.,]\d+)?(?:e[+-]?\d+)?`,symbol=String.raw`(?:n\([^()<>]+\)|Kcell|PV|RT|pH|c°|[nmMVCBAPRTGIUabcdkℓεσρ])`,decoration=String.raw`(?:${marker}|[₀-₉ₐₑᵦ⁰¹²³⁴⁵⁶⁷⁸⁹⁻⁺°])`,simple=String.raw`(?:(?:${number}|${symbol})(?:${decoration})*|${marker}|\[[^<>\[\]]+\](?:${decoration})*)`,atom=String.raw`(?:\([^()<>]+\)|(?:${simple})+)`;
+  const marker=String.raw`\uE000\d+\uE001`,number=String.raw`[−-]?(?:\d{1,3}(?:[ \u00A0\u202F]\d{3})+|\d+)(?:[.,]\d+)?(?:e[+-]?\d+)?`,symbol=String.raw`(?:[nu]\([^()<>]+\)|dpH|dV|Kcell|PV|RT|pH|c°|[nmMVCBAPRTGIUabcdkℓεσρ])`,decoration=String.raw`(?:${marker}|[₀-₉ₐₑᵦ⁰¹²³⁴⁵⁶⁷⁸⁹⁻⁺°])`,simple=String.raw`(?:(?:${number}|${symbol})(?:${decoration})*|${marker}|\[[^<>\[\]]+\](?:${decoration})*)`,atom=String.raw`(?:\([^()<>]+\)|(?:${simple})+)`;
   const quotient=new RegExp(String.raw`(?<![\p{L}\p{N}_/>])(${atom})\s*\/\s*(${atom})(?![\p{L}\p{N}_])`,'gu');
   const unwrap=value=>value.startsWith('(')&&value.endsWith(')')?value.slice(1,-1):value;
   html=html.split(/(<[^>]*>)/g).map(part=>{if(part.startsWith('<'))return part;let out=part;for(let pass=0;pass<8;pass++){const previous=out;out=out.replace(quotient,(match,n,d,offset,text)=>/(?:Étape|ÉTAPE|Indice|Question)\s*$/i.test(text.slice(0,offset))?match:save(mathFraction(decode(unwrap(n)),decode(unwrap(d)))));if(out===previous)break;}return out;}).join('');
