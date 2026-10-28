@@ -16,7 +16,7 @@
   <link rel="manifest" href="./manifest.webmanifest">
   <link rel="apple-touch-icon" href="./icon-192.png">
   <meta name="apple-mobile-web-app-title" content="Déclic">
-  <link rel="stylesheet" href="./styles.css?v=dc1294b368e6">
+  <link rel="stylesheet" href="./styles.css?v=e136753b4e37">
 </head>
 <body>
   <a class="skip" href="#main">Aller au contenu</a>
@@ -45,6 +45,6 @@
   <script>
   (()=>{const button=document.getElementById("theme-toggle");const root=document.documentElement;const meta=document.querySelector('meta[name="theme-color"]');function sync(){const dark=root.dataset.theme==="dark";button.setAttribute("aria-pressed",String(dark));button.setAttribute("aria-label",dark?"Activer le thème clair":"Activer le thème sombre");button.querySelector(".theme-icon").textContent=dark?"☀":"☾";button.querySelector(".theme-label").textContent=dark?"Mode clair":"Mode sombre";meta.content=dark?"#101827":"#163b3b";}button.addEventListener("click",()=>{const dark=root.dataset.theme!=="dark";root.dataset.theme=dark?"dark":"light";try{localStorage.setItem("declic-theme",dark?"dark":"light")}catch(e){}sync()});sync()})();
   </script>
-  <script type="module" src="./app.js?v=dc1294b368e6"></script>
+  <script type="module" src="./app.js?v=e136753b4e37"></script>
 </body>
 </html>
