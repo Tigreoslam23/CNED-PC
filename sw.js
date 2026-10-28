@@ -1,6 +1,6 @@
 // Généré par build-standalone.mjs ; régénérer après chaque modification.
 const PREFIX='declic-'+encodeURIComponent(self.registration.scope)+'-';
-const CACHE=PREFIX+"079fe0810a98a887";
+const CACHE=PREFIX+"56f3cbbfa3612ee8";
 const ASSETS=["./","./index.html","./styles.css","./core.js","./content.js","./reaction.js","./module-two-content.js","./module-two-reaction.js","./module-three-content.js","./module-three-models.js","./module-four-content.js","./module-four-lab.js","./module-five-content.js","./module-five-lab.js","./module-six-content.js","./module-six-lab.js","./module-seven-content.js","./module-seven-lab.js","./module-eight-content.js","./module-eight-lab.js","./module-nine-content.js","./module-nine-lab.js","./math-format.js","./calculator-engine.js","./calculator.js","./chapter-content.js","./chapter-bac-content.js","./chapter-core.js","./chapter-bilan.js","./install.js","./app.js","./manifest.webmanifest","./icon.svg","./icon-192.png","./icon-512.png","./icon-maskable.png"];
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS.map(asset=>new Request(new URL(asset,self.registration.scope),{cache:'reload'}))))));
 self.addEventListener('activate',event=>event.waitUntil((async()=>{for(const key of await caches.keys())if(key.startsWith(PREFIX)&&key!==CACHE)await caches.delete(key);await self.clients.claim();})()));
