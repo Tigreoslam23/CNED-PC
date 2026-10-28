@@ -2,7 +2,7 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 let html = await readFile(new URL('./index.html', import.meta.url), 'utf8');
 const css = await readFile(new URL('./styles.css', import.meta.url), 'utf8');
-const scriptNames=['core.js','content.js','reaction.js','module-two-content.js','module-two-reaction.js','module-three-content.js','module-three-models.js','module-four-content.js','module-four-lab.js','module-five-content.js','module-five-lab.js','module-six-content.js','module-six-lab.js','module-seven-content.js','module-seven-lab.js','module-eight-content.js','module-eight-lab.js','module-nine-content.js','module-nine-lab.js','math-format.js','calculator-engine.js','calculator.js','install.js','app.js'];
+const scriptNames=['core.js','content.js','reaction.js','module-two-content.js','module-two-reaction.js','module-three-content.js','module-three-models.js','module-four-content.js','module-four-lab.js','module-five-content.js','module-five-lab.js','module-six-content.js','module-six-lab.js','module-seven-content.js','module-seven-lab.js','module-eight-content.js','module-eight-lab.js','module-nine-content.js','module-nine-lab.js','math-format.js','calculator-engine.js','calculator.js','chapter-content.js','chapter-bac-content.js','chapter-core.js','chapter-bilan.js','install.js','app.js'];
 const scripts = await Promise.all(scriptNames.map(name => readFile(new URL(name,import.meta.url), 'utf8')));
 const entryVersion=createHash('sha256').update(css+scripts.join('\n')).digest('hex').slice(0,12);
 html=html.replace(/href="\.\/styles\.css(?:\?v=[^"]*)?"/,`href="./styles.css?v=${entryVersion}"`).replace(/src="\.\/app\.js(?:\?v=[^"]*)?"/,`src="./app.js?v=${entryVersion}"`);

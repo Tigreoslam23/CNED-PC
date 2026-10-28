@@ -12,7 +12,7 @@ export function formatFractionHTML(source){
 }
 export function formatFractionsIn(root){
   if(!root)return;const allowed=new Set(['SUB','SUP','EM','B','STRONG','I','BR']);
-  const excluded='svg,math,input,textarea,select,code,pre,.math-frac,.breadcrumb,.figure-label,.eyebrow,.badge,.journey-progress,.session-top,.score,.stat-grid,.skill-row,[role="progressbar"],.m8-hero-path';
+  const excluded='svg,math,input,textarea,select,code,pre,.math-frac,.breadcrumb,.figure-label,.eyebrow,.badge,.journey-progress,.session-top,.score,.stat-grid,.skill-row,[role="progressbar"],.m8-hero-path,.cp-count,.cp-score-grid,.cp-last-score';
   const nodes=[root,...root.querySelectorAll('*')].reverse();
   for(const el of nodes){if(el.closest(excluded)||el.querySelector('.math-frac')||!el.textContent.includes('/'))continue;if([...el.children].some(child=>!allowed.has(child.tagName)))continue;const before=el.innerHTML,after=formatFractionHTML(before);if(before!==after)el.innerHTML=after;}
 }

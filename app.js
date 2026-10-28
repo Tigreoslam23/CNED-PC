@@ -1,3 +1,4 @@
+import { createChapterBilan } from './chapter-bilan.js';
 import { watchMathFractions } from './math-format.js';
 import { calculatorIcon, mountCalculator } from './calculator.js';
 import { lessons, questions } from './content.js';
@@ -58,6 +59,12 @@ let showingExamResult = false;
 let activity = freshActivity();
 const reactionSessions = { '1': { progress: 0 }, '2': { progress: 0, ampho: 'base', assembled: false }, '3': { progress:0 }, '4':{}, '5':{}, '6':{}, '7':{}, '8':{}, '9':{} };
 let disposeReaction = () => {};
+const chapterBilan = createChapterBilan({
+  storage, modules:moduleCatalog,
+  getModuleState:module=>module.id===activeModule.id?state:readState(storage,module.questions,module.storageKey),
+  onStatus:(message,options)=>{if(message){$('save-status').textContent=message;$('save-status').classList.add('warning');}if(options)$('open-memo').hidden=options.hideMemo;},
+  onReview:(id,lesson,mode)=>{switchModule(id);state.lesson=lesson;save();practice=null;activity=freshActivity();view=mode;history.replaceState(null,'','#'+mode);render(true);}
+});
 function freshActivity() { return { selected: null, hints: 0, attempts: 0, done: false, firstCorrect: null, feedback: null, recorded: false }; }
 function save() {
   try { if (!storage) throw new Error(); storage.setItem(activeStorageKey, JSON.stringify(state)); }
@@ -120,11 +127,18 @@ function dashboard() {
   const lastScore = state.lastExam ? state.lastExam.answers.filter(r => r.correct).length : null;
   const weakest = Object.entries(stats).filter(([, s]) => s.total).sort((a,b) => a[1].correct / a[1].total - b[1].correct / b[1].total)[0];
   const target = weakest ? Object.keys(activeSkills).indexOf(weakest[0]) : state.completed.length < 4 ? activeLessons.findIndex((_, i) => !state.completed.includes(i)) : 0;
-  return `${pageTop('Tes repères')}<section class="section-intro"><span class="eyebrow">LE CHEMIN COMPTE AUSSI.</span><h1>Ton déclic prend forme.</h1><p class="intro-line">Voici ce que tes essais nous apprennent. Reviens sur une notion, entraîne-toi, puis vérifie si tu peux réussir sans aide.</p></section><div class="stat-grid"><div class="stat"><div class="number">${state.completed.length}<span class="muted"> / 4</span></div><div class="label">étapes du cours validées</div></div><div class="stat"><div class="number">${count}</div><div class="label">questions travaillées</div></div><div class="stat"><div class="number">${rate === null ? '—' : `${rate}<span class="muted"> %</span>`}</div><div class="label">réussite au premier essai, sans aide</div></div></div><div class="dashboard-grid"><section class="panel"><h2>Les quatre compétences</h2><p>Sur les ${recent.length} dernières réponses (40 maximum). Un indice ou une erreur au premier essai indique un point à consolider.</p>${Object.entries(activeSkills).map(([key, name]) => { const s = stats[key]; const percent = s.total ? Math.round(s.correct / s.total * 100) : 0; return `<div class="skill-row"><div><strong>${name}</strong><small>${s.total ? `${s.correct} / ${s.total} sans aide` : 'Pas encore travaillé'}</small></div>${progress(s.correct, s.total || 1, `${name} : ${percent} %` )}</div>`; }).join('')}</section><section><div class="recommendation"><span class="eyebrow">TON PROCHAIN PETIT PAS</span><h3>${weakest ? activeSkills[weakest[0]] : 'Commencer par comprendre'}</h3><p>${weakest ? 'Reprends cette étape avec l’exemple, puis vérifie ton raisonnement dans un nouvel entraînement.' : 'Quelques questions suffiront pour faire apparaître tes premiers repères.'}</p><button class="button" data-lesson="${target}">Revoir l’étape ${target + 1} →</button></div><div class="panel"><h2>Ton dernier test</h2>${lastScore === null ? '<p>Pas encore de test terminé. Il sera disponible quand tu voudras faire le point.</p><a class="text-button" href="#tester">Découvrir le test →</a>' : `<p><strong>${lastScore} / 8</strong> réponses correctes, sans aide.</p><button class="text-button" data-action="last-result">Revoir la correction →</button>`}</div></section></div><div class="reset-area">Progression conservée dans ce navigateur, sur cet appareil. Aucun compte élève requis.<br><button class="text-button" data-action="reset">Effacer la progression de ce module</button></div>`;
+  return `${pageTop('Tes repères')}<div class="cp-module-banner"><span>Faire le point sur les neuf modules ?</span><a class="text-button" href="#chapitre">Bilan du chapitre 1 →</a></div><section class="section-intro"><span class="eyebrow">LE CHEMIN COMPTE AUSSI.</span><h1>Ton déclic prend forme.</h1><p class="intro-line">Voici ce que tes essais nous apprennent. Reviens sur une notion, entraîne-toi, puis vérifie si tu peux réussir sans aide.</p></section><div class="stat-grid"><div class="stat"><div class="number">${state.completed.length}<span class="muted"> / 4</span></div><div class="label">étapes du cours validées</div></div><div class="stat"><div class="number">${count}</div><div class="label">questions travaillées</div></div><div class="stat"><div class="number">${rate === null ? '—' : `${rate}<span class="muted"> %</span>`}</div><div class="label">réussite au premier essai, sans aide</div></div></div><div class="dashboard-grid"><section class="panel"><h2>Les quatre compétences</h2><p>Sur les ${recent.length} dernières réponses (40 maximum). Un indice ou une erreur au premier essai indique un point à consolider.</p>${Object.entries(activeSkills).map(([key, name]) => { const s = stats[key]; const percent = s.total ? Math.round(s.correct / s.total * 100) : 0; return `<div class="skill-row"><div><strong>${name}</strong><small>${s.total ? `${s.correct} / ${s.total} sans aide` : 'Pas encore travaillé'}</small></div>${progress(s.correct, s.total || 1, `${name} : ${percent} %` )}</div>`; }).join('')}</section><section><div class="recommendation"><span class="eyebrow">TON PROCHAIN PETIT PAS</span><h3>${weakest ? activeSkills[weakest[0]] : 'Commencer par comprendre'}</h3><p>${weakest ? 'Reprends cette étape avec l’exemple, puis vérifie ton raisonnement dans un nouvel entraînement.' : 'Quelques questions suffiront pour faire apparaître tes premiers repères.'}</p><button class="button" data-lesson="${target}">Revoir l’étape ${target + 1} →</button></div><div class="panel"><h2>Ton dernier test</h2>${lastScore === null ? '<p>Pas encore de test terminé. Il sera disponible quand tu voudras faire le point.</p><a class="text-button" href="#tester">Découvrir le test →</a>' : `<p><strong>${lastScore} / 8</strong> réponses correctes, sans aide.</p><button class="text-button" data-action="last-result">Revoir la correction →</button>`}</div></section></div><div class="reset-area">Progression conservée dans ce navigateur, sur cet appareil. Aucun compte élève requis.<br><button class="text-button" data-action="reset">Effacer la progression de ce module</button></div>`;
 }
 function render(focus = false) {
   disposeReaction();
   syncModuleChrome();
+  if(view==='chapitre'){
+    document.title='Déclic — Bilan du chapitre 1';document.querySelector('.desktop-only strong').textContent='Bilan du chapitre 1';
+    document.querySelectorAll('#nav a').forEach(a=>{const active=a.dataset.view==='chapitre';a.classList.toggle('active',active);if(active)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
+    disposeReaction=chapterBilan.mount($('main'));
+    if(focus){$('main').focus({preventScroll:true});window.scrollTo({top:0,behavior:'instant'});}
+    return;
+  }
   $('open-memo').hidden = view === 'tester' && state.exam !== null && !showingExamResult;
   document.querySelectorAll('#nav a').forEach(a => { const active = a.dataset.view === view; a.classList.toggle('active', active); if (active) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
   $('main').innerHTML = view === 'apprendre' ? learnPage() : view === 'bilan' ? dashboard() : view === 'entrainer' ? (practice ? practice.done ? resultPage(false) : sessionPage(false) : startPage(false)) : showingExamResult && state.lastExam ? resultPage(true) : state.exam ? sessionPage(true) : startPage(true);
@@ -133,7 +147,7 @@ function render(focus = false) {
 }
 function route() {
   const hash = location.hash.slice(1);
-  view = ['apprendre', 'entrainer', 'tester', 'bilan'].includes(hash) ? hash : 'apprendre';
+  view = ['apprendre', 'entrainer', 'tester', 'bilan', 'chapitre'].includes(hash) ? hash : 'apprendre';
   activity = freshActivity();
   render(true);
 }
@@ -235,6 +249,6 @@ function switchModule(id) {
 $('module-select').addEventListener('change', event => switchModule(event.target.value));
 window.addEventListener('hashchange', route);
 mountInstall();
-mountCalculator({getAnswerField:()=>activeQuestion()?.type==='number'&&!activity.done?$('formula-answer'):null});
+mountCalculator({getAnswerField:()=>view==='chapitre'?chapterBilan.getAnswerField():activeQuestion()?.type==='number'&&!activity.done?$('formula-answer'):null});
 route();
 watchMathFractions([$('main'),$('memo-content')]);
